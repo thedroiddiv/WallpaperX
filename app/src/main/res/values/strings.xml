@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">WallpaperX</string>
+
+    <!--    do not translate -->
+    <string name="route_wallpapers">route_wallpaper</string>
+    <string name="route_favourites">route_favourites</string>
+    <string name="route_downloads">route_downloads</string>
+    <string name="route_settings">route_settings</string>
+    <string name="route_search">route_search</string>
+    <string name="route_full_wallpaper">route_full_wallpaper</string>
+
 </resources>
