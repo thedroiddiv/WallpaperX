@@ -16,7 +16,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WallpaperXTheme {
-                App()
+                Surface {
+                    App()
+                }
             }
         }
     }
