@@ -2,13 +2,10 @@ package com.dxn.wallpaperx.data.repositories
 
 import android.util.Log
 import com.dxn.wallpaperx.data.source.PixabayApi
-import com.dxn.wallpaperx.data.util.hitsToWallpapers
+import com.dxn.wallpaperx.data.hitsToWallpapers
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
-import kotlinx.coroutines.flow.Flow
 import java.lang.Exception
-import javax.inject.Inject
-import kotlin.math.log
 
 class WallpaperRepositoryImpl
 constructor(
@@ -35,6 +32,10 @@ constructor(
 
     override suspend fun getDownloadedWallpapers(): List<Wallpaper> {
         return emptyList()
+    }
+
+    override suspend fun addToFavourites(id: Int): Boolean {
+       return true
     }
 
     override suspend fun getFavourites(): List<Int> {

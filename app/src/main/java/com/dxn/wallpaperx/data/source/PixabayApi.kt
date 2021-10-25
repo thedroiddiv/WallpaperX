@@ -1,6 +1,5 @@
 package com.dxn.wallpaperx.data.source
 
-import com.dxn.wallpaperx.data.models.Hit
 import com.dxn.wallpaperx.data.models.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,7 +11,7 @@ interface PixabayApi {
         @Query ("q") query : String,
         @Query("page") page :Int = 1,
         @Query("orientation") orientation : String = "vertical",
-        @Query("safesearch") safe: Boolean = false
+        @Query("safesearch") safe: Boolean = true
     ) : Response
 
     suspend fun getWallpaper(

@@ -1,4 +1,11 @@
 package com.dxn.wallpaperx.domain.usecases
 
-class GetWallpaper {
+import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
+
+class GetWallpaper(
+    private val repository: WallpaperRepository
+) {
+    suspend operator fun invoke() {
+
+    }
 }

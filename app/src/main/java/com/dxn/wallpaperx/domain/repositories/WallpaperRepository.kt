@@ -7,5 +7,6 @@ interface WallpaperRepository {
     suspend fun getWallpapers(apiKey:String,page:Int,query:String) : List<Wallpaper>;
     suspend fun getWallpaper(id:Int) : Wallpaper;
     suspend fun getDownloadedWallpapers() : List<Wallpaper>;
+    suspend fun addToFavourites(id:Int) : Boolean;
     suspend fun getFavourites():List<Int>;
 }

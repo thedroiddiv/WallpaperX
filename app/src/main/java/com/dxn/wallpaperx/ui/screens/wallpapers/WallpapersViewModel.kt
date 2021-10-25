@@ -7,6 +7,8 @@ import com.dxn.wallpaperx.R
 import com.dxn.wallpaperx.di.ResourcesProvider
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
 import com.dxn.wallpaperx.domain.repositories.WallpaperSource
+import com.dxn.wallpaperx.domain.usecases.GetWallpaper
+import com.dxn.wallpaperx.domain.usecases.WallpaperUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,11 +17,9 @@ class WallpapersViewModel
 @Inject
 constructor(
     private val repository: WallpaperRepository,
-    private val resourcesProvider: ResourcesProvider
+    private val wallpaperUseCase: WallpaperUseCase
 ) : ViewModel() {
 
-    val wallpapers = Pager(PagingConfig(pageSize = 20)) {
-        WallpaperSource(repository,resourcesProvider.getString(R.string.pixabay_api_key))
-    }.flow
+    val wallpapers = wallpaperUseCase.getWallpapers()
 
 }

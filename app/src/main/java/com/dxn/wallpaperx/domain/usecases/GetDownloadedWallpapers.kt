@@ -1,4 +1,9 @@
 package com.dxn.wallpaperx.domain.usecases
 
-class GetDownloadedWallpapers {
+import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
+
+class GetDownloadedWallpapers(
+    private val repository: WallpaperRepository
+) {
+
 }
