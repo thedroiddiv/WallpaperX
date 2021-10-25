@@ -1,5 +1,9 @@
 package com.dxn.wallpaperx
 
-class WallpaperXApp {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class WallpaperXApp: Application() {
 
 }

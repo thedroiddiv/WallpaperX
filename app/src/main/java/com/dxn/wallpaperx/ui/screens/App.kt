@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.dxn.wallpaperx.ui.screens.wallpapers.Wallpapers
 import com.dxn.wallpaperx.ui.utils.Screen
 
 const val TAG = "AppComposable"
@@ -81,7 +82,7 @@ fun App() {
                 startDestination = Screen.Wallpapers.route
             ) {
                 composable(route = Screen.Wallpapers.route) {
-
+                    Wallpapers()
                 }
                 composable(route = Screen.Favourites.route) {
 
