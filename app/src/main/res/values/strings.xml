@@ -9,5 +9,6 @@
     <string name="route_search">route_search</string>
     <string name="route_full_wallpaper">route_full_wallpaper</string>
     <string name="title_activity_set_wallpaper">SetWallpaperActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 </resources>

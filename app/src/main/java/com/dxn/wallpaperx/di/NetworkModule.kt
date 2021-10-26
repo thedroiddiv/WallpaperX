@@ -1,7 +1,7 @@
 package com.dxn.wallpaperx.di
 
 import com.dxn.wallpaperx.data.repositories.WallpaperRepositoryImpl
-import com.dxn.wallpaperx.data.source.PixabayApi
+import com.dxn.wallpaperx.data.remote.PixabayApi
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -22,8 +22,4 @@ object NetworkModule {
         .build()
         .create(PixabayApi::class.java)
 
-    @Provides
-    @Singleton
-    fun provideWallpaperRepository(pixabayApi: PixabayApi): WallpaperRepository =
-        WallpaperRepositoryImpl(pixabayApi)
 }

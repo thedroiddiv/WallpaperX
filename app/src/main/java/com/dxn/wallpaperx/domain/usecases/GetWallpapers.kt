@@ -14,9 +14,9 @@ class GetWallpapers(
     private val repository: WallpaperRepository,
     private val resourcesProvider: ResourcesProvider
 ) {
-    operator fun invoke(): Flow<PagingData<Wallpaper>> {
+    operator fun invoke(query:String): Flow<PagingData<Wallpaper>> {
         return Pager(PagingConfig(pageSize = 20)) {
-            WallpaperSource(repository, resourcesProvider.getString(R.string.pixabay_api_key))
+            WallpaperSource(repository, resourcesProvider.getString(R.string.pixabay_api_key),query)
         }.flow
     }
 }

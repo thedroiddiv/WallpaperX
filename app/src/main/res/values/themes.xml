@@ -5,6 +5,10 @@
         <item name="android:windowLightStatusBar">true</item>
     </style>
 
+    <style name="Theme.WallpaperX.TranslucentStatus" parent="Theme.WallpaperX">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <style name="Theme.WallpaperX.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
