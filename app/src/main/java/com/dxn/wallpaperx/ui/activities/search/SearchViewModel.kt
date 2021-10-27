@@ -18,5 +18,4 @@ constructor(
     fun search(query:String) {
         wallpapers.value = wallpaperUseCase.getWallpapers(query)
     }
-
 }

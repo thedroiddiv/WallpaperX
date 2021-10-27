@@ -14,6 +14,7 @@ interface PixabayApi {
         @Query("safesearch") safe: Boolean = true
     ) : Response
 
+    @GET("api")
     suspend fun getWallpaper(
         @Query("key") apikey:String = "",
         @Query("id") imageId:Int,

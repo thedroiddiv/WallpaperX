@@ -1,24 +1,27 @@
-package com.dxn.wallpaperx.ui
+package com.dxn.wallpaperx.ui.activities.setwallpaper
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Download
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.lifecycle.ViewModel
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
-import coil.request.ImageRequest
 import com.dxn.wallpaperx.domain.models.Wallpaper
-import com.dxn.wallpaperx.domain.usecases.WallpaperUseCase
 import com.dxn.wallpaperx.ui.theme.WallpaperXTheme
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SetWallpaperActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +31,8 @@ class SetWallpaperActivity : ComponentActivity() {
 
         setContent {
             WallpaperXTheme {
+
+                val viewModel: SetWallpaperViewModel = hiltViewModel()
                 Box(modifier = Modifier.fillMaxSize()) {
                     Image(
                         modifier = Modifier.fillMaxSize(),
@@ -37,18 +42,24 @@ class SetWallpaperActivity : ComponentActivity() {
                         contentDescription = "wallpaper",
                         contentScale = ContentScale.Crop
                     )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                            .align(Alignment.BottomCenter)
+                            .background(Color.Red.copy(0.4f))
+                    ) {
+                        IconButton(onClick = {
+                            viewModel.saveWallpaper(wallpaper)
+                        }) {
+                            Icon(
+                                imageVector = Icons.Rounded.Download,
+                                contentDescription = "download"
+                            )
+                        }
+                    }
                 }
-
             }
         }
     }
-}
-
-@HiltViewModel
-class SetWallpaperViewModel
-@Inject
-constructor(
-    private val useCase: WallpaperUseCase
-) : ViewModel() {
-
 }

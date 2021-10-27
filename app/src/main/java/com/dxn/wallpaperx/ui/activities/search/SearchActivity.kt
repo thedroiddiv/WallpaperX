@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.ui.components.WallpaperList
 import com.dxn.wallpaperx.ui.theme.WallpaperXTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SearchActivity : ComponentActivity() {
+    @ExperimentalCoilApi
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +61,9 @@ class SearchActivity : ComponentActivity() {
                             }
                         }
                     ) {
-                        WallpaperList(dataFlow = dataFlow)
+                        WallpaperList(dataFlow = dataFlow) {
+
+                        }
                     }
                 }
             }

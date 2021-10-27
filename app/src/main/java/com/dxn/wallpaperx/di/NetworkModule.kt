@@ -1,8 +1,6 @@
 package com.dxn.wallpaperx.di
 
-import com.dxn.wallpaperx.data.repositories.WallpaperRepositoryImpl
 import com.dxn.wallpaperx.data.remote.PixabayApi
-import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides

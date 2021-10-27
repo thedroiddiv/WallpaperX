@@ -1,9 +1,17 @@
 package com.dxn.wallpaperx.domain.usecases
 
-data class WallpaperUseCase(
+import javax.inject.Inject
+
+data class WallpaperUseCase
+@Inject
+constructor
+    (
     val getWallpapers: GetWallpapers,
     val getWallpaper: GetWallpaper,
     val saveWallpaper: SaveWallpaper,
     val getSavedWallpapers: GetSavedWallpapers,
-    val setWallpaper: SetWallpaper,
+    val setWallpaperUseCases: SetWallpaperUseCases,
+    val getFavourites: GetFavourites,
+    val addFavourite: AddFavourite,
+    val removeFavourite: RemoveFavourite
 )

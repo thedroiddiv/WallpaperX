@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
@@ -17,13 +16,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.dxn.wallpaperx.ui.activities.main.screens.Screen
-import com.dxn.wallpaperx.ui.activities.main.screens.wallpapers.Wallpapers
-import com.dxn.wallpaperx.ui.activities.main.screens.wallpapers.WallpapersViewModel
+import coil.annotation.ExperimentalCoilApi
+import com.dxn.wallpaperx.ui.activities.main.screens.Favourites
+import com.dxn.wallpaperx.ui.activities.main.screens.Saved
+import com.dxn.wallpaperx.ui.activities.main.screens.Wallpapers
 import com.dxn.wallpaperx.ui.activities.search.SearchActivity
 
-const val TAG = "AppComposable"
-
+@ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun MainComposable() {
@@ -32,10 +31,11 @@ fun MainComposable() {
     val scaffoldState = rememberScaffoldState()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val screens = listOf(Screen.Wallpapers, Screen.Favourites, Screen.Downloads, Screen.Settings)
+    val screens = listOf(Screen.Wallpapers, Screen.Favourites, Screen.Saved, Screen.Settings)
     val currentDest = screens.find { it.route == currentRoute }
     val context = LocalContext.current as MainActivity
-    val wallpapersViewModel: WallpapersViewModel = hiltViewModel()
+    val viewModel: MainActivityViewModel = hiltViewModel()
+
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -84,13 +84,13 @@ fun MainComposable() {
                 startDestination = Screen.Wallpapers.route
             ) {
                 composable(route = Screen.Wallpapers.route) {
-                    Wallpapers(navController, rememberLazyListState(), wallpapersViewModel)
+                    Wallpapers(viewModel)
                 }
                 composable(route = Screen.Favourites.route) {
-
+                    Favourites(viewModel)
                 }
-                composable(route = Screen.Downloads.route) {
-
+                composable(route = Screen.Saved.route) {
+                    Saved(viewModel)
                 }
                 composable(route = Screen.Settings.route) {
 
