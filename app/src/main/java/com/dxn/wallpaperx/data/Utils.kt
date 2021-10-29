@@ -7,7 +7,9 @@ fun hitToWallpaper(hit: Hit): Wallpaper = Wallpaper(
     id = hit.id,
     previewUrl = hit.previewURL,
     smallUrl = hit.webformatURL,
-    wallpaperUrl = hit.largeImageURL
+    wallpaperUrl = hit.largeImageURL,
+    user = hit.user,
+    userImageURL = hit.userImageURL
 )
 
 fun hitsToWallpapers(hits: List<Hit>): List<Wallpaper> =

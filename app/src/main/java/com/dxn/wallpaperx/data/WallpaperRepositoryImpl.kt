@@ -64,7 +64,7 @@ constructor(
 
     override suspend fun getFavourites(): List<Wallpaper> {
         return localRepository.getFavourites()
-            .map { Wallpaper(it.id, it.previewUrl, it.smallUrl, it.wallpaperUrl) }
+            .map { Wallpaper(it.id, it.previewUrl, it.smallUrl, it.wallpaperUrl,"","") }
     }
 
 }

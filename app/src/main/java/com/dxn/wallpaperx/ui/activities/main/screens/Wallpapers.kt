@@ -10,8 +10,11 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Favorite
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +34,8 @@ fun Wallpapers(
 ) {
     val context = LocalContext.current
     val dataFlow by remember { viewModel.wallpapers }
+    val favourites by remember { viewModel.favourites }
+    val favouriteIds = favourites.map { it.id }
     val wallpapers = dataFlow.collectAsLazyPagingItems()
 
     Box(
@@ -55,6 +60,7 @@ fun Wallpapers(
                             .height(246.dp),
                         wallpaper = wallpaper
                     ) {
+                        val isFavourite = favouriteIds.contains(wallpaper.id)
                         Box(modifier = Modifier
                             .fillMaxSize()
                             .clickable {
@@ -67,10 +73,13 @@ fun Wallpapers(
                                     .align(Alignment.BottomEnd)
                                     .padding(12.dp),
                                 onClick = {
-                                    viewModel.addFavourite(wallpaper)
+                                    if (isFavourite) viewModel.removeFavourite(wallpaper.id) else viewModel.addFavourite(
+                                        wallpaper
+                                    )
+
                                 }) {
                                 Icon(
-                                    imageVector = Icons.Rounded.Favorite,
+                                    imageVector = if (isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                                     contentDescription = "favourite button",
                                     tint = Color.Red
                                 )

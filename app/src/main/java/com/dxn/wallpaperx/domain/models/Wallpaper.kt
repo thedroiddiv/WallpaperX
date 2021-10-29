@@ -5,5 +5,7 @@ data class Wallpaper(
     val id:Int,
     val previewUrl:String,
     val smallUrl:String,
-    val wallpaperUrl:String
+    val wallpaperUrl:String,
+    val user: String,
+    val userImageURL: String,
 ): Serializable
