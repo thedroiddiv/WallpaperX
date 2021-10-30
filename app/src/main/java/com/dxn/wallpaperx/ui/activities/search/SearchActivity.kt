@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
+import com.dxn.wallpaperx.ui.activities.search.components.SearchBar
 import com.dxn.wallpaperx.ui.components.WallpaperList
 import com.dxn.wallpaperx.ui.theme.WallpaperXTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +39,8 @@ class SearchActivity : ComponentActivity() {
                     val viewModel: SearchViewModel = viewModel()
                     val dataFlow by remember { viewModel.wallpapers }
                     val wallpapers = dataFlow.collectAsLazyPagingItems()
+                    val favouriteIds by remember { viewModel.favouriteIds }
+
                     Scaffold(
                         topBar = {
                             TopAppBar(
@@ -56,7 +59,6 @@ class SearchActivity : ComponentActivity() {
                                                 tint = MaterialTheme.colors.onPrimary
                                             )
                                         }
-
                                     },
                                     onSearch = { viewModel.search(it) }
                                 )
@@ -65,9 +67,13 @@ class SearchActivity : ComponentActivity() {
                     ) {
                         WallpaperList(
                             wallpapers = wallpapers,
-                            favouriteIds = listOf(),
-                            addFavourite = {},
-                            removeFavourite = {}
+                            favouriteIds = favouriteIds,
+                            addFavourite = { wallpaper ->
+                                viewModel.addFavourite(wallpaper)
+                            },
+                            removeFavourite = { id ->
+                                viewModel.removeFavourite(id)
+                            }
                         )
                     }
                 }
@@ -77,52 +83,3 @@ class SearchActivity : ComponentActivity() {
 }
 
 
-@Composable
-fun SearchBar(
-    leadingIcon: @Composable () -> Unit,
-    onSearch: (String) -> Unit
-) {
-    var query by remember { mutableStateOf("") }
-    val focusManager = LocalFocusManager.current
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 0.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        TextField(
-            value = query,
-            onValueChange = { query = it },
-            modifier = Modifier
-                .fillMaxWidth(1f),
-            textStyle = MaterialTheme.typography.body1,
-            leadingIcon = leadingIcon,
-            trailingIcon = {
-                IconButton(onClick = {
-                    query = ""
-                    focusManager.clearFocus()
-                }) {
-                    Icon(
-                        imageVector = Icons.Rounded.Close,
-                        contentDescription = "Search",
-                        tint = MaterialTheme.colors.onPrimary.copy(0.5f)
-                    )
-                }
-            },
-            singleLine = true,
-            maxLines = 1,
-            colors = TextFieldDefaults.textFieldColors(
-                textColor = MaterialTheme.colors.onPrimary,
-                cursorColor = MaterialTheme.colors.onPrimary,
-                backgroundColor = Color.Transparent,
-                focusedIndicatorColor = MaterialTheme.colors.onPrimary.copy(0.7f),
-                unfocusedIndicatorColor = MaterialTheme.colors.onPrimary.copy(0.6f),
-            ),
-            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = {
-                onSearch(query)
-                focusManager.clearFocus()
-            })
-        )
-    }
-}

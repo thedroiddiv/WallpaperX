@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.ui.activities.main.screens.Favourites
+import com.dxn.wallpaperx.ui.activities.main.screens.Settings
 import com.dxn.wallpaperx.ui.activities.main.screens.Wallpapers
 import com.dxn.wallpaperx.ui.activities.search.SearchActivity
 
@@ -45,10 +46,10 @@ fun MainComposable(
 
     val wallpaperListState = rememberLazyListState()
 
-//    val viewModel: MainActivityViewModel = hiltViewModel()
     val wallpapers = viewModel.wallpapers.collectAsLazyPagingItems()
     val favourites by remember { viewModel.favourites }
     val favouriteIds = favourites.map { it.id }
+
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -96,7 +97,10 @@ fun MainComposable(
         }
     ) {
 
-        Column(Modifier.fillMaxSize().padding(bottom = 48.dp)) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(bottom = 48.dp)) {
             NavHost(
                 navController = navController,
                 startDestination = Screen.Wallpapers.route
@@ -108,7 +112,7 @@ fun MainComposable(
                     Favourites(viewModel,favourites)
                 }
                 composable(route = Screen.Settings.route) {
-
+                    Settings()
                 }
             }
         }

@@ -3,30 +3,32 @@
     package="com.dxn.wallpaperx">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
 
     <application
         android:name=".WallpaperXApp"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.WallpaperX"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.activities.search.SearchActivity"
             android:exported="true"
             android:label="@string/title_activity_search"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.WallpaperX.NoActionBar" />
 
         <activity
             android:name=".ui.activities.setwallpaper.SetWallpaperActivity"
             android:exported="true"
             android:label="@string/title_activity_set_wallpaper"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.WallpaperX.TranslucentStatus" />
 
         <activity

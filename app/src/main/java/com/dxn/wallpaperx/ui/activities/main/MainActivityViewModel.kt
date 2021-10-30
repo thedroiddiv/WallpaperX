@@ -3,6 +3,7 @@ package com.dxn.wallpaperx.ui.activities.main
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -22,6 +23,8 @@ class MainActivityViewModel
 constructor(
     private val wallpaperUseCase: WallpaperUseCase
 ) : ViewModel() {
+
+
 
     var wallpapers = flowOf<PagingData<Wallpaper>>()
     val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())

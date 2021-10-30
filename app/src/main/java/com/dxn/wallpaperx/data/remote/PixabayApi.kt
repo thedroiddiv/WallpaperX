@@ -11,7 +11,8 @@ interface PixabayApi {
         @Query ("q") query : String,
         @Query("page") page :Int = 1,
         @Query("orientation") orientation : String = "vertical",
-        @Query("safesearch") safe: Boolean = true
+        @Query("safesearch") safe: Boolean = false,
+        @Query("image_type") imageType : String = "photo"
     ) : Response
 
     @GET("api")

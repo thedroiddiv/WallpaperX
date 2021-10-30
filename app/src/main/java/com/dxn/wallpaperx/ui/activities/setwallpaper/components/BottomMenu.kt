@@ -91,12 +91,12 @@ fun BottomMenu(
                         contentDescription = "download"
                     )
                 }
-                IconButton(onClick = {}) {
-                    Icon(
-                        imageVector = Icons.Rounded.Info,
-                        contentDescription = "info"
-                    )
-                }
+//                IconButton(onClick = {}) {
+//                    Icon(
+//                        imageVector = Icons.Rounded.Info,
+//                        contentDescription = "info"
+//                    )
+//                }
                 IconButton(onClick = onFavourite) {
                     Icon(
                         imageVector = if (isLiked) (Icons.Rounded.Favorite) else Icons.Rounded.FavoriteBorder,

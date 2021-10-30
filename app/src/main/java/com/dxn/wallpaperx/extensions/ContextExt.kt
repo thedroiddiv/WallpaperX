@@ -1,6 +1,5 @@
 package com.dxn.wallpaperx.extensions
 
-import android.app.Application
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
@@ -13,7 +12,6 @@ import android.widget.Toast
 import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.request.SuccessResult
-import dagger.hilt.android.internal.Contexts.getApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -25,18 +23,16 @@ fun Context.shortToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
-fun Context.longToast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-}
-
-suspend fun Context.getBitmap(url:String) : Bitmap {
-    val loader = ImageLoader(this)
-    val request = ImageRequest.Builder(this)
-        .data(url)
-        .allowHardware(false) // Disable hardware bitmaps.
-        .build()
-    val result = (loader.execute(request) as SuccessResult).drawable
-    return (result as BitmapDrawable).bitmap
+suspend fun Context.getBitmap(url: String): Bitmap {
+    return withContext(Dispatchers.IO) {
+        val loader = ImageLoader(this@getBitmap)
+        val request = ImageRequest.Builder(this@getBitmap)
+            .data(url)
+            .allowHardware(false) // Disable hardware bitmaps.
+            .build()
+        val result = (loader.execute(request) as SuccessResult).drawable
+        (result as BitmapDrawable).bitmap
+    }
 }
 
 suspend fun Context.downloadWallpaper(bitmap: Bitmap, displayName: String) {
@@ -50,7 +46,7 @@ suspend fun Context.downloadWallpaper(bitmap: Bitmap, displayName: String) {
                         put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/jpeg")
                         put(
                             MediaStore.Images.ImageColumns.RELATIVE_PATH,
-                            Environment.DIRECTORY_DOWNLOADS
+                            Environment.DIRECTORY_PICTURES+"/wallpaperx"
                         )
                     }
                     val imageUri: Uri? =
@@ -59,7 +55,7 @@ suspend fun Context.downloadWallpaper(bitmap: Bitmap, displayName: String) {
                 }
             } else {
                 val imagesDir =
-                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES+"/wallpaperx")
                 val image = File(imagesDir, displayName)
                 fos = FileOutputStream(image)
             }

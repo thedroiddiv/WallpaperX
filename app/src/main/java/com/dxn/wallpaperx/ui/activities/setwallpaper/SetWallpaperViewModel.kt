@@ -14,6 +14,7 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.usecases.WallpaperUseCase
+import com.dxn.wallpaperx.extensions.getBitmap
 import com.dxn.wallpaperx.extensions.shortToast
 import com.dxn.wallpaperx.ui.activities.main.MainActivityViewModel
 import dagger.hilt.android.internal.Contexts.getApplication
@@ -66,14 +67,20 @@ constructor(
         }
     }
 
-    fun setWallpaper(wallpaper: Wallpaper,flag:Int) {
+    fun setWallpaper(wallpaper: Wallpaper, flag: Int) {
         isProgressVisible.value = true
         viewModelScope.launch {
-            wallpaperUseCase.setWallpaperUseCases(wallpaper,flag)
+            wallpaperUseCase.setWallpaperUseCases(wallpaper, flag)
             isProgressVisible.value = false
-//            withContext(Dispatchers.Main) {
-              application.shortToast("Wallpaper applied!")
-//            }
+            application.shortToast("Wallpaper applied!")
+        }
+    }
+
+    fun downloadWallpaper(wallpaper: Wallpaper) {
+        viewModelScope.launch {
+            val bitmap = application.getBitmap(wallpaper.wallpaperUrl)
+            wallpaperUseCase.downloadWallpaper(bitmap, "IMG${wallpaper.id}.jpg")
+            application.shortToast("Downloaded\nPictures/wallpaperx")
         }
     }
 

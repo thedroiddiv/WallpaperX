@@ -15,23 +15,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object WallpaperModule {
-
-//    @Provides
-//    @Singleton
-//    fun provideWallpaperUseCases(
-//        repository: WallpaperRepository,
-//        resourcesProvider: ResourcesProvider
-//    ) = WallpaperUseCase(
-//        getWallpaper = GetWallpaper(repository, resourcesProvider),
-//        getWallpapers = GetWallpapers(repository, resourcesProvider),
-//        saveWallpaper = SaveWallpaper(repository),
-//        getSavedWallpapers = GetSavedWallpapers(repository),
-//        setWallpaper = SetWallpaper(),
-//        getFavourites = GetFavourites(repository),
-//        addFavourite = AddFavourite(repository),
-//        removeFavourite = RemoveFavourite(repository)
-//    )
-
     @Provides
     @Singleton
     fun provideWallpaperRepository(

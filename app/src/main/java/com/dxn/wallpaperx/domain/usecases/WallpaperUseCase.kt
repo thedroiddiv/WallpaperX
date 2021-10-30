@@ -8,8 +8,7 @@ constructor
     (
     val getWallpapers: GetWallpapers,
     val getWallpaper: GetWallpaper,
-    val saveWallpaper: SaveWallpaper,
-    val getSavedWallpapers: GetSavedWallpapers,
+    val downloadWallpaper: DownloadWallpaper,
     val setWallpaperUseCases: SetWallpaperUseCases,
     val getFavourites: GetFavourites,
     val addFavourite: AddFavourite,
