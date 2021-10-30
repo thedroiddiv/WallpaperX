@@ -19,6 +19,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.ui.components.WallpaperList
 import com.dxn.wallpaperx.ui.theme.WallpaperXTheme
@@ -36,6 +37,7 @@ class SearchActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colors.background) {
                     val viewModel: SearchViewModel = viewModel()
                     val dataFlow by remember { viewModel.wallpapers }
+                    val wallpapers = dataFlow.collectAsLazyPagingItems()
                     Scaffold(
                         topBar = {
                             TopAppBar(
@@ -61,9 +63,12 @@ class SearchActivity : ComponentActivity() {
                             }
                         }
                     ) {
-                        WallpaperList(dataFlow = dataFlow) {
-
-                        }
+                        WallpaperList(
+                            wallpapers = wallpapers,
+                            favouriteIds = listOf(),
+                            addFavourite = {},
+                            removeFavourite = {}
+                        )
                     }
                 }
             }

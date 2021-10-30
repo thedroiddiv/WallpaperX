@@ -9,7 +9,6 @@ class GetFavourites
 @Inject
 constructor(
     private val repository: WallpaperRepository,
-    private val resourcesProvider: ResourcesProvider
 ) {
     suspend operator fun invoke(): List<Wallpaper> = repository.getFavourites()
 }

@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
 
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application
         android:name=".WallpaperXApp"
@@ -21,11 +22,13 @@
             android:exported="true"
             android:label="@string/title_activity_search"
             android:theme="@style/Theme.WallpaperX.NoActionBar" />
+
         <activity
             android:name=".ui.activities.setwallpaper.SetWallpaperActivity"
             android:exported="true"
             android:label="@string/title_activity_set_wallpaper"
             android:theme="@style/Theme.WallpaperX.TranslucentStatus" />
+
         <activity
             android:name=".ui.activities.main.MainActivity"
             android:exported="true"

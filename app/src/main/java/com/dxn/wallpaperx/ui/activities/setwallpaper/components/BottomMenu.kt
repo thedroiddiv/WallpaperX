@@ -1,16 +1,12 @@
 package com.dxn.wallpaperx.ui.activities.setwallpaper.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Download
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Wallpaper
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,18 +18,23 @@ import coil.compose.rememberImagePainter
 @Composable
 fun BottomMenu(
     modifier: Modifier,
-    title:String,
-    subtitle:String,
+    title: String,
+    userImageUrl : String,
+    subtitle: String,
+    isLiked: Boolean,
     onFabClicked: () -> Unit,
+
     onDownload: () -> Unit,
-    onInfo:() -> Unit,
-    onFavourite : () -> Unit
+    onLock: () -> Unit,
+    onFavourite: () -> Unit,
+
+    isProgressVisible: Boolean = false
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colors.primary)
+            .clip(RoundedCornerShape(16.dp)),
+        backgroundColor = MaterialTheme.colors.primary
     ) {
         Column(Modifier.padding(16.dp)) {
             Row(
@@ -42,14 +43,26 @@ fun BottomMenu(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row {
-                    Image(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(40.dp),
-                        painter = rememberImagePainter(data = "https://picsum.photos/200"),
-                        contentDescription = "user",
-                        contentScale = ContentScale.Crop
-                    )
+                    Box(Modifier.size(52.dp)) {
+                        Image(
+                            modifier = Modifier
+                                .clip(CircleShape)
+                                .size(40.dp)
+                                .align(Alignment.Center),
+                            painter = rememberImagePainter(data = userImageUrl),
+                            contentDescription = "user",
+                            contentScale = ContentScale.Crop
+                        )
+                        if (isProgressVisible) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(52.dp)
+                                    .align(Alignment.Center),
+                                color = MaterialTheme.colors.onPrimary,
+                                strokeWidth = 2.dp
+                            )
+                        }
+                    }
+
                     Spacer(modifier = Modifier.width(16.dp))
                     Column {
                         Text(text = title, style = MaterialTheme.typography.h6)
@@ -62,8 +75,8 @@ fun BottomMenu(
                     contentColor = MaterialTheme.colors.primary
                 ) {
                     Icon(
-                        imageVector = Icons.Default.Wallpaper,
-                        contentDescription = "set wallpaper"
+                        imageVector = Icons.Rounded.Wallpaper,
+                        contentDescription = "set"
                     )
                 }
             }
@@ -72,30 +85,28 @@ fun BottomMenu(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                IconButton(onClick = {
-
-                }) {
+                IconButton(onClick = onDownload) {
                     Icon(
-                        imageVector = Icons.Default.Download,
-                        contentDescription = "set wallpaper"
+                        imageVector = Icons.Rounded.Download,
+                        contentDescription = "download"
                     )
                 }
                 IconButton(onClick = {}) {
                     Icon(
-                        imageVector = Icons.Default.Info,
-                        contentDescription = "set wallpaper"
+                        imageVector = Icons.Rounded.Info,
+                        contentDescription = "info"
                     )
                 }
-                IconButton(onClick = { }) {
+                IconButton(onClick = onFavourite) {
                     Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        contentDescription = "set wallpaper"
+                        imageVector = if (isLiked) (Icons.Rounded.Favorite) else Icons.Rounded.FavoriteBorder,
+                        contentDescription = "favourite"
                     )
                 }
-                IconButton(onClick = { }) {
+                IconButton(onClick =onLock) {
                     Icon(
-                        imageVector = Icons.Default.Info,
-                        contentDescription = "set wallpaper"
+                        imageVector = Icons.Rounded.LockOpen,
+                        contentDescription = "set"
                     )
                 }
             }

@@ -17,20 +17,21 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
+import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.ui.activities.main.MainActivityViewModel
 import com.dxn.wallpaperx.ui.activities.setwallpaper.SetWallpaperActivity
 import com.dxn.wallpaperx.ui.components.WallpaperCard
+import com.dxn.wallpaperx.ui.components.WallpaperList
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun Favourites(
-    viewModel: MainActivityViewModel
+    viewModel: MainActivityViewModel,
+    wallpapers : List<Wallpaper>
 ) {
-    val wallpapers by remember { viewModel.favourites }
-    viewModel.loadFavourites()
-
     val context = LocalContext.current
+    viewModel.loadFavourites()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -39,6 +40,7 @@ fun Favourites(
         if (wallpapers.isEmpty()) {
             Text(text = "Uhh no! No items were found")
         }
+
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),
             modifier = Modifier.padding(bottom = 8.dp)
@@ -50,30 +52,17 @@ fun Favourites(
                         .padding(4.dp)
                         .fillMaxWidth()
                         .height(246.dp),
-                    wallpaper = wallpaper
-                ) {
-                    Box(modifier = Modifier
-                        .fillMaxSize()
-                        .clickable {
-                            val intent = Intent(context, SetWallpaperActivity::class.java)
-                            intent.putExtra("wallpaper", wallpapers[index])
-                            context.startActivity(intent)
-                        }) {
-                        IconButton(
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .padding(12.dp),
-                            onClick = {
-                                viewModel.removeFavourite(wallpaper.id)
-                            }) {
-                            Icon(
-                                imageVector = Icons.Rounded.Favorite,
-                                contentDescription = "favourite button",
-                                tint = Color.Red
-                            )
-                        }
+                    wallpaper = wallpaper,
+                    isFavourite = true,
+                    onLikedClicked = {
+                        viewModel.removeFavourite(wallpaper.id)
+                    },
+                    onClick = {
+                        val intent = Intent(context, SetWallpaperActivity::class.java)
+                        intent.putExtra("wallpaper", wallpapers[index])
+                        context.startActivity(intent)
                     }
-                }
+                )
             }
         }
     }

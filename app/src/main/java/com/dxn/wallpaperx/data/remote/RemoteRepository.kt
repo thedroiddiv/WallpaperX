@@ -3,6 +3,7 @@ package com.dxn.wallpaperx.data.remote
 import android.content.Context
 import com.dxn.wallpaperx.data.hitsToWallpapers
 import com.dxn.wallpaperx.domain.models.Wallpaper
+import java.util.Collections.shuffle
 import javax.inject.Inject
 
 class RemoteRepository
@@ -18,7 +19,7 @@ constructor(
     ): List<Wallpaper> {
         return runCatching {
             val response = pixabayApi.getWallpapers(apikey = apiKey, page = page, query = query)
-            hitsToWallpapers(response.hits)
+            hitsToWallpapers((response.hits))
         }.getOrThrow()
     }
 

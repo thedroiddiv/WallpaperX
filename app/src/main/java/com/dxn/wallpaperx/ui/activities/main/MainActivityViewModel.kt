@@ -23,31 +23,18 @@ constructor(
     private val wallpaperUseCase: WallpaperUseCase
 ) : ViewModel() {
 
-    var wallpapers = mutableStateOf(flowOf<PagingData<Wallpaper>>())
-    val savedWallpapers = mutableStateOf(listOf<SavedWallpaper>())
+    var wallpapers = flowOf<PagingData<Wallpaper>>()
     val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())
 
     init {
         loadWallpapers()
         loadFavourites()
-        loadSavedWallpapers()
     }
 
     private fun loadWallpapers() {
-        Log.d(TAG, "loadWallpapers: Wallpapers loaded")
         viewModelScope.launch {
             kotlin.runCatching {
-                wallpapers.value = wallpaperUseCase.getWallpapers("")
-            }
-        }
-    }
-
-    fun loadSavedWallpapers() {
-        viewModelScope.launch(Dispatchers.IO) {
-            kotlin.runCatching {
-                savedWallpapers.value = wallpaperUseCase.getSavedWallpapers()
-            }.getOrElse {
-                Log.e(TAG, "loadSavedWallpapers: ${it.message}", )
+                wallpapers = wallpaperUseCase.getWallpapers("wallpaper")
             }
         }
     }
@@ -72,8 +59,8 @@ constructor(
     fun removeFavourite(id: Int) {
         viewModelScope.launch {
             wallpaperUseCase.removeFavourite(id)
+            loadFavourites()
         }
-        loadFavourites()
     }
 
     companion object {
