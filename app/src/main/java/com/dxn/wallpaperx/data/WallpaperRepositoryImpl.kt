@@ -21,6 +21,7 @@ import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
@@ -57,9 +58,9 @@ constructor(
     override suspend fun removeFavourite(id: Int): Boolean =
         localRepository.removeFavourite(id)
 
-    override suspend fun getFavourites(): List<Wallpaper> {
+    override fun getFavourites(): Flow<List<Wallpaper>> {
         return localRepository.getFavourites()
-            .map { favEntityToWallpaper(it) }
+            .map { wallpapers -> wallpapers.map { favEntityToWallpaper(it) } }
     }
 
 }

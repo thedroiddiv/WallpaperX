@@ -65,12 +65,10 @@ constructor(
         }
     }
 
-    suspend fun getFavourites(): List<FavouriteEntity> {
-        return withContext(Dispatchers.IO) {
-            runCatching {
+    fun getFavourites(): Flow<List<FavouriteEntity>> {
+        return runCatching {
                 favouriteDao.getAll()
             }.getOrThrow()
-        }
     }
 
     suspend fun removeFavourite(id: Int): Boolean {

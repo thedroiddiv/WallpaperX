@@ -21,6 +21,8 @@ import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -34,6 +36,7 @@ constructor(
     private val application: Application
 ) : ViewModel() {
 
+    var favJob : Job? = null
     val favouriteIds = mutableStateOf(listOf<Int>())
     val isProgressVisible = mutableStateOf(false)
 
@@ -42,15 +45,12 @@ constructor(
     }
 
     private fun loadFavourites() {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                favouriteIds.value = wallpaperUseCase.getFavourites().map { it.id }
-                Log.d(TAG, "loadFavourites: ${favouriteIds.value}")
-            }.getOrElse {
-                Log.d(TAG, "loadFavourites: ${it.message}")
-            }
-        }
+        favJob?.cancel()
+        favJob = wallpaperUseCase.getFavourites()
+            .onEach { favouriteIds.value = it.map { wallpaper -> wallpaper.id  } }
+            .launchIn(viewModelScope)
     }
+
 
     fun removeFavourite(id: Int) {
         viewModelScope.launch {

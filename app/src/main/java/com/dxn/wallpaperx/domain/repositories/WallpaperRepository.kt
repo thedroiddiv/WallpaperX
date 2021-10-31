@@ -2,6 +2,7 @@ package com.dxn.wallpaperx.domain.repositories
 
 import com.dxn.wallpaperx.domain.models.SavedWallpaper
 import com.dxn.wallpaperx.domain.models.Wallpaper
+import kotlinx.coroutines.flow.Flow
 
 interface WallpaperRepository {
 
@@ -13,6 +14,6 @@ interface WallpaperRepository {
 
     suspend fun addFavourite(wallpaper: Wallpaper): Boolean
     suspend fun removeFavourite(id: Int): Boolean
-    suspend fun getFavourites(): List<Wallpaper>
+    fun getFavourites(): Flow<List<Wallpaper>>
 
 }

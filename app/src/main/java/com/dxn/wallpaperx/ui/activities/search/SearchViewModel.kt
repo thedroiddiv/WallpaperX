@@ -12,7 +12,10 @@ import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
 import com.dxn.wallpaperx.domain.usecases.WallpaperUseCase
 import com.dxn.wallpaperx.ui.activities.main.MainActivityViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,6 +26,7 @@ constructor(
     private val wallpaperUseCase: WallpaperUseCase
 ) : ViewModel() {
 
+    var favJob : Job? = null
     val wallpapers = mutableStateOf(flowOf<PagingData<Wallpaper>>())
     val favouriteIds: MutableState<List<Int>> = mutableStateOf(listOf())
 
@@ -35,13 +39,10 @@ constructor(
     }
 
     private fun loadFavourites() {
-        viewModelScope.launch {
-            kotlin.runCatching {
-                favouriteIds.value = wallpaperUseCase.getFavourites().map { it.id }
-            }.getOrElse {
-                Log.d(MainActivityViewModel.TAG, "loadFavourites: ${it.message}")
-            }
-        }
+        favJob?.cancel()
+        favJob = wallpaperUseCase.getFavourites()
+            .onEach { favouriteIds.value = it.map { wallpaper -> wallpaper.id  } }
+            .launchIn(viewModelScope)
     }
 
     fun addFavourite(wallpaper: Wallpaper) {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.material.MaterialTheme
@@ -19,6 +20,7 @@ class MainActivity : ComponentActivity() {
     val viewModel by viewModels<MainActivityViewModel>()
 
 
+    @ExperimentalAnimationApi
     @ExperimentalCoilApi
     @ExperimentalFoundationApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WallpaperXTheme {
                 Surface(Modifier.background(MaterialTheme.colors.surface)) {
-                    MainComposable(viewModel)
+                   MainComposable(viewModel = viewModel)
                 }
             }
         }

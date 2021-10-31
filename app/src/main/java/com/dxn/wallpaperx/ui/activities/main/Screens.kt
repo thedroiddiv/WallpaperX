@@ -12,7 +12,7 @@ sealed class Screen(
     val icon: ImageVector
 ) {
     object Wallpapers : Screen(
-        "WallpapersX",
+        "WallpaperX",
         "route_wallpapers",
         R.string.route_wallpapers,
         Icons.Rounded.Wallpaper
