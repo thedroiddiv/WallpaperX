@@ -1,30 +1,24 @@
 package com.dxn.wallpaperx.ui.components
 
-import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Favorite
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.paging.LoadState
-import androidx.paging.LoadStates
-import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
-import com.dxn.wallpaperx.domain.models.SavedWallpaper
 import com.dxn.wallpaperx.domain.models.Wallpaper
-import com.dxn.wallpaperx.ui.activities.setwallpaper.SetWallpaperActivity
-import kotlinx.coroutines.flow.Flow
+import com.dxn.wallpaperx.ui.screens.Screen
+import com.google.gson.Gson
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
@@ -34,10 +28,9 @@ fun WallpaperList(
     favouriteIds: List<Int>,
     addFavourite: (Wallpaper) -> Unit,
     removeFavourite: (Int) -> Unit,
-    state: LazyListState = rememberLazyListState()
+    state: LazyListState = rememberLazyListState(),
+    navController: NavHostController
 ) {
-    val context = LocalContext.current
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -58,9 +51,8 @@ fun WallpaperList(
                             .height(246.dp),
                         wallpaper = wallpaper,
                         onClick = {
-                            val intent = Intent(context, SetWallpaperActivity::class.java)
-                            intent.putExtra("wallpaper", wallpaper)
-                            context.startActivity(intent)
+                            val data = Uri.encode(Gson().toJson(wallpaper))
+                            navController.navigate("${Screen.SetWallpaper.route}/$data" )
                         },
                         isFavourite = isFavourite,
                         onLikedClicked = {
@@ -89,3 +81,4 @@ fun WallpaperList(
         }
     }
 }
+

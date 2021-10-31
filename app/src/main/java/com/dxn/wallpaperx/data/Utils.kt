@@ -27,11 +27,11 @@ fun favEntityToWallpaper(favouriteEntity: FavouriteEntity): Wallpaper {
 fun wallpaperToFavouriteEntity(wallpaper: Wallpaper): FavouriteEntity {
     return FavouriteEntity(
         wallpaper.id,
-        wallpaper.previewUrl,
-        wallpaper.wallpaperUrl,
-        wallpaper.smallUrl,
-        wallpaper.user,
-        wallpaper.userImageURL
+        wallpaper.previewUrl!!,
+        wallpaper.wallpaperUrl!!,
+        wallpaper.smallUrl!!,
+        wallpaper.user!!,
+        wallpaper.userImageURL!!
     )
 }
 

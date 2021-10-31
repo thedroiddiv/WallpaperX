@@ -32,7 +32,7 @@
             android:theme="@style/Theme.WallpaperX.TranslucentStatus" />
 
         <activity
-            android:name=".ui.activities.main.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
