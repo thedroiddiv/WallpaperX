@@ -1,11 +1,11 @@
 package com.dxn.wallpaperx.data
 
 import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
-import com.dxn.wallpaperx.data.remote.models.Hit
+import com.dxn.wallpaperx.data.remote.pixabay.models.Hit
 import com.dxn.wallpaperx.domain.models.Wallpaper
 
 fun hitToWallpaper(hit: Hit): Wallpaper = Wallpaper(
-    id = hit.id,
+    id = hit.id.toString(),
     previewUrl = hit.previewURL,
     smallUrl = hit.webformatURL,
     wallpaperUrl = hit.largeImageURL,
@@ -27,11 +27,11 @@ fun favEntityToWallpaper(favouriteEntity: FavouriteEntity): Wallpaper {
 fun wallpaperToFavouriteEntity(wallpaper: Wallpaper): FavouriteEntity {
     return FavouriteEntity(
         wallpaper.id,
-        wallpaper.previewUrl!!,
-        wallpaper.wallpaperUrl!!,
-        wallpaper.smallUrl!!,
-        wallpaper.user!!,
-        wallpaper.userImageURL!!
+        wallpaper.previewUrl,
+        wallpaper.wallpaperUrl,
+        wallpaper.smallUrl,
+        wallpaper.user,
+        wallpaper.userImageURL
     )
 }
 

@@ -6,9 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.ui.screens.App
 import com.dxn.wallpaperx.ui.theme.WallpaperXTheme
@@ -25,9 +31,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WallpaperXTheme {
-                Surface(Modifier.background(MaterialTheme.colors.surface)) {
-                   App()
+                Surface(modifier = Modifier.fillMaxSize(),color = Color.Black) {
+                    App()
                 }
+
             }
         }
     }

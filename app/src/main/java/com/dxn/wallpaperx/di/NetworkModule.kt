@@ -1,6 +1,7 @@
 package com.dxn.wallpaperx.di
 
-import com.dxn.wallpaperx.data.remote.PixabayApi
+import com.dxn.wallpaperx.data.remote.pixabay.PixabayApi
+import com.dxn.wallpaperx.data.remote.unsplash.UnsplashApi
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -19,5 +20,12 @@ object NetworkModule {
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
         .build()
         .create(PixabayApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUnsplashApi(): UnsplashApi = Retrofit.Builder().baseUrl("https://pixabay.com/")
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+        .build()
+        .create(UnsplashApi::class.java)
 
 }

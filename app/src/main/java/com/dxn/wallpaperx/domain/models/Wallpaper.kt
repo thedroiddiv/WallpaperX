@@ -3,7 +3,7 @@ package com.dxn.wallpaperx.domain.models
 import android.os.Parcel
 import android.os.Parcelable
 data class Wallpaper(
-    val id:Int,
+    val id:String,
     val previewUrl: String,
     val smallUrl:String,
     val wallpaperUrl:String,
@@ -11,7 +11,7 @@ data class Wallpaper(
     val userImageURL: String,
 ): Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readInt(),
+        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -20,7 +20,7 @@ data class Wallpaper(
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
+        parcel.writeString(id)
         parcel.writeString(previewUrl)
         parcel.writeString(smallUrl)
         parcel.writeString(wallpaperUrl)

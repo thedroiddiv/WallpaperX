@@ -2,7 +2,6 @@ package com.dxn.wallpaperx.domain.usecases
 
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
-import com.dxn.wallpaperx.helpers.ResourcesProvider
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -27,5 +26,5 @@ class RemoveFavourite
 constructor(
     private val repository: WallpaperRepository
 ) {
-    suspend operator fun invoke(id: Int) = repository.removeFavourite(id)
+    suspend operator fun invoke(id: String) = repository.removeFavourite(id)
 }

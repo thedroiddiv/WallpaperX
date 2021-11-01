@@ -7,7 +7,6 @@ import com.dxn.wallpaperx.domain.models.Wallpaper
 class WallpaperSource
 constructor(
     private val repository: WallpaperRepository,
-    private val apiKey: String,
     private val query: String
 ) : PagingSource<Int, Wallpaper>() {
 
@@ -19,7 +18,7 @@ constructor(
         return kotlin.runCatching {
             val nextPage = params.key ?: 1
             val wallpapers =
-                repository.getWallpapers(apiKey, nextPage, query)
+                repository.getWallpapers(nextPage, query)
             LoadResult.Page(
                 data = wallpapers,
                 prevKey = if (nextPage == 1) null else nextPage - 1,

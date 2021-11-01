@@ -5,39 +5,38 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.runtime.Composable
 import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavController
+import com.dxn.wallpaperx.ui.navigation.HomeScreen
 
-fun slideInFromRight(initial:NavBackStackEntry, target:NavBackStackEntry): EnterTransition? {
+fun slideInFromRight(initial: NavBackStackEntry, target: NavBackStackEntry): EnterTransition? {
     return when (initial.destination.route) {
-        "Red" ,"Blue"->
-            slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(500))
+        HomeScreen.Wallpapers.route, HomeScreen.Favourites.route, HomeScreen.Setting.route ->
+            slideInHorizontally(initialOffsetX = { 1000 }, animationSpec = tween(300))
         else -> null
     }
 }
 
-fun slideInFromLeft(initial:NavBackStackEntry, target:NavBackStackEntry): EnterTransition? {
+fun slideInFromLeft(initial: NavBackStackEntry, target: NavBackStackEntry): EnterTransition? {
     return when (initial.destination.route) {
-        "Red" ,"Blue"->
-            slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(500))
+        HomeScreen.Wallpapers.route, HomeScreen.Favourites.route, HomeScreen.Setting.route ->
+            slideInHorizontally(initialOffsetX = { -1000 }, animationSpec = tween(300))
         else -> null
     }
 }
 
 
-fun slideOutToLeft(initial:NavBackStackEntry, target:NavBackStackEntry): ExitTransition? {
+fun slideOutToLeft(initial: NavBackStackEntry, target: NavBackStackEntry): ExitTransition? {
     return when (target.destination.route) {
-        "Red" ,"Blue" ->
-            slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(500))
+        HomeScreen.Wallpapers.route, HomeScreen.Favourites.route, HomeScreen.Setting.route ->
+            slideOutHorizontally(targetOffsetX = { -1000 }, animationSpec = tween(700))
         else -> null
     }
 }
 
-fun slideOutToRight(initial:NavBackStackEntry, target:NavBackStackEntry): ExitTransition? {
+fun slideOutToRight(initial: NavBackStackEntry, target: NavBackStackEntry): ExitTransition? {
     return when (target.destination.route) {
-        "Red" ,"Blue"->
-            slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(700))
+        HomeScreen.Wallpapers.route, HomeScreen.Favourites.route, HomeScreen.Setting.route ->
+            slideOutHorizontally(targetOffsetX = { 1000 }, animationSpec = tween(300))
         else -> null
     }
 }

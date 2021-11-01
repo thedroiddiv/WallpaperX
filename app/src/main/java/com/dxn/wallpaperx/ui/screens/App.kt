@@ -1,26 +1,43 @@
 package com.dxn.wallpaperx.ui.screens
 
-import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
+import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.domain.models.Wallpaper
-import com.dxn.wallpaperx.ui.anim.slideInFromLeft
-import com.dxn.wallpaperx.ui.anim.slideInFromRight
-import com.dxn.wallpaperx.ui.anim.slideOutToLeft
-import com.dxn.wallpaperx.ui.anim.slideOutToRight
-import com.dxn.wallpaperx.ui.screens.home.Home
+import com.dxn.wallpaperx.ui.navigation.HomeScreen
+import com.dxn.wallpaperx.ui.navigation.RootScreen
+import com.dxn.wallpaperx.ui.screens.home.HomeViewModel
+import com.dxn.wallpaperx.ui.screens.home.components.BottomBar
+import com.dxn.wallpaperx.ui.screens.home.components.TopBar
+import com.dxn.wallpaperx.ui.screens.home.favourites.Favourites
+import com.dxn.wallpaperx.ui.screens.home.settings.Settings
+import com.dxn.wallpaperx.ui.screens.home.wallpapers.Wallpapers
 import com.dxn.wallpaperx.ui.screens.search.Search
-import com.dxn.wallpaperx.ui.screens.set_wallpaper.SetWallpaper
+import com.dxn.wallpaperx.ui.screens.setWallpaper.SetWallpaper
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.navigation
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.gson.Gson
 
 
@@ -34,28 +51,79 @@ fun App() {
 
     val navController = rememberAnimatedNavController()
 
-    Box(modifier = Modifier.fillMaxSize()) {
-        AnimatedNavHost(navController = navController, startDestination = Screen.Home.route) {
-            composable(
-                route = Screen.Home.route,
-                enterTransition = { initial, target -> slideInFromRight(initial, target) },
-                exitTransition = { initial, target -> slideOutToLeft(initial, target) },
-                popEnterTransition = { initial, target -> slideInFromLeft(initial, target) },
-                popExitTransition = {initial, target -> slideOutToRight(initial, target) }
+    val systemUiController = rememberSystemUiController()
+    val primaryColor = MaterialTheme.colors.primary
+
+    SideEffect {
+        systemUiController.setNavigationBarColor(Color.Black)
+    }
+
+    val homeViewModel: HomeViewModel = hiltViewModel()
+    val wallpapers = homeViewModel.wallpapers.collectAsLazyPagingItems()
+    val favourites by remember { homeViewModel.favourites }
+
+    val wallpaperListState = rememberLazyListState()
+    val favouriteListState = rememberLazyListState()
+
+    val screens = listOf(HomeScreen.Wallpapers, HomeScreen.Favourites, HomeScreen.Setting)
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+    val currentDest = screens.find { it.route == currentRoute }
+
+
+    Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(16.dp)),
+        topBar = {
+            AnimatedVisibility(visible = (screens.map { it.route }).contains(currentRoute)) {
+                TopBar(currentDest = currentDest, navController = navController)
+            }
+        },
+        bottomBar = {
+            AnimatedVisibility(visible = (screens.map { it.route }).contains(currentRoute)) {
+                BottomBar(
+                    screens = screens,
+                    navController = navController,
+                    currentRoute = currentRoute
+                )
+            }
+        }
+    ) {
+        AnimatedNavHost(navController = navController, startDestination = RootScreen.Home.route) {
+            navigation(
+                route = RootScreen.Home.route,
+                startDestination = HomeScreen.Wallpapers.route
             ) {
-                Home(navController = navController)
+
+                composable(route = HomeScreen.Wallpapers.route) {
+                    Wallpapers(
+                        viewModel = homeViewModel,
+                        wallpapers = wallpapers,
+                        favourites = favourites,
+                        listState = wallpaperListState,
+                        navController = navController
+                    )
+                }
+                composable(route = HomeScreen.Favourites.route) {
+                    Favourites(
+                        viewModel = homeViewModel,
+                        favourites = favourites,
+                        listState = favouriteListState,
+                        navController = navController
+                    )
+                }
+                composable(route = HomeScreen.Setting.route) {
+                    Settings()
+                }
             }
             composable(
-                route = Screen.Search.route,
-                enterTransition = { initial, target -> slideInFromRight(initial, target) },
-                exitTransition = { initial, target -> slideOutToLeft(initial, target) },
+                route = RootScreen.Search.route,
             ) {
                 Search(navController = navController)
             }
             composable(
-                route = Screen.SetWallpaper.route + "/{wallpaper}",
-                enterTransition = { initial, target -> slideInFromRight(initial, target) },
-                exitTransition = { initial, target -> slideOutToLeft(initial, target) },
+                route = RootScreen.SetWallpaper.route + "/{wallpaper}",
                 arguments = listOf(navArgument("wallpaper") { type = NavType.StringType })
             ) { backStack ->
                 backStack.arguments?.getString("wallpaper")?.let {
@@ -65,12 +133,4 @@ fun App() {
             }
         }
     }
-
-}
-
-
-sealed class Screen(val title: String, val route: String) {
-    object Home : Screen("Home", "home_route")
-    object Search : Screen("Search", "search_route")
-    object SetWallpaper : Screen("SetWallpaper", "set_wallpaper_route")
 }

@@ -4,10 +4,9 @@ import android.app.Application
 import android.app.WallpaperManager
 import android.content.Context
 import android.util.Log
-import androidx.core.content.ContextCompat.getSystemService
 import com.dxn.wallpaperx.domain.models.Wallpaper
-import com.dxn.wallpaperx.extensions.getBitmap
-import com.dxn.wallpaperx.extensions.shortToast
+import com.dxn.wallpaperx.common.extensions.getBitmap
+import com.dxn.wallpaperx.common.extensions.shortToast
 import javax.inject.Inject
 
 class SetWallpaperUseCases

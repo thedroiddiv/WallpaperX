@@ -17,19 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WallpaperX"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".ui.activities.search.SearchActivity"
-            android:exported="true"
-            android:label="@string/title_activity_search"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.WallpaperX.NoActionBar" />
-
-        <activity
-            android:name=".ui.activities.setwallpaper.SetWallpaperActivity"
-            android:exported="true"
-            android:label="@string/title_activity_set_wallpaper"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.WallpaperX.TranslucentStatus" />
 
         <activity
             android:name=".ui.MainActivity"

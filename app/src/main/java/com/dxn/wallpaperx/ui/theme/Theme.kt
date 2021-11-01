@@ -1,5 +1,6 @@
 package com.dxn.wallpaperx.ui.theme
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -9,29 +10,32 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
 
-    primary = Brown900,
-    primaryVariant = Color.Black,
+    primary = Color.Black,
     onPrimary = Color.White,
 
-    surface = Brown600,
+    surface = Color.Black,
     onSurface = Color.White,
 
-    onSecondary = Red900 // accent color
+    background = Color.Black,
+    onBackground = Color.White,
+
+    secondary = Red900
 )
 
 private val LightColorPalette = lightColors(
     primary = Color.White,
-    primaryVariant = Brown900,
     onPrimary = Color.Black,
 
     surface = Color.White,
     onSurface = Color.Black,
 
-    onSecondary = Red900 // accent color
+    onSecondary = Red900
 )
+
 
 @Composable
 fun WallpaperXTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

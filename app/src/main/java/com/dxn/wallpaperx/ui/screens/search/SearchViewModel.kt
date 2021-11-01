@@ -24,7 +24,7 @@ constructor(
 
     var favJob : Job? = null
     val wallpapers = mutableStateOf(flowOf<PagingData<Wallpaper>>())
-    val favouriteIds: MutableState<List<Int>> = mutableStateOf(listOf())
+    val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())
 
     init {
         loadFavourites()
@@ -37,7 +37,7 @@ constructor(
     private fun loadFavourites() {
         favJob?.cancel()
         favJob = wallpaperUseCase.getFavourites()
-            .onEach { favouriteIds.value = it.map { wallpaper -> wallpaper.id  } }
+            .onEach { favourites.value = it }
             .launchIn(viewModelScope)
     }
 
@@ -48,7 +48,7 @@ constructor(
         }
     }
 
-    fun removeFavourite(id: Int) {
+    fun removeFavourite(id: String) {
         viewModelScope.launch {
             wallpaperUseCase.removeFavourite(id)
             loadFavourites()

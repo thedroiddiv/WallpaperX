@@ -1,6 +1,7 @@
 package com.dxn.wallpaperx.ui.components
 
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
@@ -17,32 +18,35 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.domain.models.Wallpaper
-import com.dxn.wallpaperx.ui.screens.Screen
+import com.dxn.wallpaperx.ui.navigation.RootScreen
 import com.google.gson.Gson
+
+const val TAG = "WallpaperList"
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun WallpaperList(
     wallpapers: LazyPagingItems<Wallpaper>,
-    favouriteIds: List<Int>,
+    favourites: List<Wallpaper>,
     addFavourite: (Wallpaper) -> Unit,
-    removeFavourite: (Int) -> Unit,
+    removeFavourite: (String) -> Unit,
     state: LazyListState = rememberLazyListState(),
     navController: NavHostController
 ) {
+//    Log.d(TAG, "WallpaperList: $favourites")
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),
-            modifier = Modifier.padding(bottom = 8.dp),
+            modifier = Modifier.padding(horizontal = 8.dp,),
             state = state
         ) {
             items(wallpapers.itemCount) { index ->
                 wallpapers[index]?.let { wallpaper ->
-                    val isFavourite = favouriteIds.contains(wallpaper.id)
+                    val isFavourite = favourites.any { it.id == wallpaper.id}
                     WallpaperCard(
                         modifier = Modifier
                             .padding(top = if (index == 0 || index == 1) 8.dp else 0.dp)
@@ -52,7 +56,7 @@ fun WallpaperList(
                         wallpaper = wallpaper,
                         onClick = {
                             val data = Uri.encode(Gson().toJson(wallpaper))
-                            navController.navigate("${Screen.SetWallpaper.route}/$data" )
+                            navController.navigate("${RootScreen.SetWallpaper.route}/$data" )
                         },
                         isFavourite = isFavourite,
                         onLikedClicked = {

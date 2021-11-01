@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.WallpaperX" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor" tools:targetApi="l">#130808</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#000000</item>
         <item name="android:windowLightStatusBar">false</item>
 
     </style>

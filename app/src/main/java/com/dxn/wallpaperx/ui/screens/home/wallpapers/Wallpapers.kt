@@ -21,19 +21,18 @@ import com.dxn.wallpaperx.ui.screens.home.HomeViewModel
 fun Wallpapers(
     viewModel: HomeViewModel,
     wallpapers: LazyPagingItems<Wallpaper>,
-    favouriteIds: List<Int>,
+    favourites: List<Wallpaper>,
     listState: LazyListState,
     navController: NavHostController
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 8.dp)
     ) {
 
         WallpaperList(
             wallpapers = wallpapers,
-            favouriteIds = favouriteIds,
+            favourites = favourites,
             addFavourite = { viewModel.addFavourite(it) },
             removeFavourite = { viewModel.removeFavourite(it) },
             state = listState,

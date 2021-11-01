@@ -39,7 +39,7 @@ constructor(
         }
     }
 
-    fun loadFavourites() {
+    private fun loadFavourites() {
         favJob?.cancel()
         favJob = wallpaperUseCase.getFavourites()
             .onEach { favourites.value = it }
@@ -52,7 +52,7 @@ constructor(
         }
     }
 
-    fun removeFavourite(id: Int) {
+    fun removeFavourite(id: String) {
         viewModelScope.launch {
             wallpaperUseCase.removeFavourite(id)
         }
@@ -62,3 +62,4 @@ constructor(
         const val TAG = "MainActivityViewModel"
     }
 }
+
