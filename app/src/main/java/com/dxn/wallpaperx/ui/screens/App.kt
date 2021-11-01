@@ -52,7 +52,6 @@ fun App() {
     val navController = rememberAnimatedNavController()
 
     val systemUiController = rememberSystemUiController()
-    val primaryColor = MaterialTheme.colors.primary
 
     SideEffect {
         systemUiController.setNavigationBarColor(Color.Black)
