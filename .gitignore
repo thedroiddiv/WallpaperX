@@ -1,3 +1,2 @@
 **/*/res/values/secrets.xml
-/keystore/keystoreinitial.jks
-/keystore/private_key.pepk
+/keystore/
