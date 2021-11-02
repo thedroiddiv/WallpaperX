@@ -10,12 +10,12 @@ WallpaperX is a simple android application built using <a href="https://develope
 
  
 <div>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample1.jpeg" height="640"/>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample2.jpeg" height="640">
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample3.jpeg" height="640">
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample4.jpeg" height="640">
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample5.jpeg" height="640">
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample6.jpeg" height="640">
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample1.jpeg" height="480"/>
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample2.jpeg" height="480">
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample3.jpeg" height="480">
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample4.jpeg" height="480">
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample5.jpeg" height="480">
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/samples/sample6.jpeg" height="480">
 </div>
 
 
