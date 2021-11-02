@@ -1,7 +1,4 @@
 # WallpaperX
-
-# WallpaperX
-
 WallpaperX is a simple android application built using Jetpack compose - Android's Modern UI Toolkit.
 
 It uses pixabay and unsplash api to fetch wallpapers. 
