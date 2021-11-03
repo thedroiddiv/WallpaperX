@@ -16,14 +16,14 @@ import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.ui.components.WallpaperCard
 import com.dxn.wallpaperx.ui.navigation.RootScreen
-import com.dxn.wallpaperx.ui.screens.home.HomeViewModel
+import com.dxn.wallpaperx.ui.screens.MainViewModel
 import com.google.gson.Gson
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable
 fun Favourites(
-    viewModel: HomeViewModel,
+    viewModel: MainViewModel,
     favourites : List<Wallpaper>,
     listState: LazyListState,
     navController: NavHostController

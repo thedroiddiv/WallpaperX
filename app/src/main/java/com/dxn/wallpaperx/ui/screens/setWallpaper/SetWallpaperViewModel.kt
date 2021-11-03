@@ -23,36 +23,7 @@ constructor(
     private val application: Application
 ) : ViewModel() {
 
-    var favJob : Job? = null
-    val favouriteIds = mutableStateOf(listOf<String>())
     val isProgressVisible = mutableStateOf(false)
-
-    init {
-        loadFavourites()
-    }
-
-    private fun loadFavourites() {
-        favJob?.cancel()
-        favJob = wallpaperUseCase.getFavourites()
-            .onEach { favouriteIds.value = it.map { wallpaper -> wallpaper.id  } }
-            .launchIn(viewModelScope)
-    }
-
-
-    fun removeFavourite(id: String) {
-        viewModelScope.launch {
-            wallpaperUseCase.removeFavourite(id)
-        }
-        loadFavourites()
-    }
-
-
-    fun addFavourite(wallpaper: Wallpaper) {
-        viewModelScope.launch {
-            wallpaperUseCase.addFavourite(wallpaper)
-            loadFavourites()
-        }
-    }
 
     fun setWallpaper(wallpaper: Wallpaper, flag: Int) {
         isProgressVisible.value = true

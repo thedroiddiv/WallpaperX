@@ -22,36 +22,13 @@ constructor(
     private val wallpaperUseCase: WallpaperUseCase
 ) : ViewModel() {
 
-    var favJob : Job? = null
+    var searchJob: Job? = null
     val wallpapers = mutableStateOf(flowOf<PagingData<Wallpaper>>())
-    val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())
 
-    init {
-        loadFavourites()
-    }
-
-    fun search(query:String) {
-        wallpapers.value = wallpaperUseCase.getWallpapers(query)
-    }
-
-    private fun loadFavourites() {
-        favJob?.cancel()
-        favJob = wallpaperUseCase.getFavourites()
-            .onEach { favourites.value = it }
-            .launchIn(viewModelScope)
-    }
-
-    fun addFavourite(wallpaper: Wallpaper) {
-        viewModelScope.launch {
-            wallpaperUseCase.addFavourite(wallpaper)
-            loadFavourites()
-        }
-    }
-
-    fun removeFavourite(id: String) {
-        viewModelScope.launch {
-            wallpaperUseCase.removeFavourite(id)
-            loadFavourites()
+    fun search(query: String) {
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            wallpapers.value = wallpaperUseCase.getWallpapers(query)
         }
     }
 

@@ -21,7 +21,6 @@ import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.ui.navigation.HomeScreen
 import com.dxn.wallpaperx.ui.navigation.RootScreen
-import com.dxn.wallpaperx.ui.screens.home.HomeViewModel
 import com.dxn.wallpaperx.ui.components.BottomBar
 import com.dxn.wallpaperx.ui.components.TopBar
 import com.dxn.wallpaperx.ui.screens.home.favourites.Favourites
@@ -49,19 +48,15 @@ fun App() {
     val navController = rememberAnimatedNavController()
     val systemUiController = rememberSystemUiController()
     val backgroundColor = MaterialTheme.colors.background
-
     SideEffect {
         systemUiController.setNavigationBarColor(backgroundColor)
         systemUiController.setStatusBarColor(backgroundColor)
     }
-
-    val homeViewModel: HomeViewModel = hiltViewModel()
-    val wallpapers = homeViewModel.wallpapers.collectAsLazyPagingItems()
-    val favourites by remember { homeViewModel.favourites }
-
+    val mainViewModel: MainViewModel = hiltViewModel()
+    val wallpapers = mainViewModel.wallpapers.collectAsLazyPagingItems()
+    val favourites by remember { mainViewModel.favourites }
     val wallpaperListState = rememberLazyListState()
     val favouriteListState = rememberLazyListState()
-
     val screens = listOf(HomeScreen.Wallpapers, HomeScreen.Favourites, HomeScreen.Setting)
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -94,7 +89,7 @@ fun App() {
             ) {
                 composable(route = HomeScreen.Wallpapers.route) {
                     Wallpapers(
-                        viewModel = homeViewModel,
+                        viewModel = mainViewModel,
                         wallpapers = wallpapers,
                         favourites = favourites,
                         listState = wallpaperListState,
@@ -103,7 +98,7 @@ fun App() {
                 }
                 composable(route = HomeScreen.Favourites.route) {
                     Favourites(
-                        viewModel = homeViewModel,
+                        viewModel = mainViewModel,
                         favourites = favourites,
                         listState = favouriteListState,
                         navController = navController
@@ -116,15 +111,26 @@ fun App() {
             composable(
                 route = RootScreen.Search.route,
             ) {
-                Search(navController = navController)
+                Search(
+                    navController = navController,
+                    favourites = favourites,
+                    addFavourite = { mainViewModel.addFavourite(it) },
+                    removeFavourite = { mainViewModel.removeFavourite(it) }
+                )
             }
             composable(
                 route = RootScreen.SetWallpaper.route + "/{wallpaper}",
                 arguments = listOf(navArgument("wallpaper") { type = NavType.StringType })
             ) { backStack ->
-                backStack.arguments?.getString("wallpaper")?.let {
-                    val wallpaper = Gson().fromJson(it, Wallpaper::class.java)
-                    SetWallpaper(navController = navController, wallpaper = wallpaper)
+                backStack.arguments?.getString("wallpaper")?.let { w ->
+                    val wallpaper = Gson().fromJson(w, Wallpaper::class.java)
+                    SetWallpaper(
+                        navController = navController,
+                        wallpaper = wallpaper,
+                        favourites = favourites,
+                        addFavourite = { mainViewModel.addFavourite(it) },
+                        removeFavourite = { mainViewModel.removeFavourite(it) }
+                    )
                 }
             }
         }

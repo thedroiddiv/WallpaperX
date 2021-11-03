@@ -12,6 +12,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
+import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.ui.components.WallpaperList
 import com.dxn.wallpaperx.ui.components.SearchBar
 
@@ -19,12 +20,14 @@ import com.dxn.wallpaperx.ui.components.SearchBar
 @ExperimentalFoundationApi
 @Composable
 fun Search(
-    navController: NavHostController
+    navController: NavHostController,
+    favourites: List<Wallpaper>,
+    addFavourite: (Wallpaper) -> Unit,
+    removeFavourite: (String) -> Unit
 ) {
     val viewModel: SearchViewModel = hiltViewModel()
     val dataFlow by remember { viewModel.wallpapers }
     val wallpapers = dataFlow.collectAsLazyPagingItems()
-    val favourites by remember { viewModel.favourites }
 
     Scaffold(
         topBar = {
@@ -54,10 +57,10 @@ fun Search(
             wallpapers = wallpapers,
             favourites = favourites,
             addFavourite = { wallpaper ->
-                viewModel.addFavourite(wallpaper)
+                addFavourite(wallpaper)
             },
             removeFavourite = { id ->
-                viewModel.removeFavourite(id)
+                removeFavourite(id)
             },
             navController = navController
         )

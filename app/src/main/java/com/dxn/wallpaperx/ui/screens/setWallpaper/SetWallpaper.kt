@@ -31,6 +31,7 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import coil.transform.BlurTransformation
 import com.dxn.wallpaperx.domain.models.Wallpaper
+import com.dxn.wallpaperx.domain.usecases.RemoveFavourite
 import com.dxn.wallpaperx.ui.screens.setWallpaper.components.BottomMenu
 
 
@@ -40,15 +41,16 @@ private const val TAG = "SetWallpaper"
 @Composable
 fun SetWallpaper(
     navController: NavHostController,
-    wallpaper: Wallpaper
+    wallpaper: Wallpaper,
+    favourites: List<Wallpaper>,
+    addFavourite: (Wallpaper) -> Unit,
+    removeFavourite: (String) -> Unit
 ) {
 
     val viewModel: SetWallpaperViewModel = hiltViewModel()
     var bottomMenuVisibility by remember { mutableStateOf(true) }
-    val favouriteIds by remember { viewModel.favouriteIds }
     val isProgressVisible by remember { viewModel.isProgressVisible }
-
-    val isLiked = (favouriteIds.contains(wallpaper.id))
+    val isLiked = favourites.any { it.id == wallpaper.id }
 
     val loader = rememberImagePainter(
         data = wallpaper.previewUrl,
@@ -121,9 +123,9 @@ fun SetWallpaper(
                     },
                     onFavourite = {
                         if (isLiked) {
-                            viewModel.removeFavourite(wallpaper.id)
+                            removeFavourite(wallpaper.id)
                         } else {
-                            viewModel.addFavourite(wallpaper)
+                            addFavourite(wallpaper)
                         }
                     },
                     onLock = {
