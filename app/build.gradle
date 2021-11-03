@@ -72,6 +72,7 @@ dependencies {
     def accompanist_version = '0.21.0-beta'
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
 
 
     // Coroutines
