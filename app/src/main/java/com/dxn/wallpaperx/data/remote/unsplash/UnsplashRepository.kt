@@ -15,7 +15,7 @@ class UnsplashRepository(
 
 
     override suspend fun getWallpapers(page: Int, query: String): List<Wallpaper> {
-        return unsplashApi.getImages(query = query,page = page,apikey = resourcesProvider.getString(R.string.unsplash_api_key)).map { imageDtoToWallpaper(it) }
+        return unsplashApi.getImages(query = query,page = page,apikey = resourcesProvider.getString(R.string.unsplash_api_key)).results.map { imageDtoToWallpaper(it) }
     }
 
     override suspend fun getWallpaper(id: String): Wallpaper {

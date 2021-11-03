@@ -23,7 +23,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideUnsplashApi(): UnsplashApi = Retrofit.Builder().baseUrl("https://pixabay.com/")
+    fun provideUnsplashApi(): UnsplashApi = Retrofit.Builder().baseUrl("https://api.unsplash.com/")
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
         .build()
         .create(UnsplashApi::class.java)

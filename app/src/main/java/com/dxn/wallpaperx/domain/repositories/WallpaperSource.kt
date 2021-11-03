@@ -1,5 +1,6 @@
 package com.dxn.wallpaperx.domain.repositories
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.dxn.wallpaperx.domain.models.Wallpaper
@@ -24,7 +25,10 @@ constructor(
                 prevKey = if (nextPage == 1) null else nextPage - 1,
                 nextKey = nextPage.plus(1)
             )
-        }.getOrThrow()
+        }.getOrElse {
+            Log.e(TAG, "load: ${it.message}", )
+            LoadResult.Error(it)
+        }
     }
 
     override fun getRefreshKey(state: PagingState<Int, Wallpaper>): Int? {

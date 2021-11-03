@@ -13,23 +13,26 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object WallpaperModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideRemoteRepository(
-//        unsplashApi: UnsplashApi,
-//        resourcesProvider: ResourcesProvider
-//    ): RemoteRepository =
-//        UnsplashRepository(unsplashApi, resourcesProvider)
+    @Provides
+    @Singleton
+    @Named("unsplash")
+    fun provideUnsplashRepository(
+        unsplashApi: UnsplashApi,
+        resourcesProvider: ResourcesProvider
+    ): RemoteRepository =
+        UnsplashRepository(unsplashApi, resourcesProvider)
 
     @Provides
     @Singleton
-    fun provideRemoteRepository(
+    @Named("pixabay")
+    fun providePixabayRepository(
         api: PixabayApi,
         resourcesProvider: ResourcesProvider
     ): RemoteRepository =
@@ -38,7 +41,7 @@ object WallpaperModule {
     @Provides
     @Singleton
     fun provideWallpaperRepository(
-        remoteRepository: RemoteRepository,
+        @Named("unsplash") remoteRepository: RemoteRepository,
         localRepository: LocalRepository
     ): WallpaperRepository =
         WallpaperRepositoryImpl(remoteRepository, localRepository)
