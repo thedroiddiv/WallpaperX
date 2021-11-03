@@ -1,6 +1,5 @@
 package com.dxn.wallpaperx.ui.theme
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -10,22 +9,20 @@ import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
     primary = Color.Black,
-    onPrimary = Color.White,
+    onPrimary = Blue200,
     surface = Color.Black,
-    onSurface = Color.White,
+    onSurface = Blue200,
     background = Color.Black,
-    onBackground = Color.White,
-    secondary = Red900
+    onBackground = Blue200,
 )
 
 private val LightColorPalette = lightColors(
     primary = Color.White,
-    onPrimary = Color.Black,
+    onPrimary = Blue500,
     surface = Color.White,
-    onSurface = Color.Black,
+    onSurface = Blue500,
     background = Color.White,
-    onBackground = Color.Black,
-    onSecondary = Red900
+    onBackground = Blue500,
 )
 
 

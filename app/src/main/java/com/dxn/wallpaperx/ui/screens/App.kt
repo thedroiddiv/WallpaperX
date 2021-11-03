@@ -5,7 +5,6 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -13,9 +12,6 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -26,8 +22,8 @@ import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.ui.navigation.HomeScreen
 import com.dxn.wallpaperx.ui.navigation.RootScreen
 import com.dxn.wallpaperx.ui.screens.home.HomeViewModel
-import com.dxn.wallpaperx.ui.screens.home.components.BottomBar
-import com.dxn.wallpaperx.ui.screens.home.components.TopBar
+import com.dxn.wallpaperx.ui.components.BottomBar
+import com.dxn.wallpaperx.ui.components.TopBar
 import com.dxn.wallpaperx.ui.screens.home.favourites.Favourites
 import com.dxn.wallpaperx.ui.screens.home.settings.Settings
 import com.dxn.wallpaperx.ui.screens.home.wallpapers.Wallpapers
@@ -52,10 +48,11 @@ fun App() {
 
     val navController = rememberAnimatedNavController()
     val systemUiController = rememberSystemUiController()
-    val primaryColor = MaterialTheme.colors.primary
+    val backgroundColor = MaterialTheme.colors.background
 
     SideEffect {
-        systemUiController.setNavigationBarColor(primaryColor)
+        systemUiController.setNavigationBarColor(backgroundColor)
+        systemUiController.setStatusBarColor(backgroundColor)
     }
 
     val homeViewModel: HomeViewModel = hiltViewModel()
@@ -69,7 +66,6 @@ fun App() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val currentDest = screens.find { it.route == currentRoute }
-
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -89,16 +85,13 @@ fun App() {
         }
     ) {
         AnimatedNavHost(navController = navController, startDestination = RootScreen.Splash.route) {
-
             composable(RootScreen.Splash.route) {
                 SplashScreen(navController = navController)
             }
-
             navigation(
                 route = RootScreen.Home.route,
                 startDestination = HomeScreen.Wallpapers.route
             ) {
-
                 composable(route = HomeScreen.Wallpapers.route) {
                     Wallpapers(
                         viewModel = homeViewModel,

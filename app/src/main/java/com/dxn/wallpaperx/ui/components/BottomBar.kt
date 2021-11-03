@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.ui.screens.home.components
+package com.dxn.wallpaperx.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
