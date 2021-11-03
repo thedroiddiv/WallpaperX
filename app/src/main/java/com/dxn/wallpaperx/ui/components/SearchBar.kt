@@ -44,11 +44,7 @@ fun SearchBar(
         BasicTextField(
             value = query,
             onValueChange = { query = it },
-            textStyle = TextStyle.Default.copy(
-                color = MaterialTheme.colors.onPrimary,
-                fontSize = MaterialTheme.typography.body1.fontSize,
-                fontWeight = FontWeight.Light
-            ),
+            textStyle = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onPrimary),
             modifier = Modifier
                 .weight(1f)
                 .padding(vertical = 4.dp, horizontal = 16.dp),
