@@ -33,6 +33,7 @@ import com.dxn.wallpaperx.ui.screens.home.settings.Settings
 import com.dxn.wallpaperx.ui.screens.home.wallpapers.Wallpapers
 import com.dxn.wallpaperx.ui.screens.search.Search
 import com.dxn.wallpaperx.ui.screens.setWallpaper.SetWallpaper
+import com.dxn.wallpaperx.ui.screens.splash.SplashScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.navigation
@@ -50,11 +51,11 @@ private const val TAG = "AppComposable"
 fun App() {
 
     val navController = rememberAnimatedNavController()
-
     val systemUiController = rememberSystemUiController()
+    val primaryColor = MaterialTheme.colors.primary
 
     SideEffect {
-        systemUiController.setNavigationBarColor(Color.Black)
+        systemUiController.setNavigationBarColor(primaryColor)
     }
 
     val homeViewModel: HomeViewModel = hiltViewModel()
@@ -71,9 +72,7 @@ fun App() {
 
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .clip(RoundedCornerShape(16.dp)),
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             AnimatedVisibility(visible = (screens.map { it.route }).contains(currentRoute)) {
                 TopBar(currentDest = currentDest, navController = navController)
@@ -89,7 +88,12 @@ fun App() {
             }
         }
     ) {
-        AnimatedNavHost(navController = navController, startDestination = RootScreen.Home.route) {
+        AnimatedNavHost(navController = navController, startDestination = RootScreen.Splash.route) {
+
+            composable(RootScreen.Splash.route) {
+                SplashScreen(navController = navController)
+            }
+
             navigation(
                 route = RootScreen.Home.route,
                 startDestination = HomeScreen.Wallpapers.route
