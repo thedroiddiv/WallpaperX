@@ -3,7 +3,6 @@ package com.dxn.wallpaperx.data.remote.unsplash
 import com.dxn.wallpaperx.data.remote.unsplash.models.ImageDto
 import com.dxn.wallpaperx.data.remote.unsplash.models.Response
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface UnsplashApi {
