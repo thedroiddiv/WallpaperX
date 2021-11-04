@@ -67,7 +67,7 @@ fun WallpaperList(
                     WallpaperCard(
                         modifier = Modifier
                             .padding(top = if (index == 0 || index == 1) 8.dp else 0.dp)
-                            .padding(4.dp)
+                            .padding(8.dp)
                             .fillMaxWidth()
                             .height(246.dp),
                         wallpaper = wallpaper,

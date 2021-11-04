@@ -30,7 +30,7 @@ fun WallpaperCard(
     onLikedClicked: () -> Unit,
     onClick: () -> Unit,
     elevation: Dp = 4.dp,
-    shape: Shape = RoundedCornerShape(8.dp),
+    shape: Shape = RoundedCornerShape(16.dp),
 ) {
     Surface(modifier = modifier, elevation = elevation, shape = shape) {
         Box(Modifier.fillMaxSize()) {
