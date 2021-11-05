@@ -1,6 +1,6 @@
-package com.dxn.wallpaperx.data.remote.unsplash.models
+package com.dxn.wallpaperx.data.remote.unsplash.models.collection
 
-data class Urls(
+data class UrlsXX(
     val full: String,
     val raw: String,
     val regular: String,

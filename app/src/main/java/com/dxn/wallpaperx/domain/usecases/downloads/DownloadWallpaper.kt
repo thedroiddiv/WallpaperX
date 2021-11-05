@@ -1,7 +1,6 @@
-package com.dxn.wallpaperx.domain.usecases
+package com.dxn.wallpaperx.domain.usecases.downloads
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.util.Log
 import com.dxn.wallpaperx.common.extensions.getBitmap
 import com.dxn.wallpaperx.domain.models.Wallpaper

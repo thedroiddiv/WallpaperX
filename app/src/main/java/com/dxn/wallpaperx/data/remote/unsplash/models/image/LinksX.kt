@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.data.remote.unsplash.models
+package com.dxn.wallpaperx.data.remote.unsplash.models.image
 
 data class LinksX(
     val html: String,

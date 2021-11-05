@@ -1,6 +1,6 @@
-package com.dxn.wallpaperx.data.remote.unsplash.models
+package com.dxn.wallpaperx.data.remote.unsplash.models.collection
 
-data class Links(
+data class LinksXXX(
     val download: String,
     val download_location: String,
     val html: String,

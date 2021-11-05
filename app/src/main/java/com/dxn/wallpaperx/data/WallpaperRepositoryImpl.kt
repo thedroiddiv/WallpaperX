@@ -3,6 +3,7 @@ package com.dxn.wallpaperx.data
 import android.graphics.Bitmap
 import com.dxn.wallpaperx.data.local.LocalRepository
 import com.dxn.wallpaperx.data.remote.RemoteRepository
+import com.dxn.wallpaperx.domain.models.Collection
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
 import kotlinx.coroutines.flow.Flow
@@ -24,8 +25,16 @@ constructor(
     override suspend fun getWallpaper(id: String) =
         remoteRepository.getWallpaper(id)
 
+    override suspend fun getCollections(page: Int): List<Collection> =
+        remoteRepository.getCollections(page)
+
+    override suspend fun getWallpapersByCollection(
+        collectionId: String,
+        page: Int
+    ): List<Wallpaper> = remoteRepository.getWallpapersByCollection(collectionId, page)
+
     override suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String) {
-        localRepository.downloadWallpaper(bitmap,displayName)
+        localRepository.downloadWallpaper(bitmap, displayName)
     }
 
     override suspend fun addFavourite(wallpaper: Wallpaper): Boolean =

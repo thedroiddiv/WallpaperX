@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.ui.screens
+package com.dxn.wallpaperx.ui
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import com.dxn.wallpaperx.domain.models.Collection
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.usecases.WallpaperUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,12 +26,27 @@ constructor(
 
     var favJob: Job? = null
     var wallJob: Job? = null
+    var collJob: Job? = null
     var wallpapers = flowOf<PagingData<Wallpaper>>()
+    var collections = flowOf<PagingData<Collection>>()
     val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())
 
     init {
         loadWallpapers()
         loadFavourites()
+        loadCollections()
+    }
+
+    private fun loadCollections() {
+        collJob?.cancel()
+        collJob = viewModelScope.launch {
+            kotlin.runCatching {
+                collections = wallpaperUseCase.getCollections()
+                Log.d(TAG, "loadCollections: $collections")
+            }.getOrElse {
+                Log.e(TAG, "loadFavourites: ${it.message}")
+            }
+        }
     }
 
     private fun loadWallpapers() {

@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.domain.usecases
+package com.dxn.wallpaperx.domain.usecases.wallpapers
 
 import android.app.Application
 import android.app.WallpaperManager
@@ -6,8 +6,6 @@ import android.content.Context
 import android.util.Log
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.common.extensions.getBitmap
-import com.dxn.wallpaperx.common.extensions.shortToast
-import com.dxn.wallpaperx.ui.screens.setWallpaper.SetWallpaperViewModel
 import javax.inject.Inject
 
 class SetWallpaperUseCases

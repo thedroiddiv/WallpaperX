@@ -18,23 +18,23 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun FavouriteButton(
     modifier: Modifier = Modifier,
-    isFavourite : Boolean,
-    onClick : () -> Unit
+    isFavourite: Boolean,
+    onClick: () -> Unit
 ) {
 
-    var size by remember { mutableStateOf( if(isFavourite) 32.dp else 24.dp) }
+    var size by remember { mutableStateOf(if (isFavourite) 32.dp else 24.dp) }
     val animSize by animateDpAsState(targetValue = size)
 
     IconButton(
         modifier = modifier,
         onClick = {
             onClick()
-            size = if(size==24.dp) 32.dp else 24.dp
+            size = if (size == 24.dp) 32.dp else 24.dp
         }) {
         Icon(
             imageVector = if (isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
             contentDescription = "favourite button",
-            tint = if(isFavourite) Color.Red else Color.White,
+            tint = if (isFavourite) Color.Red else Color.White,
             modifier = Modifier.size(24.dp)
         )
     }

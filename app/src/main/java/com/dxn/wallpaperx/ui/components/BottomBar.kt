@@ -33,13 +33,11 @@ fun BottomBar(
                         }
                     }
                 },
-                label = { Text(text = screen.title) },
                 icon = {
                     Icon(imageVector = screen.icon, contentDescription = screen.title)
                 },
                 selectedContentColor = MaterialTheme.colors.onPrimary,
-                unselectedContentColor = MaterialTheme.colors.onPrimary.copy(0.4f),
-                alwaysShowLabel = false
+                unselectedContentColor = MaterialTheme.colors.onPrimary.copy(0.2f),
             )
         }
     }

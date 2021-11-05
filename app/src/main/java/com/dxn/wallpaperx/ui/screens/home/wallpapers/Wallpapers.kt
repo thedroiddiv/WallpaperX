@@ -11,7 +11,7 @@ import androidx.paging.compose.LazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.ui.components.WallpaperList
-import com.dxn.wallpaperx.ui.screens.MainViewModel
+import com.dxn.wallpaperx.ui.MainViewModel
 
 @ExperimentalCoilApi
 @ExperimentalFoundationApi

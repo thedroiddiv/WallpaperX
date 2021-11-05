@@ -9,7 +9,7 @@ import com.dxn.wallpaperx.ui.navigation.HomeScreen
 object WallpapersAnimations {
     fun enterTransition(initial: NavBackStackEntry): EnterTransition {
         return when (initial.destination.route) {
-            HomeScreen.Favourites.route, HomeScreen.Setting.route -> {
+            HomeScreen.Favourites.route, HomeScreen.Setting.route, HomeScreen.Collections.route -> {
                 slideInHorizontally(initialOffsetX = { -1000 })
             }
             else -> {
@@ -20,7 +20,7 @@ object WallpapersAnimations {
 
     fun exitTransition(target: NavBackStackEntry): ExitTransition {
         return when (target.destination.route) {
-            HomeScreen.Favourites.route, HomeScreen.Setting.route -> {
+            HomeScreen.Favourites.route, HomeScreen.Setting.route, HomeScreen.Collections.route -> {
                 slideOutHorizontally(targetOffsetX = { -1000 })
             }
             else -> {

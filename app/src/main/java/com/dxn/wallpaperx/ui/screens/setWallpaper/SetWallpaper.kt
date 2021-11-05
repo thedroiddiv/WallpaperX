@@ -31,7 +31,6 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import coil.transform.BlurTransformation
 import com.dxn.wallpaperx.domain.models.Wallpaper
-import com.dxn.wallpaperx.domain.usecases.RemoveFavourite
 import com.dxn.wallpaperx.ui.screens.setWallpaper.components.BottomMenu
 
 

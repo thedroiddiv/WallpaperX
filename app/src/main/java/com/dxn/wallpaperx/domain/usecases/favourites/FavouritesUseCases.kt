@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.domain.usecases
+package com.dxn.wallpaperx.domain.usecases.favourites
 
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository

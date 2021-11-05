@@ -29,14 +29,14 @@ object WallpaperModule {
     ): RemoteRepository =
         UnsplashRepository(unsplashApi, resourcesProvider)
 
-    @Provides
-    @Singleton
-    @Named("pixabay")
-    fun providePixabayRepository(
-        api: PixabayApi,
-        resourcesProvider: ResourcesProvider
-    ): RemoteRepository =
-        PixabayRepository(api, resourcesProvider)
+//    @Provides
+//    @Singleton
+//    @Named("pixabay")
+//    fun providePixabayRepository(
+//        api: PixabayApi,
+//        resourcesProvider: ResourcesProvider
+//    ): PixabayRepository =
+//        PixabayRepository(api, resourcesProvider)
 
     @Provides
     @Singleton

@@ -11,11 +11,11 @@ class PixabayRepository
 constructor(
     private val pixabayApi: PixabayApi,
     resourcesProvider: ResourcesProvider
-) : RemoteRepository {
+) {
 
     private val apikey = resourcesProvider.getString(R.string.pixabay_api_key)
 
-    override suspend fun getWallpapers(
+    suspend fun getWallpapers(
         page: Int,
         query: String
     ): List<Wallpaper> {
@@ -25,7 +25,7 @@ constructor(
         }.getOrThrow()
     }
 
-    override suspend fun getWallpaper(id: String): Wallpaper {
+    suspend fun getWallpaper(id: String): Wallpaper {
         return runCatching {
             val response = pixabayApi.getWallpaper(apikey = apikey, imageId = id.toInt())
             hitsToWallpapers(response.hits)[0]

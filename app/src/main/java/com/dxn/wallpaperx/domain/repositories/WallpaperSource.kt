@@ -8,7 +8,8 @@ import com.dxn.wallpaperx.domain.models.Wallpaper
 class WallpaperSource
 constructor(
     private val repository: WallpaperRepository,
-    private val query: String
+    private val query: String,
+    private val isCollection: Boolean
 ) : PagingSource<Int, Wallpaper>() {
 
     companion object {
@@ -19,14 +20,15 @@ constructor(
         return kotlin.runCatching {
             val nextPage = params.key ?: 1
             val wallpapers =
-                repository.getWallpapers(nextPage, query)
+                if (isCollection) repository.getWallpapersByCollection(query, nextPage) else
+                    repository.getWallpapers(nextPage, query)
             LoadResult.Page(
                 data = wallpapers,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
                 nextKey = nextPage.plus(1)
             )
         }.getOrElse {
-            Log.e(TAG, "load: ${it.message}", )
+            Log.e(TAG, "load: ${it.message}")
             LoadResult.Error(it)
         }
     }

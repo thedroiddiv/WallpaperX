@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.domain.usecases
+package com.dxn.wallpaperx.domain.usecases.wallpapers
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -17,7 +17,7 @@ constructor(
     private val repository: WallpaperRepository,
 ) {
     suspend operator fun invoke(id: String): Wallpaper {
-        return repository.getWallpaper( id)
+        return repository.getWallpaper(id)
     }
 }
 
@@ -28,7 +28,19 @@ constructor(
 ) {
     operator fun invoke(query: String): Flow<PagingData<Wallpaper>> {
         return Pager(PagingConfig(pageSize = 20)) {
-            WallpaperSource(repository, query)
+            WallpaperSource(repository, query, false)
+        }.flow
+    }
+}
+
+class GetWallpapersByCollection
+@Inject
+constructor(
+    private val repository: WallpaperRepository,
+) {
+    operator fun invoke(collectionId: String): Flow<PagingData<Wallpaper>> {
+        return Pager(PagingConfig(pageSize = 20)) {
+            WallpaperSource(repository, collectionId, true)
         }.flow
     }
 }
