@@ -1,6 +1,7 @@
 package com.dxn.wallpaperx.domain.usecases.downloads
 
 import android.content.Context
+import android.net.Uri
 import android.util.Log
 import com.dxn.wallpaperx.common.extensions.getBitmap
 import com.dxn.wallpaperx.domain.models.Wallpaper
@@ -14,11 +15,11 @@ constructor(
     private val repository: WallpaperRepository,
     @ApplicationContext private val context: Context
 ) {
-    suspend operator fun invoke(wallpaper: Wallpaper): Result<Boolean> {
+    suspend operator fun invoke(wallpaper: Wallpaper): Result<Uri?> {
         return try {
             val bitmap = context.getBitmap(wallpaper.wallpaperUrl)
-            repository.downloadWallpaper(bitmap, "IMG${wallpaper.id}.jpg")
-            Result.success(true)
+            val uri = repository.downloadWallpaper(bitmap, "IMG${wallpaper.id}.jpg")
+            Result.success(uri)
         } catch (e: Exception) {
             Log.e(TAG, "invoke: ${e.message}")
             Result.failure(e)

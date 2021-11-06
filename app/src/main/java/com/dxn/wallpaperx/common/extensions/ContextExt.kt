@@ -3,6 +3,7 @@ package com.dxn.wallpaperx.common.extensions
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.widget.Toast
 import coil.ImageLoader
 import coil.request.ErrorResult
@@ -29,6 +30,25 @@ suspend fun Context.getBitmap(url: String): Bitmap {
             is SuccessResult -> {
                 val result = res.drawable
                 (result as BitmapDrawable).bitmap
+            }
+            else -> {
+                throw (res as ErrorResult).throwable
+            }
+        }
+    }
+}
+
+suspend fun Context.getDrawable(url: String) : Drawable{
+    return withContext(Dispatchers.IO) {
+        val loader = ImageLoader(this@getDrawable)
+        val request = ImageRequest.Builder(this@getDrawable)
+            .data(url)
+            .allowHardware(false) // Disable hardware bitmaps.
+            .build()
+        val res = loader.execute(request)
+        when (res) {
+            is SuccessResult -> {
+                res.drawable
             }
             else -> {
                 throw (res as ErrorResult).throwable

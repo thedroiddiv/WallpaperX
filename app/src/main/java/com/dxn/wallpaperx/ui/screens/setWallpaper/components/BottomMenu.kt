@@ -19,13 +19,14 @@ import coil.compose.rememberImagePainter
 fun BottomMenu(
     modifier: Modifier,
     title: String,
-    userImageUrl : String,
+    userImageUrl: String,
     subtitle: String,
     isLiked: Boolean,
     onFabClicked: () -> Unit,
 
     onDownload: () -> Unit,
     onLock: () -> Unit,
+    onShare: () -> Unit,
     onFavourite: () -> Unit,
 
     isProgressVisible: Boolean = false
@@ -55,7 +56,8 @@ fun BottomMenu(
                         )
                         if (isProgressVisible) {
                             CircularProgressIndicator(
-                                modifier = Modifier.size(52.dp)
+                                modifier = Modifier
+                                    .size(52.dp)
                                     .align(Alignment.Center),
                                 color = MaterialTheme.colors.onPrimary,
                                 strokeWidth = 2.dp
@@ -97,7 +99,13 @@ fun BottomMenu(
                         contentDescription = "favourite"
                     )
                 }
-                IconButton(onClick =onLock) {
+                IconButton(onClick = onShare) {
+                    Icon(
+                        imageVector = Icons.Rounded.Share,
+                        contentDescription = "share"
+                    )
+                }
+                IconButton(onClick = onLock) {
                     Icon(
                         imageVector = Icons.Rounded.LockOpen,
                         contentDescription = "set"

@@ -1,23 +1,17 @@
 package com.dxn.wallpaperx.ui.screens.setWallpaper
 
 import android.app.Application
-import android.util.Log
+import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dxn.wallpaperx.common.extensions.shortToast
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.usecases.WallpaperUseCase
-import com.dxn.wallpaperx.common.extensions.getBitmap
-import com.dxn.wallpaperx.common.extensions.shortToast
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import kotlin.math.log2
+
 
 @HiltViewModel
 class SetWallpaperViewModel
@@ -34,7 +28,7 @@ constructor(
         viewModelScope.launch {
             val res = wallpaperUseCase.setWallpaperUseCases(wallpaper, flag)
             isProgressVisible.value = false
-            if(res.isSuccess) {
+            if (res.isSuccess) {
                 application.shortToast("Applied!")
             } else {
                 res.getOrElse {
@@ -46,14 +40,19 @@ constructor(
 
     fun downloadWallpaper(wallpaper: Wallpaper) {
         viewModelScope.launch {
-            val res = wallpaperUseCase.downloadWallpaper(wallpaper)
-            if(res.isSuccess) {
-                application.shortToast("Downloaded\nPictures/wallpaperx")
-            }
-            res.getOrElse {
-                application.shortToast("Failure ${it.message}")
-            }
+            val uri = saveWallpaper(wallpaper)
+            uri?.let { application.shortToast("Downloaded \nPictures/wallpaperx") }
         }
+    }
+
+    suspend fun saveWallpaper(wallpaper: Wallpaper): Uri? {
+        isProgressVisible.value = true
+        val uri = wallpaperUseCase.downloadWallpaper(wallpaper).getOrElse {
+            application.shortToast("Failure ${it.message}")
+            null
+        }
+        isProgressVisible.value = false
+        return uri
     }
 
     companion object {

@@ -1,6 +1,7 @@
 package com.dxn.wallpaperx.data
 
 import android.graphics.Bitmap
+import android.net.Uri
 import com.dxn.wallpaperx.data.local.LocalRepository
 import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.domain.models.Collection
@@ -33,9 +34,9 @@ constructor(
         page: Int
     ): List<Wallpaper> = remoteRepository.getWallpapersByCollection(collectionId, page)
 
-    override suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String) {
+    override suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String): Uri? =
         localRepository.downloadWallpaper(bitmap, displayName)
-    }
+
 
     override suspend fun addFavourite(wallpaper: Wallpaper): Boolean =
         localRepository.addToFavourites(
@@ -45,9 +46,8 @@ constructor(
     override suspend fun removeFavourite(id: String): Boolean =
         localRepository.removeFavourite(id)
 
-    override fun getFavourites(): Flow<List<Wallpaper>> {
-        return localRepository.getFavourites()
-            .map { wallpapers -> wallpapers.map { favEntityToWallpaper(it) } }
-    }
+    override fun getFavourites(): Flow<List<Wallpaper>> = localRepository.getFavourites()
+        .map { wallpapers -> wallpapers.map { favEntityToWallpaper(it) } }
+
 
 }

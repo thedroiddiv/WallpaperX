@@ -23,9 +23,10 @@ constructor(
     private val context: Application,
     private val favouriteDao: FavouriteDao
 ) {
-    suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String) {
-        withContext(Dispatchers.IO) {
+    suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String): Uri? {
+        return withContext(Dispatchers.IO) {
             kotlin.runCatching {
+                val imageUri: Uri?
                 var fos: OutputStream?
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     context.contentResolver.let { resolver ->
@@ -34,23 +35,27 @@ constructor(
                             put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/jpeg")
                             put(
                                 MediaStore.Images.ImageColumns.RELATIVE_PATH,
-                                Environment.DIRECTORY_PICTURES+"/wallpaperx"
+                                Environment.DIRECTORY_PICTURES + "/wallpaperx"
                             )
                         }
-                        val imageUri: Uri? =
-                            resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                        imageUri = resolver.insert(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            contentValues
+                        )
                         fos = imageUri?.let { context.contentResolver.openOutputStream(it) }
                     }
                 } else {
                     val imagesDir =
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES+"/wallpaperx")
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/wallpaperx")
                     val image = File(imagesDir, displayName)
                     fos = FileOutputStream(image)
+                    imageUri = Uri.fromFile(image)
                 }
                 fos?.use {
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 95, it)
                     it.close()
                 }
+                imageUri
             }.getOrThrow()
         }
     }

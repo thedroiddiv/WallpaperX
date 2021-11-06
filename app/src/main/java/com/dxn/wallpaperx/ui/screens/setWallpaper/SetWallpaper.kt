@@ -1,6 +1,8 @@
 package com.dxn.wallpaperx.ui.screens.setWallpaper
 
 import android.app.WallpaperManager
+import android.content.Intent
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
@@ -24,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat.startActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
@@ -32,6 +35,7 @@ import coil.compose.rememberImagePainter
 import coil.transform.BlurTransformation
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.ui.screens.setWallpaper.components.BottomMenu
+import kotlinx.coroutines.launch
 
 
 private const val TAG = "SetWallpaper"
@@ -45,6 +49,9 @@ fun SetWallpaper(
     addFavourite: (Wallpaper) -> Unit,
     removeFavourite: (String) -> Unit
 ) {
+
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
 
     val viewModel: SetWallpaperViewModel = hiltViewModel()
     var bottomMenuVisibility by remember { mutableStateOf(true) }
@@ -125,6 +132,21 @@ fun SetWallpaper(
                             removeFavourite(wallpaper.id)
                         } else {
                             addFavourite(wallpaper)
+                        }
+                    },
+                    onShare = {
+                        scope.launch {
+                            val uri = viewModel.saveWallpaper(wallpaper)
+                            val sendIntent: Intent = Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(Intent.EXTRA_STREAM, uri)
+                                type = "image/jpg"
+                            }
+                            startActivity(
+                                context,
+                                Intent.createChooser(sendIntent, "Share wallpaper"),
+                                null
+                            )
                         }
                     },
                     onLock = {
