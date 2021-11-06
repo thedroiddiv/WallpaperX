@@ -9,6 +9,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import com.dxn.wallpaperx.data.local.favourites.FavouriteDao
 import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
+import com.dxn.wallpaperx.domain.models.Wallpaper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
@@ -87,5 +88,6 @@ constructor(
     companion object {
         const val TAG = "LocalRepository"
     }
-
 }
+
+

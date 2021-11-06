@@ -34,6 +34,7 @@ import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import coil.transform.BlurTransformation
 import com.dxn.wallpaperx.domain.models.Wallpaper
+import com.dxn.wallpaperx.ui.components.BackButton
 import com.dxn.wallpaperx.ui.screens.setWallpaper.components.BottomMenu
 import kotlinx.coroutines.launch
 
@@ -160,20 +161,11 @@ fun SetWallpaper(
                 )
             }
         }
-        IconButton(
+        BackButton(
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .padding(start = 16.dp, top = 16.dp)
-                .clip(CircleShape)
-                .background(Color.Black.copy(0.0f)),
-            onClick = {
-                navController.popBackStack()
-            }) {
-            Icon(
-                imageVector = Icons.Rounded.ArrowBack,
-                contentDescription = "back",
-                tint = MaterialTheme.colors.primary
-            )
-        }
+                .padding(start = 16.dp, top = 16.dp),
+            navController = navController
+        )
     }
 }

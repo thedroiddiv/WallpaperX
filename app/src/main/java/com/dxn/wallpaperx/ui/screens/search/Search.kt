@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.domain.models.Wallpaper
+import com.dxn.wallpaperx.ui.components.BackButton
 import com.dxn.wallpaperx.ui.components.WallpaperList
 import com.dxn.wallpaperx.ui.components.SearchBar
 
@@ -43,11 +44,14 @@ fun Search(
                         .fillMaxSize()
                         .padding(8.dp)
                 ) {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "back")
-                    }
+                    BackButton(navController = navController)
+//                    IconButton(onClick = { navController.popBackStack() }) {
+//                        Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "back")
+//                    }
                     SearchBar(
-                        modifier = Modifier.weight(1f).fillMaxHeight(0.8f),
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight(0.8f),
                         onSearch = { viewModel.search(it) })
                 }
             }

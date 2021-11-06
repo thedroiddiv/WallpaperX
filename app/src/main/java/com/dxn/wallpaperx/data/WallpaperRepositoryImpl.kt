@@ -3,6 +3,7 @@ package com.dxn.wallpaperx.data
 import android.graphics.Bitmap
 import android.net.Uri
 import com.dxn.wallpaperx.data.local.LocalRepository
+import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
 import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.domain.models.Collection
 import com.dxn.wallpaperx.domain.models.Wallpaper
@@ -49,5 +50,27 @@ constructor(
     override fun getFavourites(): Flow<List<Wallpaper>> = localRepository.getFavourites()
         .map { wallpapers -> wallpapers.map { favEntityToWallpaper(it) } }
 
+}
 
+
+fun favEntityToWallpaper(favouriteEntity: FavouriteEntity): Wallpaper {
+    return Wallpaper(
+        favouriteEntity.id,
+        favouriteEntity.previewUrl,
+        favouriteEntity.wallpaperUrl,
+        favouriteEntity.smallUrl,
+        favouriteEntity.user,
+        favouriteEntity.userImageURL
+    )
+}
+
+fun wallpaperToFavouriteEntity(wallpaper: Wallpaper): FavouriteEntity {
+    return FavouriteEntity(
+        wallpaper.id,
+        wallpaper.previewUrl,
+        wallpaper.wallpaperUrl,
+        wallpaper.smallUrl,
+        wallpaper.user,
+        wallpaper.userImageURL
+    )
 }

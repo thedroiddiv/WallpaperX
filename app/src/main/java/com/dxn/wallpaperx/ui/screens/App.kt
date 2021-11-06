@@ -1,15 +1,19 @@
 package com.dxn.wallpaperx.ui.screens
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
@@ -27,6 +31,7 @@ import com.dxn.wallpaperx.ui.navigation.HomeScreen
 import com.dxn.wallpaperx.ui.navigation.RootScreen
 import com.dxn.wallpaperx.ui.components.BottomBar
 import com.dxn.wallpaperx.ui.components.TopBar
+import com.dxn.wallpaperx.ui.screens.setWallpaper.Gallery
 import com.dxn.wallpaperx.ui.screens.home.collections.Collections
 import com.dxn.wallpaperx.ui.screens.home.favourites.Favourites
 import com.dxn.wallpaperx.ui.screens.home.settings.Settings
@@ -74,6 +79,12 @@ fun App() {
     val currentRoute = navBackStackEntry?.destination?.route
     val currentDest = screens.find { it.route == currentRoute }
 
+    val launcher =
+        rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
+            val data = Uri.encode(uri.toString())
+            navController.navigate(RootScreen.Gallery.route.plus("/${data}"))
+        }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -88,6 +99,19 @@ fun App() {
                     navController = navController,
                     currentRoute = currentRoute
                 )
+            }
+        },
+        floatingActionButton = {
+            AnimatedVisibility(visible = (screens.map { it.route }).contains(currentRoute)) {
+                FloatingActionButton(
+                    onClick = {
+                        launcher.launch("image/*")
+                    },
+                    backgroundColor = MaterialTheme.colors.onPrimary,
+                    contentColor = MaterialTheme.colors.primary
+                ) {
+                    Icon(imageVector = Icons.Rounded.Add, contentDescription = "add photo")
+                }
             }
         }
     ) {
@@ -150,6 +174,18 @@ fun App() {
                     addFavourite = { mainViewModel.addFavourite(it) },
                     removeFavourite = { mainViewModel.removeFavourite(it) }
                 )
+            }
+            composable(
+                route = RootScreen.Gallery.route.plus("/{imageUri}"),
+                enterTransition = { initial, _ -> FavouritesAnimations.enterTransition(initial) },
+                exitTransition = { _, target -> FavouritesAnimations.exitTransition(target) },
+                arguments = listOf(navArgument("imageUri") { type = NavType.StringType })
+            ) { backStack ->
+                backStack.arguments?.getString("imageUri")?.let { u ->
+                    val uri = Uri.parse(u)
+                    Gallery(uri, navController)
+                }
+
             }
             composable(
                 route = RootScreen.SetWallpaper.route + "/{wallpaper}",

@@ -1,6 +1,5 @@
 package com.dxn.wallpaperx.di
 
-import com.dxn.wallpaperx.data.remote.pixabay.PixabayApi
 import com.dxn.wallpaperx.data.remote.unsplash.UnsplashApi
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -14,12 +13,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    @Provides
-    @Singleton
-    fun providePixabayApi(): PixabayApi = Retrofit.Builder().baseUrl("https://pixabay.com/")
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-        .build()
-        .create(PixabayApi::class.java)
 
     @Provides
     @Singleton
