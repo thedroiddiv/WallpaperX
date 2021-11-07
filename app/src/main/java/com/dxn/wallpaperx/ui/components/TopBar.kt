@@ -38,7 +38,13 @@ fun TopBar(
         ) {
             IconButton(
                 modifier = Modifier.width(40.dp),
-                onClick = { }) {
+                onClick = {
+                    if (currentDest?.route != HomeScreen.Wallpapers.route) {
+                        navController.navigate(HomeScreen.Wallpapers.route) {
+                            currentDest?.route?.let { popUpTo(it) { inclusive = true } }
+                        }
+                    }
+                }) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_launcher_foreground),
                     contentDescription = "app logo"

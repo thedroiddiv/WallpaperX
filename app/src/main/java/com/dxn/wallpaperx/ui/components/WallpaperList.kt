@@ -37,7 +37,6 @@ fun WallpaperList(
     removeFavourite: (String) -> Unit,
     state: LazyListState = rememberLazyListState(),
     navController: NavHostController,
-//    onError: (Throwable) -> Unit,
 ) {
     SwipeRefresh(
         modifier = Modifier
@@ -58,7 +57,7 @@ fun WallpaperList(
     ) {
         LazyVerticalGrid(
             cells = GridCells.Fixed(2),
-            modifier = Modifier.padding(horizontal = 8.dp),
+            modifier = Modifier.padding(horizontal = 8.dp).fillMaxSize(),
             state = state
         ) {
             items(wallpapers.itemCount) { index ->
@@ -95,7 +94,9 @@ fun WallpaperList(
                     item {
                         Text(text = "No items found \n Error : " + it.error.message.toString())
                     }
-//                    onError(it.error)
+                    item {
+                        Text(text = "Swipe down to refresh")
+                    }
                 }
             }
         }

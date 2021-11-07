@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun Settings() {
@@ -18,9 +19,10 @@ fun Settings() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Noting here!\n¯\\_(ツ)_/¯",
+            text = "Coming Soon!\n¯\\_(ツ)_/¯",
             style = MaterialTheme.typography.h3,
-            fontWeight = FontWeight.ExtraLight
+            fontWeight = FontWeight.ExtraLight,
+            textAlign = TextAlign.Center
         )
     }
 }
