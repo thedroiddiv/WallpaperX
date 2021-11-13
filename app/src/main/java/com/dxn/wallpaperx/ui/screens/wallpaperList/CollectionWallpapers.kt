@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
@@ -38,7 +37,7 @@ fun CollectionWallpapers(
         viewModel.loadWallpapers(collectionId)
     }
     val wallpapers = viewModel.wallpapers.collectAsLazyPagingItems()
-    Column() {
+    Column {
         Row(
             modifier = Modifier.height(52.dp).fillMaxWidth().padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,

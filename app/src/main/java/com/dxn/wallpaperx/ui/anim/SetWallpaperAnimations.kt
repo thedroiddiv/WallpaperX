@@ -7,11 +7,13 @@ import androidx.navigation.NavBackStackEntry
 import com.dxn.wallpaperx.ui.navigation.HomeScreen
 
 object SetWallpaperAnimations {
-    fun enterTransition(initial: NavBackStackEntry): EnterTransition {
+    @ExperimentalAnimationApi
+    fun enterTransition(): EnterTransition {
         return expandIn(expandFrom = Alignment.Center,animationSpec = tween(durationMillis = 1000))
     }
 
-    fun exitTransition(target: NavBackStackEntry): ExitTransition {
+    @ExperimentalAnimationApi
+    fun exitTransition(): ExitTransition {
         return shrinkOut(shrinkTowards = Alignment.Center,animationSpec = tween(durationMillis = 1000))
     }
 }

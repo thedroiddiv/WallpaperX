@@ -24,9 +24,9 @@ constructor(
     private val wallpaperUseCase: WallpaperUseCase
 ) : ViewModel() {
 
-    var favJob: Job? = null
-    var wallJob: Job? = null
-    var collJob: Job? = null
+    private var favJob: Job? = null
+    private var wallJob: Job? = null
+    private var collJob: Job? = null
     var wallpapers = flowOf<PagingData<Wallpaper>>()
     var collections = flowOf<PagingData<Collection>>()
     val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())

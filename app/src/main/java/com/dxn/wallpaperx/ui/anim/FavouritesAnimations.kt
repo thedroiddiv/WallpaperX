@@ -1,13 +1,11 @@
 package com.dxn.wallpaperx.ui.anim
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.*
 import androidx.navigation.NavBackStackEntry
 import com.dxn.wallpaperx.ui.navigation.HomeScreen
 
 object FavouritesAnimations {
+    @ExperimentalAnimationApi
     fun enterTransition(initial: NavBackStackEntry): EnterTransition {
         return when (initial.destination.route) {
             HomeScreen.Wallpapers.route,HomeScreen.Collections.route -> {
@@ -22,6 +20,7 @@ object FavouritesAnimations {
         }
     }
 
+    @ExperimentalAnimationApi
     fun exitTransition(target: NavBackStackEntry): ExitTransition {
         return when (target.destination.route) {
             HomeScreen.Wallpapers.route,HomeScreen.Collections.route -> {
