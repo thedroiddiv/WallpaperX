@@ -49,13 +49,6 @@ fun Collections(
         }
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize(), state = listState) {
-            item {
-                Icon(
-                    modifier = Modifier.padding(start = 16.dp, bottom = 16.dp),
-                    painter = painterResource(id = R.drawable.ic_collections),
-                    contentDescription = "collections"
-                )
-            }
             items(collections) { collection ->
                 collection?.let {
                     CategoryCard(

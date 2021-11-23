@@ -29,11 +29,6 @@ fun Wallpapers(
     navController: NavHostController
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
-        Icon(
-            modifier = Modifier.padding(start = 16.dp),
-            painter = painterResource(id = R.drawable.ic_wallpapers),
-            contentDescription = "collections"
-        )
         WallpaperList(
             wallpapers = wallpapers,
             favourites = favourites,

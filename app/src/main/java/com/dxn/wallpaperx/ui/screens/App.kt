@@ -5,6 +5,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
@@ -15,7 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
@@ -73,7 +77,7 @@ fun App() {
         HomeScreen.Wallpapers,
         HomeScreen.Collections,
         HomeScreen.Favourites,
-//        HomeScreen.Setting
+        HomeScreen.Setting
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -90,7 +94,17 @@ fun App() {
             AnimatedVisibility(
                 visible = currentRoute == RootScreen.Home.route,
             ) {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(
+                    Modifier.fillMaxWidth().height(56.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .padding(start = 16.dp, top = 16.dp, bottom = 8.dp),
+                        painter = painterResource(id = screens[pagerState.currentPage].resId),
+                        contentDescription = "collections"
+                    )
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
                         modifier = Modifier.padding(16.dp),
@@ -120,7 +134,7 @@ fun App() {
             }
         }
     ) {
-        AnimatedNavHost(navController = navController, startDestination = RootScreen.Splash.route) {
+        AnimatedNavHost(navController = navController, startDestination = RootScreen.Home.route) {
             composable(RootScreen.Splash.route) {
                 SplashScreen(navController = navController)
             }
