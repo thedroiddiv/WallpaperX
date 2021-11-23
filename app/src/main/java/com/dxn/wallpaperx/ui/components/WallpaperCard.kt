@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,7 +31,7 @@ fun WallpaperCard(
     onLikedClicked: () -> Unit,
     onClick: () -> Unit,
     elevation: Dp = 4.dp,
-    shape: Shape = RoundedCornerShape(16.dp),
+    shape: Shape = MaterialTheme.shapes.medium,
 ) {
     Surface(modifier = modifier, elevation = elevation, shape = shape) {
         Box(Modifier.fillMaxSize()) {

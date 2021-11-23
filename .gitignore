@@ -22,8 +22,6 @@ out/
 
 # Gradle files
 .gradle/
-.gradle/*
-.gradle/7.0.2/fileHashes/fileHashes.bin
 build/
 
 # Local configuration file (sdk path, etc)

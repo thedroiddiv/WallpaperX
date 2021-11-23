@@ -18,14 +18,10 @@ fun FavouriteButton(
     onClick: () -> Unit
 ) {
 
-    var size by remember { mutableStateOf(if (isFavourite) 32.dp else 24.dp) }
-//    val animSize by animateDpAsState(targetValue = size)
-
     IconButton(
         modifier = modifier,
         onClick = {
             onClick()
-            size = if (size == 24.dp) 32.dp else 24.dp
         }) {
         Icon(
             imageVector = if (isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
