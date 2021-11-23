@@ -3,11 +3,9 @@ package com.dxn.wallpaperx.domain.usecases.wallpapers
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.dxn.wallpaperx.R
-import com.dxn.wallpaperx.common.helpers.ResourcesProvider
 import com.dxn.wallpaperx.domain.models.Wallpaper
 import com.dxn.wallpaperx.domain.repositories.WallpaperRepository
-import com.dxn.wallpaperx.domain.repositories.WallpaperSource
+import com.dxn.wallpaperx.domain.source.WallpaperSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

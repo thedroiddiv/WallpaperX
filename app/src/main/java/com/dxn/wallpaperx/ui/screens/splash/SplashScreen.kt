@@ -8,7 +8,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -16,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import com.dxn.wallpaperx.R
 import com.dxn.wallpaperx.ui.navigation.RootScreen
-import com.google.accompanist.systemuicontroller.SystemUiController
 import kotlinx.coroutines.delay
 
 @Composable

@@ -6,8 +6,11 @@
         <entry key="../../../../../layout/compose-model-1635010848304.xml" value="0.19467905405405406" />
         <entry key="../../../../../layout/compose-model-1635183534670.xml" value="0.19383445945945946" />
         <entry key="../../../../../layout/compose-model-1635571294616.xml" value="1.23125" />
+        <entry key="app/src/main/res/drawable/ic_collections.xml" value="0.23897435897435898" />
+        <entry key="app/src/main/res/drawable/ic_favourites.xml" value="0.13148148148148148" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.24427083333333333" />
+        <entry key="app/src/main/res/drawable/ic_wallpapers.xml" value="0.125" />
         <entry key="app/src/main/res/font/mon.xml" value="0.12962962962962962" />
         <entry key="app/src/main/res/font/mont.xml" value="0.1109375" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.10555555555555556" />
