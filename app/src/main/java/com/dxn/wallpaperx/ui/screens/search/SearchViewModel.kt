@@ -19,7 +19,7 @@ constructor(
     private val wallpaperUseCase: WallpaperUseCase
 ) : ViewModel() {
 
-    var searchJob: Job? = null
+    private var searchJob: Job? = null
     val wallpapers = mutableStateOf(flowOf<PagingData<Wallpaper>>())
 
     fun search(query: String) {

@@ -1,8 +1,5 @@
 package com.dxn.wallpaperx.ui.components
 
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.keyframes
-import androidx.compose.animation.core.repeatable
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -11,7 +8,6 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset.Companion.Infinite
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
@@ -23,7 +19,7 @@ fun FavouriteButton(
 ) {
 
     var size by remember { mutableStateOf(if (isFavourite) 32.dp else 24.dp) }
-    val animSize by animateDpAsState(targetValue = size)
+//    val animSize by animateDpAsState(targetValue = size)
 
     IconButton(
         modifier = modifier,
