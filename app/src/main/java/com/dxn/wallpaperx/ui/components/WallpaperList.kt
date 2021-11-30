@@ -63,7 +63,15 @@ fun WallpaperList(
                 .fillMaxSize(),
             state = state
         ) {
-            items(wallpapers.itemCount) { index ->
+
+
+
+            items(
+                count = wallpapers.itemCount,
+//                span = {
+//
+//                }
+            ) { index ->
                 wallpapers[index]?.let { wallpaper ->
                     val isFavourite = favourites.any { it.id == wallpaper.id }
                     WallpaperCard(
