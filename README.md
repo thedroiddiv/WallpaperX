@@ -1,9 +1,9 @@
 
-<div style="display: flex; justify-content: center;">
+<p align="center">
 <img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/main/assets/icons/ic_launcher_round/android/res/mipmap-xxxhdpi/ic_launcher_round.png"/>
-</div>
+</p>
 
-# WallpaperX
+<h1 align="center">WallpaperX</h1>
 WallpaperX is a simple android application built using <a href="https://developer.android.com/jetpack/compose">Jetpack compose - Android’s modern toolkit for building native UI</a>. It uses pixabay and unsplash api to fetch wallpapers.
 
 ### Technologies used
