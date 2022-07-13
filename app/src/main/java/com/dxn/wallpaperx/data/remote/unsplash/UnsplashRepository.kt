@@ -1,6 +1,5 @@
 package com.dxn.wallpaperx.data.remote.unsplash
 
-import com.dxn.wallpaperx.R
 import com.dxn.wallpaperx.common.helpers.ResourcesProvider
 import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.data.remote.unsplash.models.collection.CollectionDto
@@ -13,14 +12,11 @@ class UnsplashRepository(
     private val resourcesProvider: ResourcesProvider
 ) : RemoteRepository {
 
-    private val apikey = resourcesProvider.getString(R.string.unsplash_api_key)
-
-
     override suspend fun getWallpapers(page: Int, query: String): List<Wallpaper> {
         return unsplashApi.getImages(
             query = query,
             page = page,
-            apikey = resourcesProvider.getString(R.string.unsplash_api_key)
+            apikey = resourcesProvider.unsplashApiKey
         ).results.map { imageDtoToWallpaper(it) }
     }
 
@@ -29,13 +25,13 @@ class UnsplashRepository(
     }
 
     override suspend fun getCollections(page: Int): List<Collection> =
-        unsplashApi.getCollection(page, apikey = apikey).map { collectionDtoToCollection(it) }
+        unsplashApi.getCollection(page, apikey = resourcesProvider.unsplashApiKey).map { collectionDtoToCollection(it) }
 
     override suspend fun getWallpapersByCollection(
         collectionId: String,
         page: Int
     ): List<Wallpaper> =
-        unsplashApi.getPhotosByCollection(collectionId, page, apikey = apikey)
+        unsplashApi.getPhotosByCollection(collectionId, page, apikey = resourcesProvider.unsplashApiKey)
             .map { imageDtoToWallpaper(it) }
 }
 
