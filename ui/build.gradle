@@ -49,6 +49,9 @@ android {
 
 dependencies {
 
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+
     implementation 'androidx.compose.material3:material3:1.0.0-alpha14'
 
     implementation 'androidx.core:core-ktx:1.8.0'
@@ -59,8 +62,6 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:1.1.1"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
     implementation 'androidx.activity:activity-compose:1.5.0'
-    implementation project(path: ':domain')
-    implementation project(path: ':data')
     debugImplementation "androidx.compose.ui:ui-tooling:1.1.1"
 
     // Compose dependencies

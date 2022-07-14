@@ -33,26 +33,13 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.2'
-    implementation 'com.google.android.material:material:1.6.1'
-
-    // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-
-    // Room
-    implementation "androidx.room:room-runtime:2.4.2"
-    kapt "androidx.room:room-compiler:2.4.2"
-    // Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.4.2"
+    implementation project(path: ':data')
 
     // Coil
     implementation "io.coil-kt:coil-compose:1.4.0"
 
     // hilt
     implementation "com.google.dagger:hilt-android:$dagger_hilt_version"
-    implementation project(path: ':data')
     kapt "com.google.dagger:hilt-android-compiler:$dagger_hilt_version"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 

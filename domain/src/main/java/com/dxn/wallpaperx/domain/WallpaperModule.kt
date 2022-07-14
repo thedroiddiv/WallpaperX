@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.domain.di
+package com.dxn.wallpaperx.domain
 
 import android.app.Application
 import com.dxn.wallpaperx.data.local.LocalRepository
