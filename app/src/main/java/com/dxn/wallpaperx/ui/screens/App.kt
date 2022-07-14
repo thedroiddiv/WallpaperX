@@ -7,7 +7,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
@@ -97,7 +96,9 @@ fun App() {
                 visible = currentRoute == RootScreen.Home.route,
             ) {
                 Row(
-                    Modifier.fillMaxWidth().height(56.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -176,8 +177,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.Search.route,
-//                enterTransition = { _, _ -> slideInHorizontally(initialOffsetX = { 1000 }) },
-//                exitTransition = { _, _ -> slideOutHorizontally(targetOffsetX = { 1000 }) }
+                enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
+                exitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
             ) {
                 Search(
                     navController = navController,
@@ -188,8 +189,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.Gallery.route.plus("/{imageUri}"),
-//                enterTransition = { initial, _ -> FavouritesAnimations.enterTransition(initial) },
-//                exitTransition = { _, target -> FavouritesAnimations.exitTransition(target) },
+                enterTransition = { FavouritesAnimations.enterTransition(this.initialState) },
+                exitTransition = { FavouritesAnimations.exitTransition(this.targetState) },
                 arguments = listOf(navArgument("imageUri") { type = NavType.StringType })
             ) { backStack ->
                 backStack.arguments?.getString("imageUri")?.let { u ->
@@ -200,8 +201,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.SetWallpaper.route + "/{wallpaper}",
-//                enterTransition = { _, _ -> SetWallpaperAnimations.enterTransition() },
-//                exitTransition = { _, _ -> SetWallpaperAnimations.exitTransition() },
+                enterTransition = { SetWallpaperAnimations.enterTransition() },
+                exitTransition = { SetWallpaperAnimations.exitTransition() },
                 arguments = listOf(navArgument("wallpaper") { type = NavType.StringType })
             ) { backStack ->
                 backStack.arguments?.getString("wallpaper")?.let { w ->
@@ -217,8 +218,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.CollectionWallpaper.route + "/{collectionId}/{title}",
-//                enterTransition = { _, _ -> expandIn() },
-//                exitTransition = { _, _ -> shrinkOut() },
+                enterTransition = { expandIn() },
+                exitTransition = { shrinkOut() },
                 arguments = listOf(navArgument("collectionId") { type = NavType.StringType },
                     navArgument("title") { type = NavType.StringType })
             ) { backStack ->
