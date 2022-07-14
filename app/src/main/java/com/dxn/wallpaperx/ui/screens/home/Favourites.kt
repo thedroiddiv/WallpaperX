@@ -3,10 +3,10 @@ package com.dxn.wallpaperx.ui.screens.home
 import android.net.Uri
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,7 +26,7 @@ import com.google.gson.Gson
 fun Favourites(
     viewModel: MainViewModel,
     favourites: List<Wallpaper>,
-    listState: LazyListState,
+    listState: LazyGridState,
     navController: NavHostController
 ) {
     Column(
@@ -38,7 +38,7 @@ fun Favourites(
             Text(text = "Uhh no! No items were found")
         }
         LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
+            columns = GridCells.Fixed(2),
             state = listState,
         ) {
             itemsIndexed(favourites) { index, wallpaper ->

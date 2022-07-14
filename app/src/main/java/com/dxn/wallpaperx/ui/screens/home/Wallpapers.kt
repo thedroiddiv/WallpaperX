@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,7 +26,7 @@ fun Wallpapers(
     viewModel: MainViewModel,
     wallpapers: LazyPagingItems<Wallpaper>,
     favourites: List<Wallpaper>,
-    listState: LazyListState,
+    listState: LazyGridState,
     navController: NavHostController
 ) {
     Column(modifier = Modifier.fillMaxSize()) {

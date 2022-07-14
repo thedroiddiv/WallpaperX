@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "WallpaperX"
 include ':app'
+include ':ui'

@@ -1,12 +1,14 @@
 package com.dxn.wallpaperx.ui.screens
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -18,7 +20,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -52,6 +53,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.gson.Gson
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalPagerApi
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
@@ -69,8 +71,8 @@ fun App() {
     val wallpapers = mainViewModel.wallpapers.collectAsLazyPagingItems()
     val collections = mainViewModel.collections.collectAsLazyPagingItems()
     val favourites by remember { mainViewModel.favourites }
-    val wallpaperListState = rememberLazyListState()
-    val favouriteListState = rememberLazyListState()
+    val wallpaperListState = rememberLazyGridState()
+    val favouriteListState = rememberLazyGridState()
     val collectionListState = rememberLazyListState()
     val pagerState = rememberPagerState()
     val screens = listOf(
@@ -174,8 +176,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.Search.route,
-                enterTransition = { _, _ -> slideInHorizontally(initialOffsetX = { 1000 }) },
-                exitTransition = { _, _ -> slideOutHorizontally(targetOffsetX = { 1000 }) }
+//                enterTransition = { _, _ -> slideInHorizontally(initialOffsetX = { 1000 }) },
+//                exitTransition = { _, _ -> slideOutHorizontally(targetOffsetX = { 1000 }) }
             ) {
                 Search(
                     navController = navController,
@@ -186,8 +188,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.Gallery.route.plus("/{imageUri}"),
-                enterTransition = { initial, _ -> FavouritesAnimations.enterTransition(initial) },
-                exitTransition = { _, target -> FavouritesAnimations.exitTransition(target) },
+//                enterTransition = { initial, _ -> FavouritesAnimations.enterTransition(initial) },
+//                exitTransition = { _, target -> FavouritesAnimations.exitTransition(target) },
                 arguments = listOf(navArgument("imageUri") { type = NavType.StringType })
             ) { backStack ->
                 backStack.arguments?.getString("imageUri")?.let { u ->
@@ -198,8 +200,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.SetWallpaper.route + "/{wallpaper}",
-                enterTransition = { _, _ -> SetWallpaperAnimations.enterTransition() },
-                exitTransition = { _, _ -> SetWallpaperAnimations.exitTransition() },
+//                enterTransition = { _, _ -> SetWallpaperAnimations.enterTransition() },
+//                exitTransition = { _, _ -> SetWallpaperAnimations.exitTransition() },
                 arguments = listOf(navArgument("wallpaper") { type = NavType.StringType })
             ) { backStack ->
                 backStack.arguments?.getString("wallpaper")?.let { w ->
@@ -215,8 +217,8 @@ fun App() {
             }
             composable(
                 route = RootScreen.CollectionWallpaper.route + "/{collectionId}/{title}",
-                enterTransition = { _, _ -> expandIn() },
-                exitTransition = { _, _ -> shrinkOut() },
+//                enterTransition = { _, _ -> expandIn() },
+//                exitTransition = { _, _ -> shrinkOut() },
                 arguments = listOf(navArgument("collectionId") { type = NavType.StringType },
                     navArgument("title") { type = NavType.StringType })
             ) { backStack ->
