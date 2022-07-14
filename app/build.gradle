@@ -21,11 +21,17 @@ android {
         }
     }
 
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     buildTypes {
         release {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField("String", "UNSPLASH_API_KEY", "\"" + localProperties['UNSPLASH_API_KEY'] + "\"")
         }
     }
     compileOptions {

@@ -1,6 +1,5 @@
 package com.dxn.wallpaperx.di
 
-import com.dxn.wallpaperx.common.helpers.ResourcesProvider
 import com.dxn.wallpaperx.data.WallpaperRepositoryImpl
 import com.dxn.wallpaperx.data.local.LocalRepository
 import com.dxn.wallpaperx.data.remote.RemoteRepository
@@ -21,11 +20,7 @@ object WallpaperModule {
     @Provides
     @Singleton
     @Named("unsplash")
-    fun provideUnsplashRepository(
-        unsplashApi: UnsplashApi,
-        resourcesProvider: ResourcesProvider
-    ): RemoteRepository =
-        UnsplashRepository(unsplashApi, resourcesProvider)
+    fun provideUnsplashRepository(unsplashApi: UnsplashApi, ): RemoteRepository = UnsplashRepository(unsplashApi)
 
     @Provides
     @Singleton

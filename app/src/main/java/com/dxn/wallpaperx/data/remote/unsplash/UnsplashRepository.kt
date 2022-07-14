@@ -1,22 +1,19 @@
 package com.dxn.wallpaperx.data.remote.unsplash
 
-import com.dxn.wallpaperx.common.helpers.ResourcesProvider
+import com.dxn.wallpaperx.common.Constants.UNSPLASH_API_KEY
 import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.data.remote.unsplash.models.collection.CollectionDto
 import com.dxn.wallpaperx.data.remote.unsplash.models.image.ImageDto
 import com.dxn.wallpaperx.domain.models.Collection
 import com.dxn.wallpaperx.domain.models.Wallpaper
 
-class UnsplashRepository(
-    private val unsplashApi: UnsplashApi,
-    private val resourcesProvider: ResourcesProvider
-) : RemoteRepository {
+class UnsplashRepository(private val unsplashApi: UnsplashApi) : RemoteRepository {
 
     override suspend fun getWallpapers(page: Int, query: String): List<Wallpaper> {
         return unsplashApi.getImages(
             query = query,
             page = page,
-            apikey = resourcesProvider.unsplashApiKey
+            apikey = UNSPLASH_API_KEY
         ).results.map { imageDtoToWallpaper(it) }
     }
 
@@ -25,13 +22,14 @@ class UnsplashRepository(
     }
 
     override suspend fun getCollections(page: Int): List<Collection> =
-        unsplashApi.getCollection(page, apikey = resourcesProvider.unsplashApiKey).map { collectionDtoToCollection(it) }
+        unsplashApi.getCollection(page, apikey = UNSPLASH_API_KEY)
+            .map { collectionDtoToCollection(it) }
 
     override suspend fun getWallpapersByCollection(
         collectionId: String,
         page: Int
     ): List<Wallpaper> =
-        unsplashApi.getPhotosByCollection(collectionId, page, apikey = resourcesProvider.unsplashApiKey)
+        unsplashApi.getPhotosByCollection(collectionId, page, apikey = UNSPLASH_API_KEY)
             .map { imageDtoToWallpaper(it) }
 }
 
