@@ -1,6 +1,6 @@
-THIS FILE IS REPRESENTATION OF local.properties
-TO SUCCESSFULLY BUILD THE PROJECT PASTE THIS INTO YOUR local.properties FILE
-MAKE SURE TO REPLACE THE VARIABLES WITH ACTUAL VALUES
+# THIS FILE IS REPRESENTATION OF local.properties
+# TO SUCCESSFULLY BUILD THE PROJECT PASTE THIS INTO YOUR local.properties FILE
+# MAKE SURE TO REPLACE THE VARIABLES WITH ACTUAL VALUES
 
 ## This file must *NOT* be checked into Version Control Systems,
 # as it contains information specific to your local configuration.
@@ -9,5 +9,5 @@ MAKE SURE TO REPLACE THE VARIABLES WITH ACTUAL VALUES
 # For customization when using a Version Control System, please read the
 # header note.
 #Wed Jul 13 19:59:53 IST 2022
-sdk.dir=<PATH_TO_ANDROID_SDK>
+sdk.dir=/Users/divyansh/Library/Android/sdk
 UNSPLASH_API_KEY=<YOUR_UNSLPASH_API_KEY>
