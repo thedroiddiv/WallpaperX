@@ -4,7 +4,9 @@
 </p>
 
 <h1 align="center">WallpaperX</h1>
-WallpaperX is a simple android application built using <a href="https://developer.android.com/jetpack/compose">Jetpack compose - Android’s modern toolkit for building native UI</a>. It uses pixabay and unsplash api to fetch wallpapers.
+WallpaperX is a simple android application built using <a href="https://developer.android.com/jetpack/compose">Jetpack compose - Android’s modern toolkit for building native UI</a>. It uses pixabay and unsplash api to fetch wallpapers. 
+<br><br>
+WallpaperX brings cool and fresh wallpapers just to you from unsplash.com. Set wallpapers for your home and lock screen, download and share.
 
 ### Technologies used
 - Jetpack compose
