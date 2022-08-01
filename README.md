@@ -7,9 +7,9 @@
 WallpaperX is a simple android application built using <a href="https://developer.android.com/jetpack/compose">Jetpack compose - Android’s modern toolkit for building native UI</a>. It uses pixabay and unsplash api to fetch wallpapers. 
 <br><br>
 WallpaperX brings cool and fresh wallpapers just to you from unsplash.com. Set wallpapers for your home and lock screen, download and share.
-
+<br><br>
 The project uses multiple modules saparated on basis DATA-DOMAIN-UI, three layered architecutre.
-
+<br><br>
 <img width="300" alt="Screenshot 2022-08-01 at 2 37 40 PM" src="https://user-images.githubusercontent.com/69595691/182114350-0dd515bd-f304-4a2c-8183-1b392dce4707.png">
 
 ### Technologies used
