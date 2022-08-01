@@ -8,6 +8,8 @@ WallpaperX is a simple android application built using <a href="https://develope
 <br><br>
 WallpaperX brings cool and fresh wallpapers just to you from unsplash.com. Set wallpapers for your home and lock screen, download and share.
 
+The project uses multiple modules saparated on basis DATA-DOMAIN-UI, three layered architecutre.
+
 ### Technologies used
 - Jetpack compose
 - Dagger-Hilt
