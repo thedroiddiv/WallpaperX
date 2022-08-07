@@ -10,7 +10,8 @@ WallpaperX brings cool and fresh wallpapers just to you from unsplash.com. Set w
 <br><br>
 The project uses multiple modules saparated on basis DATA-DOMAIN-UI, three layered architecutre.
 <br><br>
-<img width="300" alt="Screenshot 2022-08-01 at 2 37 40 PM" src="https://user-images.githubusercontent.com/69595691/182114350-0dd515bd-f304-4a2c-8183-1b392dce4707.png">
+
+![Frame 7](https://user-images.githubusercontent.com/69595691/183310290-77a10919-f9a0-4a76-8cac-23b018f4d67b.png)
 
 ### Technologies used
 - Jetpack compose
