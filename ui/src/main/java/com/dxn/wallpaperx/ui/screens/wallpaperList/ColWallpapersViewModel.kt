@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class ColWallpapersViewModel
 @Inject
@@ -34,5 +33,4 @@ constructor(
             }
         }
     }
-
 }

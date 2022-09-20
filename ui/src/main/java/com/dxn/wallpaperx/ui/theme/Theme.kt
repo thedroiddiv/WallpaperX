@@ -25,7 +25,6 @@ private val LightColorPalette = lightColors(
     onBackground = Blue500,
 )
 
-
 @Composable
 fun WallpaperXTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
 

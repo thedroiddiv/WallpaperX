@@ -56,11 +56,13 @@ fun WallpaperCard(
                 contentDescription = "wallpaper",
                 contentScale = ContentScale.Crop
             )
-            Box(modifier = Modifier
-                .matchParentSize()
-                .clickable {
-                    onClick()
-                }) {
+            Box(
+                modifier = Modifier
+                    .matchParentSize()
+                    .clickable {
+                        onClick()
+                    }
+            ) {
                 FavouriteButton(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)

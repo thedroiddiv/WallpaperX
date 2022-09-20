@@ -19,7 +19,6 @@ import com.dxn.wallpaperx.ui.components.WallpaperCard
 import com.dxn.wallpaperx.ui.navigation.RootScreen
 import com.google.gson.Gson
 
-
 @ExperimentalCoilApi
 @ExperimentalFoundationApi
 @Composable

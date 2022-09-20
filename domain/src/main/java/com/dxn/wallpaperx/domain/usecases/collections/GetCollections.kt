@@ -4,8 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.dxn.wallpaperx.data.model.Collection
-import com.dxn.wallpaperx.domain.source.CollectionSource
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
+import com.dxn.wallpaperx.domain.source.CollectionSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

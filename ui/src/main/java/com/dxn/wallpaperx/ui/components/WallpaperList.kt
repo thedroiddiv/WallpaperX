@@ -64,8 +64,6 @@ fun WallpaperList(
             state = state
         ) {
 
-
-
             items(
                 count = wallpapers.itemCount,
 //                span = {
@@ -113,4 +111,3 @@ fun WallpaperList(
         }
     }
 }
-

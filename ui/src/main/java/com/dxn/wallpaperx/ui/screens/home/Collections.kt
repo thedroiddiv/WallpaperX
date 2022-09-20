@@ -15,8 +15,8 @@ import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
-import com.dxn.wallpaperx.ui.components.CategoryCard
 import com.dxn.wallpaperx.data.model.Collection
+import com.dxn.wallpaperx.ui.components.CategoryCard
 import com.dxn.wallpaperx.ui.navigation.RootScreen
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.SwipeRefreshIndicator
@@ -52,7 +52,7 @@ fun Collections(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(180.dp)
-                            .padding(horizontal = 16.dp, vertical = 8.dp ),
+                            .padding(horizontal = 16.dp, vertical = 8.dp),
                         title = collection.title,
                         backgroundImage = collection.coverPhoto
                     ) {

@@ -1,11 +1,11 @@
 package com.dxn.wallpaperx.data.remote.unsplash
 
 import com.dxn.wallpaperx.data.Constants.UNSPLASH_API_KEY
+import com.dxn.wallpaperx.data.model.Collection
+import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.data.remote.unsplash.models.collection.CollectionDto
 import com.dxn.wallpaperx.data.remote.unsplash.models.image.ImageDto
-import com.dxn.wallpaperx.data.model.Wallpaper
-import com.dxn.wallpaperx.data.model.Collection
 
 class UnsplashRepository(private val unsplashApi: UnsplashApi) : RemoteRepository {
 
@@ -32,7 +32,6 @@ class UnsplashRepository(private val unsplashApi: UnsplashApi) : RemoteRepositor
         unsplashApi.getPhotosByCollection(collectionId, page, apikey = UNSPLASH_API_KEY)
             .map { imageDtoToWallpaper(it) }
 }
-
 
 fun imageDtoToWallpaper(imageDto: ImageDto): Wallpaper {
     return Wallpaper(

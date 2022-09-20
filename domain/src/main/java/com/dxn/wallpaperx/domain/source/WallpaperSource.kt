@@ -37,5 +37,4 @@ constructor(
     override fun getRefreshKey(state: PagingState<Int, Wallpaper>): Int? {
         return null
     }
-
 }

@@ -17,6 +17,25 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.jlleitschuh.gradle.ktlint" version "11.0.0"
+}
+
+subprojects {
+    apply plugin: "org.jlleitschuh.gradle.ktlint" // Version should be inherited from parent
+    ktlint {
+        // check for "ktlint" here:
+        // https://github.com/JLLeitschuh/ktlint-gradle/blob/master/plugin/gradle/libs.versions.toml
+        disabledRules = ["no-wildcard-imports"]
+    }
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+task installGitHook(type: Copy) {
+    from new File(rootProject.rootDir, 'pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    fileMode 0777
 }

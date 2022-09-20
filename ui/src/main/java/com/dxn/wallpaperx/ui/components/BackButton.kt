@@ -12,13 +12,14 @@ import androidx.navigation.NavHostController
 @Composable
 fun BackButton(
     modifier: Modifier = Modifier,
-    navController:NavHostController
+    navController: NavHostController
 ) {
     IconButton(
         modifier = modifier,
         onClick = {
             navController.popBackStack()
-        }) {
+        }
+    ) {
         Icon(
             imageVector = Icons.Rounded.ArrowBack,
             contentDescription = "back button",

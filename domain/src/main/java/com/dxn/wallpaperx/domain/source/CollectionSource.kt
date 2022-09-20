@@ -32,5 +32,4 @@ class CollectionSource(
     override fun getRefreshKey(state: PagingState<Int, Collection>): Int? {
         return null
     }
-
 }

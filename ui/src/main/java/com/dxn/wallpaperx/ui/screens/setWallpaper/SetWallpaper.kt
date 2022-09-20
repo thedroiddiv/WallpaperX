@@ -34,7 +34,6 @@ import com.dxn.wallpaperx.ui.components.BackButton
 import com.dxn.wallpaperx.ui.screens.setWallpaper.components.BottomMenu
 import kotlinx.coroutines.launch
 
-
 private const val TAG = "SetWallpaper"
 
 @ExperimentalAnimationApi

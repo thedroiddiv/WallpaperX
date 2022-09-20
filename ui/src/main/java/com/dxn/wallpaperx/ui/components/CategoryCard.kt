@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -26,9 +25,11 @@ fun CategoryCard(
     backgroundImage: String,
     onClick: () -> Unit
 ) {
-    Card(modifier = modifier
-        .clickable { onClick() }
-        .clip(MaterialTheme.shapes.medium)) {
+    Card(
+        modifier = modifier
+            .clickable { onClick() }
+            .clip(MaterialTheme.shapes.medium)
+    ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = rememberImagePainter(data = backgroundImage),
@@ -43,7 +44,8 @@ fun CategoryCard(
             Text(
                 modifier = Modifier
                     .padding(16.dp)
-                    .align(Alignment.TopStart), text = title,
+                    .align(Alignment.TopStart),
+                text = title,
                 color = Color.White
             )
         }

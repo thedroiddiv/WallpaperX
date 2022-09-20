@@ -35,5 +35,4 @@ interface UnsplashApi {
 
     @GET("/photos/{id}")
     suspend fun getImage(): ImageDto
-
 }

@@ -60,5 +60,4 @@ fun CollectionWallpapers(
             navController = navController
         )
     }
-
 }

@@ -86,7 +86,7 @@ fun App() {
     val launcher =
         rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent()) { uri: Uri? ->
             val data = Uri.encode(uri.toString())
-            navController.navigate(RootScreen.Gallery.route.plus("/${data}"))
+            navController.navigate(RootScreen.Gallery.route.plus("/$data"))
         }
 
     Scaffold(
@@ -172,7 +172,6 @@ fun App() {
                             Settings()
                         }
                     }
-
                 }
             }
             composable(
@@ -197,7 +196,6 @@ fun App() {
                     val uri = Uri.parse(u)
                     Gallery(uri, navController)
                 }
-
             }
             composable(
                 route = RootScreen.SetWallpaper.route + "/{wallpaper}",
@@ -220,8 +218,10 @@ fun App() {
                 route = RootScreen.CollectionWallpaper.route + "/{collectionId}/{title}",
                 enterTransition = { expandIn() },
                 exitTransition = { shrinkOut() },
-                arguments = listOf(navArgument("collectionId") { type = NavType.StringType },
-                    navArgument("title") { type = NavType.StringType })
+                arguments = listOf(
+                    navArgument("collectionId") { type = NavType.StringType },
+                    navArgument("title") { type = NavType.StringType }
+                )
             ) { backStack ->
                 backStack.arguments?.getString("collectionId")?.let { id ->
                     val title = backStack.arguments?.getString("title")
