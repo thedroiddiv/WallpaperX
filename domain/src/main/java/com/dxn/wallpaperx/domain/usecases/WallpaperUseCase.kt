@@ -13,8 +13,7 @@ import javax.inject.Inject
 
 data class WallpaperUseCase
 @Inject
-constructor
-    (
+constructor(
     val getWallpapers: GetWallpapers,
     val getWallpaper: GetWallpaper,
     val getCollections: GetCollections,

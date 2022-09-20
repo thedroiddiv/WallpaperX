@@ -28,5 +28,4 @@ constructor(
             wallpapers.value = wallpaperUseCase.getWallpapers(query)
         }
     }
-
 }

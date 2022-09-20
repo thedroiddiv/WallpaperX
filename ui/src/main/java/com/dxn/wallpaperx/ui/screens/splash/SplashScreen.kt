@@ -34,7 +34,8 @@ fun SplashScreen(
                 durationMillis = 800,
                 easing = {
                     OvershootInterpolator(4f).getInterpolation(it)
-                })
+                }
+            )
         )
         delay(1000)
         navController.navigate(RootScreen.Home.route) {

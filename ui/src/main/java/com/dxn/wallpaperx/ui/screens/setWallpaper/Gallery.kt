@@ -15,9 +15,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.LockOpen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -34,7 +34,7 @@ import com.dxn.wallpaperx.ui.components.BackButton
 @Composable
 fun Gallery(
     imageUri: Uri,
-    navController:NavHostController
+    navController: NavHostController
 ) {
 
     val context = LocalContext.current
@@ -53,7 +53,6 @@ fun Gallery(
                 bitmap.value = ImageDecoder.decodeBitmap(source)
             }
         }.getOrElse {
-
         }
     }
     Box(Modifier.fillMaxSize()) {

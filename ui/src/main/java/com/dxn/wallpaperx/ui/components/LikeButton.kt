@@ -22,7 +22,8 @@ fun FavouriteButton(
         modifier = modifier,
         onClick = {
             onClick()
-        }) {
+        }
+    ) {
         Icon(
             imageVector = if (isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
             contentDescription = "favourite button",

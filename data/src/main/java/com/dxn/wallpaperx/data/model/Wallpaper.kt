@@ -3,13 +3,13 @@ package com.dxn.wallpaperx.data.model
 import android.os.Parcel
 import android.os.Parcelable
 data class Wallpaper(
-    val id:String,
+    val id: String,
     val previewUrl: String,
-    val smallUrl:String,
-    val wallpaperUrl:String,
+    val smallUrl: String,
+    val wallpaperUrl: String,
     val user: String,
     val userImageURL: String,
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,

@@ -4,9 +4,9 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.dxn.wallpaperx.data.local.LocalRepository
 import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
-import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.data.model.Wallpaper
+import com.dxn.wallpaperx.data.remote.RemoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -37,7 +37,6 @@ constructor(
     override suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String): Uri? =
         localRepository.downloadWallpaper(bitmap, displayName)
 
-
     override suspend fun addFavourite(wallpaper: Wallpaper): Boolean =
         localRepository.addToFavourites(
             wallpaperToFavouriteEntity(wallpaper)
@@ -48,9 +47,7 @@ constructor(
 
     override fun getFavourites(): Flow<List<Wallpaper>> = localRepository.getFavourites()
         .map { wallpapers -> wallpapers.map { favEntityToWallpaper(it) } }
-
 }
-
 
 fun favEntityToWallpaper(favouriteEntity: FavouriteEntity): Wallpaper {
     return Wallpaper(

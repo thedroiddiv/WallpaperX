@@ -6,8 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.data.model.Collection
+import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.domain.usecases.WallpaperUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -85,4 +85,3 @@ constructor(
         const val TAG = "MainActivityViewModel"
     }
 }
-

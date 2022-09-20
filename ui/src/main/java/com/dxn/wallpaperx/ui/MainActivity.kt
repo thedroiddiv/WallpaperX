@@ -16,7 +16,6 @@ import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -28,7 +27,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             WallpaperXTheme {
-                Surface(modifier = Modifier.fillMaxSize(),color = Color.Black) {
+                Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {
                     ProvideWindowInsets {
                         App()
                     }

@@ -8,7 +8,7 @@ object FavouritesAnimations {
     @ExperimentalAnimationApi
     fun enterTransition(initial: NavBackStackEntry): EnterTransition {
         return when (initial.destination.route) {
-            HomeScreen.Wallpapers.route,HomeScreen.Collections.route -> {
+            HomeScreen.Wallpapers.route, HomeScreen.Collections.route -> {
                 slideInHorizontally(initialOffsetX = { 1000 })
             }
             HomeScreen.Setting.route -> {
@@ -23,7 +23,7 @@ object FavouritesAnimations {
     @ExperimentalAnimationApi
     fun exitTransition(target: NavBackStackEntry): ExitTransition {
         return when (target.destination.route) {
-            HomeScreen.Wallpapers.route,HomeScreen.Collections.route -> {
+            HomeScreen.Wallpapers.route, HomeScreen.Collections.route -> {
                 slideOutHorizontally(targetOffsetX = { 1000 })
             }
             HomeScreen.Setting.route -> {

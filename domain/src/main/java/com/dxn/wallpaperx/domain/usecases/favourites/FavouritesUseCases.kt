@@ -18,7 +18,7 @@ class AddFavourite
 constructor(
     private val repository: WallpaperRepository
 ) {
-    suspend operator fun invoke(wallpaper: Wallpaper)  = repository.addFavourite(wallpaper)
+    suspend operator fun invoke(wallpaper: Wallpaper) = repository.addFavourite(wallpaper)
 }
 
 class RemoveFavourite

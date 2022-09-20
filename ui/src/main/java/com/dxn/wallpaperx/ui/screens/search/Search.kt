@@ -56,7 +56,8 @@ fun Search(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxHeight(0.8f),
-                        onSearch = { viewModel.search(it) })
+                        onSearch = { viewModel.search(it) }
+                    )
                 }
             }
         }
@@ -74,5 +75,3 @@ fun Search(
         )
     }
 }
-
-
