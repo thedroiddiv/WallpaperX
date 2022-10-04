@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/main/assets/icons/ic_launcher_round/android/res/mipmap-xxxhdpi/ic_launcher_round.png"/>
+<img src="https://github.com/divyansh-dxn/WallpaperX/blob/master/assets/icons/ic_launcher_round/android/res/mipmap-xxxhdpi/ic_launcher_round.png?raw=true"/>
 </p>
 
 <h1 align="center">WallpaperX</h1>
