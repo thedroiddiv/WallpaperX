@@ -28,9 +28,9 @@ The project uses multiple modules saparated on basis DATA-DOMAIN-UI, three layer
 
 ### MAD Overview
 <div>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/main/assets/mad/summary.png" width="720"/>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/main/assets/mad/jetpack.png" width="720"/>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/main/assets/mad/kotlin.png" width="720"/>
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/assets/mad/summary.png" width="720"/>
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/assets/mad/jetpack.png" width="720"/>
+<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/assets/mad/kotlin.png" width="720"/>
 </div>
 
 ![logo](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
