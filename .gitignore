@@ -1,5 +1,5 @@
-**/*/res/values/secrets.xml
 /keystore/
+**/*.DS_Store
 
 =# Built application files
 *.apk

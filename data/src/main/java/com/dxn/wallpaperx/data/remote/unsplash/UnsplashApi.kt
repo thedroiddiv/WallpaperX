@@ -15,14 +15,12 @@ interface UnsplashApi {
         @Query("page") page: Int = 1,
         @Query("orientation") orientation: String = "portrait",
         @Query("per_page") perPage: Int = 20,
-        @Query("client_id") apikey: String
     ): Response
 
     @GET("/collections")
     suspend fun getCollection(
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 20,
-        @Query("client_id") apikey: String
     ): List<CollectionDto>
 
     @GET("/collections/{id}/photos")
@@ -30,7 +28,6 @@ interface UnsplashApi {
         @Path("id") collectionId: String,
         @Query("page") page: Int = 1,
         @Query("per_page") perPage: Int = 20,
-        @Query("client_id") apikey: String
     ): List<ImageDto>
 
     @GET("/photos/{id}")
