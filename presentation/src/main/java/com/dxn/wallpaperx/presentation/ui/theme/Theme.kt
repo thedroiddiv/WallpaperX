@@ -11,7 +11,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
-
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
     onPrimary = md_theme_light_onPrimary,
@@ -41,7 +40,6 @@ private val LightColors = lightColorScheme(
     inversePrimary = md_theme_light_inversePrimary,
     // surfaceTint = md_theme_light_surfaceTint,
 )
-
 
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
@@ -73,7 +71,6 @@ private val DarkColors = darkColorScheme(
     // surfaceTint = md_theme_dark_surfaceTint,
 )
 
-
 @Composable
 fun WallpaperXTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -92,8 +89,8 @@ fun WallpaperXTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            (view.context as Activity).window.statusBarColor = colorScheme.primary.toArgb()
-            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
+            (view.context as Activity).window.statusBarColor = colorScheme.surface.toArgb()
+            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = !darkTheme
         }
     }
 
