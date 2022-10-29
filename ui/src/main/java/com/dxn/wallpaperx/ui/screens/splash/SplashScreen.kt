@@ -51,7 +51,7 @@ fun SplashScreen(
     ) {
         Image(
             modifier = Modifier.scale(scale.value),
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            painter = painterResource(id = R.mipmap.ic_launcher_foreground),
             contentDescription = "app icon"
         )
     }
