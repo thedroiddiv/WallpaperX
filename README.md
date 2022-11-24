@@ -1,6 +1,11 @@
 
 <p align="center">
 <img src="https://github.com/divyansh-dxn/WallpaperX/blob/master/assets/icons/ic_launcher_round/android/res/mipmap-xxxhdpi/ic_launcher_round.png?raw=true"/>
+
+</p>
+
+<p align="center">
+<a href="https://play.google.com/store/apps/details?id=com.dxn.wallpaperx.ui" target="_blank"><img src="https://user-images.githubusercontent.com/69595691/203753454-6dd20127-9dee-4c17-a28d-15236b477db5.png" width="200"/></a>
 </p>
 
 <h1 align="center">WallpaperX</h1>
