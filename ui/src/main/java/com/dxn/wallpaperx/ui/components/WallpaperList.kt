@@ -37,7 +37,7 @@ fun WallpaperList(
     addFavourite: (Wallpaper) -> Unit,
     removeFavourite: (String) -> Unit,
     state: LazyGridState = rememberLazyGridState(),
-    navController: NavHostController,
+    navController: NavHostController
 ) {
     SwipeRefresh(
         modifier = Modifier
@@ -49,7 +49,7 @@ fun WallpaperList(
                 refreshTriggerDistance = trigger,
                 scale = true,
                 backgroundColor = MaterialTheme.colors.primary,
-                shape = MaterialTheme.shapes.small,
+                shape = MaterialTheme.shapes.small
             )
         },
         onRefresh = {
@@ -63,9 +63,8 @@ fun WallpaperList(
                 .fillMaxSize(),
             state = state
         ) {
-
             items(
-                count = wallpapers.itemCount,
+                count = wallpapers.itemCount
 //                span = {
 //
 //                }
@@ -85,9 +84,13 @@ fun WallpaperList(
                         },
                         isFavourite = isFavourite,
                         onLikedClicked = {
-                            if (isFavourite) removeFavourite(wallpaper.id) else addFavourite(
-                                wallpaper
-                            )
+                            if (isFavourite) {
+                                removeFavourite(wallpaper.id)
+                            } else {
+                                addFavourite(
+                                    wallpaper
+                                )
+                            }
                         }
                     )
                 }

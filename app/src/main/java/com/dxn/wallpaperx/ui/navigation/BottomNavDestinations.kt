@@ -7,7 +7,7 @@ import com.dxn.wallpaperx.R
 enum class BottomNavDestinations(
     val route: String,
     @StringRes val title: Int,
-    @DrawableRes val icon: Int,
+    @DrawableRes val icon: Int
 ) {
     Wallpapers("wallpapers_screen", R.string.wallpapers, R.drawable.ic_wallpaper),
     Collections("collections_screen", R.string.collections, R.drawable.ic_collection),

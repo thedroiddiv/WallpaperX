@@ -93,7 +93,7 @@ fun App() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             AnimatedVisibility(
-                visible = currentRoute == RootScreen.Home.route,
+                visible = currentRoute == RootScreen.Home.route
             ) {
                 Row(
                     Modifier
@@ -110,7 +110,7 @@ fun App() {
                     )
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(16.dp)
                     )
                     IconButton(onClick = {
                         navController.navigate(RootScreen.Search.route)

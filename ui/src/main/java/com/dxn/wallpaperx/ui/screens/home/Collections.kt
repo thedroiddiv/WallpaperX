@@ -38,7 +38,7 @@ fun Collections(
                 refreshTriggerDistance = trigger,
                 scale = true,
                 backgroundColor = MaterialTheme.colors.primary,
-                shape = MaterialTheme.shapes.small,
+                shape = MaterialTheme.shapes.small
             )
         },
         onRefresh = {
@@ -56,7 +56,6 @@ fun Collections(
                         title = collection.title,
                         backgroundImage = collection.coverPhoto
                     ) {
-
                         navController.navigate(RootScreen.CollectionWallpaper.route.plus("/${it.id}/${it.title}"))
                     }
                 }

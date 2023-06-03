@@ -39,10 +39,8 @@ fun App() {
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-
             NavHost(navController = navController, startDestination = "home_navigation") {
                 navigation(BottomNavDestinations.Wallpapers.route, "home_navigation") {
-
                     composable(BottomNavDestinations.Wallpapers.route) {
                         Text(text = "Wallpapers")
                     }

@@ -11,7 +11,7 @@ class UnsplashRepository(private val unsplashApi: UnsplashApi) : RemoteRepositor
     override suspend fun getWallpapers(page: Int, query: String): List<Wallpaper> {
         return unsplashApi.getImages(
             query = query,
-            page = page,
+            page = page
         ).results.map { imageDtoToWallpaper(it) }
     }
 

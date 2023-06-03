@@ -7,7 +7,7 @@ import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
 
 class CollectionSource(
-    private val repository: WallpaperRepository,
+    private val repository: WallpaperRepository
 ) : PagingSource<Int, Collection>() {
 
     companion object {

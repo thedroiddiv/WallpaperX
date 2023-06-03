@@ -14,20 +14,20 @@ interface UnsplashApi {
         @Query("query") query: String,
         @Query("page") page: Int = 1,
         @Query("orientation") orientation: String = "portrait",
-        @Query("per_page") perPage: Int = 20,
+        @Query("per_page") perPage: Int = 20
     ): Response
 
     @GET("/collections")
     suspend fun getCollection(
         @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 20,
+        @Query("per_page") perPage: Int = 20
     ): List<CollectionDto>
 
     @GET("/collections/{id}/photos")
     suspend fun getPhotosByCollection(
         @Path("id") collectionId: String,
         @Query("page") page: Int = 1,
-        @Query("per_page") perPage: Int = 20,
+        @Query("per_page") perPage: Int = 20
     ): List<ImageDto>
 
     @GET("/photos/{id}")

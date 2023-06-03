@@ -46,7 +46,6 @@ fun SetWallpaper(
     addFavourite: (Wallpaper) -> Unit,
     removeFavourite: (String) -> Unit
 ) {
-
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 

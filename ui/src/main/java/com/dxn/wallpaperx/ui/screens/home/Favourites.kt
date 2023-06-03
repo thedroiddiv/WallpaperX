@@ -38,7 +38,7 @@ fun Favourites(
         }
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            state = listState,
+            state = listState
         ) {
             itemsIndexed(favourites) { index, wallpaper ->
                 WallpaperCard(

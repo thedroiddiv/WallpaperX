@@ -8,7 +8,7 @@ data class Wallpaper(
     val smallUrl: String,
     val wallpaperUrl: String,
     val user: String,
-    val userImageURL: String,
+    val userImageURL: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,

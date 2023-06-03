@@ -17,7 +17,6 @@ fun FavouriteButton(
     isFavourite: Boolean,
     onClick: () -> Unit
 ) {
-
     IconButton(
         modifier = modifier,
         onClick = {

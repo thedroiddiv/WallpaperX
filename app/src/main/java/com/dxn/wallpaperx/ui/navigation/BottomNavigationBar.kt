@@ -13,14 +13,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 
-
 @Composable
 fun BottomNavigationBar(
     modifier: Modifier = Modifier,
     navController: NavController,
     navItems: Array<BottomNavDestinations>
 ) {
-
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 

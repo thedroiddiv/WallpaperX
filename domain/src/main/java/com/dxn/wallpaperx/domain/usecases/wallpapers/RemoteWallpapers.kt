@@ -12,7 +12,7 @@ import javax.inject.Inject
 class GetWallpaper
 @Inject
 constructor(
-    private val repository: WallpaperRepository,
+    private val repository: WallpaperRepository
 ) {
     suspend operator fun invoke(id: String): Wallpaper {
         return repository.getWallpaper(id)
@@ -22,7 +22,7 @@ constructor(
 class GetWallpapers
 @Inject
 constructor(
-    private val repository: WallpaperRepository,
+    private val repository: WallpaperRepository
 ) {
     operator fun invoke(query: String): Flow<PagingData<Wallpaper>> {
         return Pager(PagingConfig(pageSize = 20)) {
@@ -34,7 +34,7 @@ constructor(
 class GetWallpapersByCollection
 @Inject
 constructor(
-    private val repository: WallpaperRepository,
+    private val repository: WallpaperRepository
 ) {
     operator fun invoke(collectionId: String): Flow<PagingData<Wallpaper>> {
         return Pager(PagingConfig(pageSize = 20)) {

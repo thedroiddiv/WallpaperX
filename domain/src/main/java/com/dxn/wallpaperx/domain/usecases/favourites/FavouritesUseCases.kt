@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetFavourites
 @Inject
 constructor(
-    private val repository: WallpaperRepository,
+    private val repository: WallpaperRepository
 ) {
     operator fun invoke(): Flow<List<Wallpaper>> = repository.getFavourites()
 }

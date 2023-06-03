@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun SearchBar(
     modifier: Modifier = Modifier,
-    onSearch: (String) -> Unit,
+    onSearch: (String) -> Unit
 ) {
     var query by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
@@ -33,7 +33,7 @@ fun SearchBar(
         modifier = modifier
             .clip(CircleShape)
             .background(MaterialTheme.colors.onPrimary.copy(0.1f)),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         BasicTextField(
             value = query,

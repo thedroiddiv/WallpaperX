@@ -36,7 +36,6 @@ fun Gallery(
     imageUri: Uri,
     navController: NavHostController
 ) {
-
     val context = LocalContext.current
     val bitmap = remember { mutableStateOf<Bitmap?>(null) }
     val viewModel = hiltViewModel<SetWallpaperViewModel>()

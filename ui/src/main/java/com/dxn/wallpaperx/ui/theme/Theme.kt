@@ -13,7 +13,7 @@ private val DarkColorPalette = darkColors(
     surface = Color.Black,
     onSurface = Blue200,
     background = Color.Black,
-    onBackground = Blue200,
+    onBackground = Blue200
 )
 
 private val LightColorPalette = lightColors(
@@ -22,12 +22,11 @@ private val LightColorPalette = lightColors(
     surface = Color.White,
     onSurface = Blue500,
     background = Color.White,
-    onBackground = Blue500,
+    onBackground = Blue500
 )
 
 @Composable
 fun WallpaperXTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

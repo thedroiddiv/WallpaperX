@@ -21,8 +21,11 @@ constructor(
         return kotlin.runCatching {
             val nextPage = params.key ?: 1
             val wallpapers =
-                if (isCollection) repository.getWallpapersByCollection(query, nextPage) else
+                if (isCollection) {
+                    repository.getWallpapersByCollection(query, nextPage)
+                } else {
                     repository.getWallpapers(nextPage, query)
+                }
             LoadResult.Page(
                 data = wallpapers,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
