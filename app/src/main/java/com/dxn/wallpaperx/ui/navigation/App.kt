@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.dxn.wallpaperx.ui.components.appbar.HomeAppBar
 import com.dxn.wallpaperx.ui.screens.home.HomeScreenVM
+import com.dxn.wallpaperx.ui.screens.home.collections.CollectionsScreen
 import com.dxn.wallpaperx.ui.screens.home.wallpapers.WallpapersScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,8 +86,7 @@ fun App() {
 
                     composable(BottomNavDestinations.Collections.route) {
                         val viewModel = it.sharedViewModel<HomeScreenVM>(navController)
-
-                        Text(text = "Collections")
+                        CollectionsScreen(viewModel = viewModel)
                     }
 
                     composable(BottomNavDestinations.Favourites.route) {
