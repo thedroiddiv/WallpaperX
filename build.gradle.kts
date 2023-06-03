@@ -19,4 +19,4 @@ allprojects {
     }
 }
 
-tasks.getByPath(":ui:preBuild").dependsOn(":installGitHook")
+tasks.getByPath(":app:preBuild").dependsOn(":installGitHook")
