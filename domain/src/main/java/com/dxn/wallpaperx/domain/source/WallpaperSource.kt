@@ -3,11 +3,11 @@ package com.dxn.wallpaperx.domain.source
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import coil.network.HttpException
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
 
-class WallpaperSource
-constructor(
+class WallpaperSource(
     private val repository: WallpaperRepository,
     private val query: String,
     private val isCollection: Boolean
@@ -18,7 +18,7 @@ constructor(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Wallpaper> {
-        return kotlin.runCatching {
+        return try {
             val nextPage = params.key ?: 1
             val wallpapers =
                 if (isCollection) {
@@ -31,9 +31,9 @@ constructor(
                 prevKey = if (nextPage == 1) null else nextPage - 1,
                 nextKey = nextPage.plus(1)
             )
-        }.getOrElse {
-            Log.e(TAG, "load: ${it.message}")
-            LoadResult.Error(it)
+        } catch (e: HttpException) {
+            Log.e(TAG, "load: ${e.message}")
+            LoadResult.Error(e)
         }
     }
 
