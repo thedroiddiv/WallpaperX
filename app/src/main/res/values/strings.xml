@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">WallpaperX</string>
+    <string name="wallpapers">Wallpapers</string>
+    <string name="collections">Collections</string>
+    <string name="favourites">Favourites</string>
 </resources>
