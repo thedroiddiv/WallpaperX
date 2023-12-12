@@ -2,6 +2,7 @@ package com.dxn.wallpaperx.data
 
 import android.app.Application
 import com.dxn.wallpaperx.data.local.LocalDatabase
+import com.dxn.wallpaperx.data.remote.pixabay.PixabayApi
 import com.dxn.wallpaperx.data.remote.unsplash.UnsplashApi
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -9,6 +10,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -31,7 +33,7 @@ object DataModule {
             OkHttpClient.Builder()
                 .addInterceptor { chain ->
                     val req = chain.request()
-                    val newUrl = req.url().newBuilder()
+                    val newUrl = req.url.newBuilder()
                         .addQueryParameter("client_id", BuildConfig.UNSPLASH_API_KEY)
                         .build()
                     val newReq = req.newBuilder().url(newUrl).build()
@@ -41,4 +43,20 @@ object DataModule {
         )
         .build()
         .create(UnsplashApi::class.java)
+
+    @Provides
+    @Singleton
+    fun providePixabayApi(): PixabayApi = Retrofit.Builder().baseUrl("https://pixabay.com/")
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+        .client(
+            OkHttpClient.Builder()
+                .addInterceptor(
+                    HttpLoggingInterceptor().apply {
+                        setLevel(HttpLoggingInterceptor.Level.BODY)
+                    }
+                )
+                .build()
+        )
+        .build()
+        .create(PixabayApi::class.java)
 }

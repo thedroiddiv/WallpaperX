@@ -34,7 +34,8 @@ fun CategoryCard(
             Image(
                 painter = rememberImagePainter(data = backgroundImage),
                 contentDescription = "category or collection ",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
             )
             Box(
                 modifier = Modifier
