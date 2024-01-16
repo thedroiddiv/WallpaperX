@@ -1,5 +1,50 @@
 [versions]
+accompanistVersion = "0.24.13-rc"
+activity-compose = "1.6.0"
+androidx-material = "1.2.1"
+appcompat = "1.5.1"
+coilComposeVersion = "1.4.0"
+core-ktx = "1.9.0"
+gsonVersion = "2.9.0"
+hiltCompilerVersion = "2.44"
+hiltAndroidVersion = "2.48"
+hiltNavigationComposeVersion = "1.0.0"
+material-icons-extended = "1.3.0-rc01"
+navigation-compose = "2.5.2"
+pagingComposeVersion = "1.0.0-alpha14"
+ui-tooling-preview = "1.2.1"
+ui = "1.2.1"
+lifecycle-viewmodel-compose = "2.5.1"
+lifecycle-runtime-ktx = "2.5.1"
+material3 = "1.0.0-rc01"
+material = "1.6.1"
+uiToolingVersion = "1.2.1"
 
 [libraries]
+accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanistVersion" }
+accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanistVersion" }
+accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistVersion" }
+accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistVersion" }
+accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistVersion" }
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanistVersion" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
+androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
+androidx-material = { module = "androidx.compose.material:material", version.ref = "androidx-material" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingComposeVersion" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiToolingVersion" }
+androidx-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "ui-tooling-preview" }
+androidx-ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
+androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
+androidx-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompilerVersion" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
 
 [plugins]
