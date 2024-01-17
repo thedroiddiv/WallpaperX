@@ -53,8 +53,8 @@ android {
 dependencies {
 
     // Retrofit
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
 
     // OkHttp
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.11.0"))
@@ -62,12 +62,12 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor")
 
     // Room
-    implementation("androidx.room:room-runtime:2.4.3")
-    kapt("androidx.room:room-compiler:2.4.3")
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
     // Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.4.3")
+    implementation(libs.androidx.room.ktx)
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
+    implementation(libs.hilt.android)
+    kapt("com.google.dagger:hilt-compiler:2.48")
 }
