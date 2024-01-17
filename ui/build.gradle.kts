@@ -32,17 +32,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
     packagingOptions {
         resources {
@@ -57,47 +57,45 @@ dependencies {
     implementation(project(":data"))
 
     // Core dependencies
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
-    implementation("androidx.activity:activity-compose:1.6.0")
-    implementation("com.google.android.material:material:1.6.1")
-    implementation("androidx.compose.material3:material3:1.0.0-rc01")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.material)
+    implementation(libs.androidx.material3)
 
     // Lifecycle
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Compose
-    implementation("androidx.compose.ui:ui:1.2.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.2.1")
-    implementation("androidx.compose.material:material:1.2.1")
-    implementation("androidx.compose.material:material-icons-extended:1.3.0-rc01")
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.material)
+    implementation(libs.androidx.material.icons.extended)
 
     // Paging 3
-    val pagingComposeVersion = "1.0.0-alpha14"
-    implementation("androidx.paging:paging-compose:$pagingComposeVersion")
+    implementation(libs.androidx.paging.compose)
 
     // Navigation
-    implementation("androidx.navigation:navigation-compose:2.5.2")
+    implementation(libs.androidx.navigation.compose)
 
     // Accompanist
-    val accompanistVersion = "0.24.13-rc"
-    implementation("com.google.accompanist:accompanist-navigation-animation:$accompanistVersion")
-    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
-    implementation("com.google.accompanist:accompanist-swiperefresh:$accompanistVersion")
-    implementation("com.google.accompanist:accompanist-pager:$accompanistVersion")
-    implementation("com.google.accompanist:accompanist-pager-indicators:$accompanistVersion")
-    implementation("com.google.accompanist:accompanist-insets:$accompanistVersion")
+    implementation(libs.accompanist.navigation.animation)
+    implementation(libs.accompanist.systemuicontroller)
+    implementation(libs.accompanist.swiperefresh)
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
+    implementation(libs.accompanist.insets)
 
     // Coil
-    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation(libs.coil.compose)
 
     // Gson
-    implementation("com.google.code.gson:gson:2.9.0")
+    implementation(libs.gson)
 
     // Dagger - Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 }
