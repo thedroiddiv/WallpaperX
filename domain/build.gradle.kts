@@ -39,17 +39,16 @@ dependencies {
     implementation(project(":data"))
 
     // Coil
-    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation(libs.coil.compose)
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-compiler:2.44")
+    implementation(libs.hilt.android)
+    kapt("com.google.dagger:hilt-compiler:2.48")
 
     // Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
 
     // Paging 3
-    val pagingComposeVersion = "1.0.0-alpha14"
-    implementation("androidx.paging:paging-compose:$pagingComposeVersion")
+    implementation(libs.androidx.paging.compose)
 }
