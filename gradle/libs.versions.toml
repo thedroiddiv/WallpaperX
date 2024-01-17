@@ -1,15 +1,17 @@
 [versions]
 accompanistVersion = "0.24.13-rc"
 activity-compose = "1.6.0"
+agp = "8.2.0"
 androidx-material = "1.2.1"
 appcompat = "1.5.1"
 coilComposeVersion = "1.4.0"
 core-ktx = "1.9.0"
 gsonVersion = "2.9.0"
-hiltCompilerVersion = "2.44"
-hiltAndroidVersion = "2.48"
+hilt = "2.48"
 hiltNavigationComposeVersion = "1.0.0"
+kotlin="1.8.10"
 kotlinxCoroutinesCoreVersion = "1.6.4"
+ktlint="11.0.0"
 material-icons-extended = "1.3.0-rc01"
 navigation-compose = "2.5.2"
 pagingComposeVersion = "1.0.0-alpha14"
@@ -58,8 +60,8 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeV
 gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
 
 # Dagger Hilt
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hiltCompilerVersion" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 
 # KotlinX
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesCoreVersion" }
@@ -70,9 +72,12 @@ material = { module = "com.google.android.material:material", version.ref = "mat
 
 # OkHttp
 
-
 # Retrofile
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
 
 [plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
