@@ -16,7 +16,7 @@ material-icons-extended = "1.3.0-rc01"
 navigation-compose = "2.5.2"
 pagingComposeVersion = "1.0.0-alpha14"
 retrofitVersion = "2.9.0"
-roomRuntimeVersion = "2.4.3"
+roomVersion = "2.6.1"
 ui-tooling-preview = "1.2.1"
 ui = "1.2.1"
 lifecycle-viewmodel-compose = "2.5.1"
@@ -26,7 +26,7 @@ material = "1.6.1"
 uiToolingVersion = "1.2.1"
 
 [libraries]
-# Acconpanist
+# Acconmpanist
 accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanistVersion" }
 accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanistVersion" }
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistVersion" }
@@ -41,9 +41,9 @@ androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingComposeVersion" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntimeVersion" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntimeVersion" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntimeVersion" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 
