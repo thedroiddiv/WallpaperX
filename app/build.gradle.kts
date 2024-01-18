@@ -62,4 +62,16 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    // Navigation Compose
+    val navVersion = "2.7.6"
+    implementation("androidx.navigation:navigation-compose:$navVersion")
+
+    // Coil Compose
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
+    // Paging 3
+    val pagingVersion = "3.2.1"
+    implementation("androidx.paging:paging-compose:$pagingVersion")
+    implementation("androidx.paging:paging-runtime:$pagingVersion")
 }
