@@ -61,18 +61,18 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.activity.compose)
     implementation(libs.material)
-    implementation(libs.androidx.material3)
+    implementation(libs.compose.material3)
 
     // Lifecycle
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     // Compose
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.tooling.preview)
-    debugImplementation(libs.androidx.ui.tooling)
-    implementation(libs.androidx.material)
-    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.material)
+    implementation(libs.compose.material.icons.extended)
 
     // Paging 3
     implementation(libs.androidx.paging.compose)
@@ -89,7 +89,7 @@ dependencies {
     implementation(libs.accompanist.insets)
 
     // Coil
-    implementation(libs.coil.compose)
+    implementation(libs.compose.coil)
 
     // Gson
     implementation(libs.gson)

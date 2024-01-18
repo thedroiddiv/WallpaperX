@@ -39,7 +39,7 @@ dependencies {
     implementation(project(":data"))
 
     // Coil
-    implementation(libs.coil.compose)
+    implementation(libs.compose.coil)
 
     // Hilt
     implementation(libs.hilt.android)
