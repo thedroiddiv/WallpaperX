@@ -4,9 +4,12 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.data.model.Wallpaper
+import com.dxn.wallpaperx.domain.source.WallpaperSource
 import kotlinx.coroutines.flow.Flow
 
 interface WallpaperRepository {
+
+    fun wallpaperSource(query: String, isCollection: Boolean): WallpaperSource
 
     suspend fun getWallpapers(page: Int, query: String): List<Wallpaper>
     suspend fun getWallpaper(id: String): Wallpaper

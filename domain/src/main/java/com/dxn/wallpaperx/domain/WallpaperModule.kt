@@ -14,6 +14,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import org.koin.android.ext.koin.androidApplication
+import org.koin.dsl.module
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -49,4 +51,10 @@ object WallpaperModule {
         localRepository: LocalRepository
     ): WallpaperRepository =
         WallpaperRepositoryImpl(remoteRepository, localRepository)
+}
+
+val wallpaperModule = module {
+    single<RemoteRepository> { PixabayRepository(get()) }
+    single<LocalRepository> { LocalRepository(androidApplication(), get()) }
+    single<WallpaperRepository> { WallpaperRepositoryImpl(get(), get()) }
 }

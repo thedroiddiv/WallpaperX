@@ -5,8 +5,9 @@ import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -19,12 +20,13 @@ fun WallpaperAppBar(
     destination: Screen,
     navigateUp: () -> Unit,
     toSettings: () -> Unit,
-    toSearch: () -> Unit
+    toSearch: () -> Unit,
+    scrollBehavior: TopAppBarScrollBehavior? = null
 ) {
 
     when (destination) {
         Screen.Wallpapers, Screen.Collections, Screen.Favourites -> {
-            TopAppBar(
+            LargeTopAppBar(
                 title = { Text(text = stringResource(destination.title)) },
                 actions = {
                     IconButton(onClick = toSettings) {
@@ -39,7 +41,8 @@ fun WallpaperAppBar(
                             contentDescription = stringResource(id = Screen.Search.title)
                         )
                     }
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
         }
 
@@ -47,7 +50,7 @@ fun WallpaperAppBar(
         Screen.SetWallpaper -> {}
         Screen.Gallery -> {}
         Screen.Settings -> {
-            TopAppBar(
+            LargeTopAppBar(
                 title = { Text(text = stringResource(destination.title)) },
                 navigationIcon = {
                     IconButton(onClick = navigateUp) {
@@ -56,7 +59,8 @@ fun WallpaperAppBar(
                             contentDescription = stringResource(id = R.string.back)
                         )
                     }
-                }
+                },
+                scrollBehavior = scrollBehavior
             )
         }
     }

@@ -70,4 +70,7 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android)
     kapt("com.google.dagger:hilt-compiler:2.48")
+
+    val koinVersion = "3.5.3"
+    implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
 }

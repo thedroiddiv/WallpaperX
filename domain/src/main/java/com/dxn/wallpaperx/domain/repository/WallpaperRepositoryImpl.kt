@@ -7,6 +7,7 @@ import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.data.remote.RemoteRepository
+import com.dxn.wallpaperx.domain.source.WallpaperSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -18,6 +19,10 @@ constructor(
 
     companion object {
         const val TAG = "WallpaperRepositoryImpl"
+    }
+
+    override fun wallpaperSource(query: String, isCollection: Boolean): WallpaperSource {
+        return WallpaperSource(this, query, isCollection)
     }
 
     override suspend fun getWallpapers(page: Int, query: String) =
