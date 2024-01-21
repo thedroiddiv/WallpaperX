@@ -6,5 +6,5 @@ data class Response(
     val total: Int,
     @SerializedName("total_pages")
     val totalPages: Int,
-    val results: List<ImageDto>
+    val results: List<ImageDto>,
 )

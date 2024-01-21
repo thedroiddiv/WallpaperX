@@ -9,7 +9,6 @@ import com.dxn.wallpaperx.domain.repository.WallpaperRepository
 class CollectionSource(
     private val repository: WallpaperRepository,
 ) : PagingSource<Int, Collection>() {
-
     companion object {
         const val TAG = "CollectionSource"
     }
@@ -21,7 +20,7 @@ class CollectionSource(
             LoadResult.Page(
                 data = collections,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
-                nextKey = nextPage.plus(1)
+                nextKey = nextPage.plus(1),
             )
         }.getOrElse {
             Log.e(TAG, "load: ${it.message}")

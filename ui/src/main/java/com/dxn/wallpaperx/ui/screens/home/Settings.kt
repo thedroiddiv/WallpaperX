@@ -16,13 +16,13 @@ fun Settings() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
             text = "Coming Soon!\n¯\\_(ツ)_/¯",
             style = MaterialTheme.typography.h3,
             fontWeight = FontWeight.ExtraLight,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
     }
 }

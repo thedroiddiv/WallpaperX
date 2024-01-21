@@ -19,5 +19,5 @@ data class CoverPhotoX(
     val updated_at: String,
     val urls: UrlsXX,
     val user: UserX,
-    val width: Int
+    val width: Int,
 )

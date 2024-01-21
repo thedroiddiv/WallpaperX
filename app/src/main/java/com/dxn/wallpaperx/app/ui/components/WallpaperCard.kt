@@ -10,10 +10,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.FavoriteBorder
+import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -33,15 +34,14 @@ fun WallpaperCard(
     previewUrl: String,
     isFav: Boolean,
     onFavClick: () -> Unit,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
-
     WallpaperCard(modifier = modifier, isFav = isFav, onFavClick = onFavClick, onClick = onClick) {
         AsyncImage(
             model = previewUrl,
             contentDescription = stringResource(R.string.wallpaper),
             modifier = modifier.fillMaxSize(),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Crop,
         )
     }
 }
@@ -53,20 +53,24 @@ private fun WallpaperCard(
     isFav: Boolean,
     onFavClick: () -> Unit,
     onClick: () -> Unit,
-    image: (@Composable BoxScope.() -> Unit)
+    image: (@Composable BoxScope.() -> Unit),
 ) {
-    OutlinedCard(modifier = Modifier.then(modifier), onClick = onClick) {
+    Card(
+        modifier = Modifier.then(modifier),
+        shape = MaterialTheme.shapes.extraLarge,
+        onClick = onClick,
+    ) {
         Box(modifier = Modifier.fillMaxSize()) {
             image()
             IconButton(
                 onClick = onFavClick,
-                modifier = Modifier.align(Alignment.BottomEnd)
+                modifier = Modifier.align(Alignment.BottomEnd),
             ) {
                 val icon = if (isFav) Icons.Rounded.Favorite else Icons.Rounded.FavoriteBorder
                 // TODO: Extract color from image and set tint
                 Icon(
                     imageVector = icon,
-                    contentDescription = null
+                    contentDescription = null,
                 )
             }
         }
@@ -81,13 +85,15 @@ fun WallpaperCardPreview() {
             Column(Modifier.padding(24.dp)) {
                 WallpaperCard(
                     modifier = Modifier.size(200.dp),
-                    isFav = true, onFavClick = { }, onClick = { }
+                    isFav = true,
+                    onFavClick = { },
+                    onClick = { },
                 ) {
                     Image(
                         modifier = Modifier.fillMaxSize(),
                         painter = painterResource(id = R.drawable.ic_launcher_background),
                         contentDescription = null,
-                        contentScale = ContentScale.Crop
+                        contentScale = ContentScale.Crop,
                     )
                 }
             }

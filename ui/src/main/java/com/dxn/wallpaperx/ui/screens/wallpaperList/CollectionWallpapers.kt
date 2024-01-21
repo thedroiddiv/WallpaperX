@@ -31,7 +31,7 @@ fun CollectionWallpapers(
     addFavourite: (Wallpaper) -> Unit,
     removeFavourite: (String) -> Unit,
     navController: NavHostController,
-    viewModel: ColWallpapersViewModel = hiltViewModel()
+    viewModel: ColWallpapersViewModel = hiltViewModel(),
 ) {
     LaunchedEffect(key1 = true) {
         viewModel.loadWallpapers(collectionId)
@@ -41,7 +41,7 @@ fun CollectionWallpapers(
         Row(
             modifier = Modifier.height(52.dp).fillMaxWidth().padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             IconButton(onClick = { navController.popBackStack() }) {
                 Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "back")
@@ -49,7 +49,7 @@ fun CollectionWallpapers(
             Text(
                 text = collectionName,
                 style = MaterialTheme.typography.h6,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
             )
         }
         WallpaperList(
@@ -57,7 +57,7 @@ fun CollectionWallpapers(
             favourites = favourites,
             addFavourite = addFavourite,
             removeFavourite = removeFavourite,
-            navController = navController
+            navController = navController,
         )
     }
 }

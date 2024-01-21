@@ -18,7 +18,7 @@ fun LibraryBuildType.provideStringFromLocalProperties(vararg keys: String) {
         buildConfigField(
             "String",
             key,
-            gradleLocalProperties(rootDir).getProperty(key)
+            gradleLocalProperties(rootDir).getProperty(key),
         )
     }
 }

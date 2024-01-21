@@ -1,4 +1,3 @@
 package com.dxn.wallpaperx.app.ui.screen.search
 
-class SearchUiState {
-}
+class SearchUiState

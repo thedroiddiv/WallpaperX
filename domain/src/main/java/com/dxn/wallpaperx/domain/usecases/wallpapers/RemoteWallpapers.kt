@@ -10,35 +10,35 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetWallpaper
-@Inject
-constructor(
-    private val repository: WallpaperRepository,
-) {
-    suspend operator fun invoke(id: String): Wallpaper {
-        return repository.getWallpaper(id)
+    @Inject
+    constructor(
+        private val repository: WallpaperRepository,
+    ) {
+        suspend operator fun invoke(id: String): Wallpaper {
+            return repository.getWallpaper(id)
+        }
     }
-}
 
 class GetWallpapers
-@Inject
-constructor(
-    private val repository: WallpaperRepository,
-) {
-    operator fun invoke(query: String): Flow<PagingData<Wallpaper>> {
-        return Pager(PagingConfig(pageSize = 20)) {
-            WallpaperSource(repository, query, false)
-        }.flow
+    @Inject
+    constructor(
+        private val repository: WallpaperRepository,
+    ) {
+        operator fun invoke(query: String): Flow<PagingData<Wallpaper>> {
+            return Pager(PagingConfig(pageSize = 20)) {
+                WallpaperSource(repository, query, false)
+            }.flow
+        }
     }
-}
 
 class GetWallpapersByCollection
-@Inject
-constructor(
-    private val repository: WallpaperRepository,
-) {
-    operator fun invoke(collectionId: String): Flow<PagingData<Wallpaper>> {
-        return Pager(PagingConfig(pageSize = 20)) {
-            WallpaperSource(repository, collectionId, true)
-        }.flow
+    @Inject
+    constructor(
+        private val repository: WallpaperRepository,
+    ) {
+        operator fun invoke(collectionId: String): Flow<PagingData<Wallpaper>> {
+            return Pager(PagingConfig(pageSize = 20)) {
+                WallpaperSource(repository, collectionId, true)
+            }.flow
+        }
     }
-}

@@ -5,5 +5,5 @@ data class Collection(
     val title: String,
     val totalPhotos: Int,
     val coverPhoto: String,
-    val tags: List<String>
+    val tags: List<String>,
 )

@@ -23,31 +23,34 @@ fun CategoryCard(
     modifier: Modifier,
     title: String,
     backgroundImage: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Card(
-        modifier = modifier
-            .clickable { onClick() }
-            .clip(MaterialTheme.shapes.medium)
+        modifier =
+            modifier
+                .clickable { onClick() }
+                .clip(MaterialTheme.shapes.medium),
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 painter = rememberImagePainter(data = backgroundImage),
                 contentDescription = "category or collection ",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(0.4f))
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .background(Color.Black.copy(0.4f)),
             )
             Text(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .align(Alignment.TopStart),
+                modifier =
+                    Modifier
+                        .padding(16.dp)
+                        .align(Alignment.TopStart),
                 text = title,
-                color = Color.White
+                color = Color.White,
             )
         }
     }

@@ -5,5 +5,5 @@ data class LinksX(
     val likes: String,
     val photos: String,
     val portfolio: String,
-    val self: String
+    val self: String,
 )

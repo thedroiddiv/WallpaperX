@@ -15,22 +15,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ColWallpapersViewModel
-@Inject
-constructor(
-    private val wallpaperUseCase: WallpaperUseCase
-) : ViewModel() {
+    @Inject
+    constructor(
+        private val wallpaperUseCase: WallpaperUseCase,
+    ) : ViewModel() {
+        private var wallJob: Job? = null
+        var wallpapers = flowOf<PagingData<Wallpaper>>()
 
-    private var wallJob: Job? = null
-    var wallpapers = flowOf<PagingData<Wallpaper>>()
-
-    fun loadWallpapers(collectionId: String) {
-        wallJob?.cancel()
-        wallJob = viewModelScope.launch {
-            kotlin.runCatching {
-                wallpapers = wallpaperUseCase.getWallpapersByCollection(collectionId)
-            }.getOrElse {
-                Log.e(MainViewModel.TAG, "loadFavourites: ${it.message}")
-            }
+        fun loadWallpapers(collectionId: String) {
+            wallJob?.cancel()
+            wallJob =
+                viewModelScope.launch {
+                    kotlin.runCatching {
+                        wallpapers = wallpaperUseCase.getWallpapersByCollection(collectionId)
+                    }.getOrElse {
+                        Log.e(MainViewModel.TAG, "loadFavourites: ${it.message}")
+                    }
+                }
         }
     }
-}

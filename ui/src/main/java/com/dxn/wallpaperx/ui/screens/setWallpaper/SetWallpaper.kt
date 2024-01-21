@@ -44,9 +44,8 @@ fun SetWallpaper(
     wallpaper: Wallpaper,
     favourites: List<Wallpaper>,
     addFavourite: (Wallpaper) -> Unit,
-    removeFavourite: (String) -> Unit
+    removeFavourite: (String) -> Unit,
 ) {
-
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
@@ -55,12 +54,13 @@ fun SetWallpaper(
     val isProgressVisible by remember { viewModel.isProgressVisible }
     val isLiked = favourites.any { it.id == wallpaper.id }
 
-    val loader = rememberImagePainter(
-        data = wallpaper.previewUrl,
-        builder = {
-            transformations(BlurTransformation(LocalContext.current))
-        }
-    )
+    val loader =
+        rememberImagePainter(
+            data = wallpaper.previewUrl,
+            builder = {
+                transformations(BlurTransformation(LocalContext.current))
+            },
+        )
     val painter = rememberImagePainter(data = wallpaper.wallpaperUrl)
     val isLoading = (painter.state.javaClass == ImagePainter.State.Loading::class.java)
 
@@ -70,44 +70,46 @@ fun SetWallpaper(
                 modifier = Modifier.fillMaxSize(),
                 painter = loader,
                 contentDescription = "wallpaper",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
             Column(
-                modifier = Modifier
-                    .align(Alignment.Center),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier =
+                    Modifier
+                        .align(Alignment.Center),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 CircularProgressIndicator(
                     modifier = Modifier.size(48.dp),
                     color = Color.White,
-                    strokeWidth = 4.dp
+                    strokeWidth = 4.dp,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = "just wait a moment...",
                     fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Light,
-                    color = Color.White
+                    color = Color.White,
                 )
             }
         } else {
             Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .pointerInput(key1 = Unit) {
-                        detectTapGestures {
-                            bottomMenuVisibility = !bottomMenuVisibility
-                        }
-                    },
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .pointerInput(key1 = Unit) {
+                            detectTapGestures {
+                                bottomMenuVisibility = !bottomMenuVisibility
+                            }
+                        },
                 painter = painter,
                 contentDescription = "wallpaper",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
             AnimatedVisibility(
                 modifier = Modifier.align(Alignment.BottomCenter),
                 visible = bottomMenuVisibility,
                 enter = slideInVertically(initialOffsetY = { height -> height }),
-                exit = slideOutVertically(targetOffsetY = { height -> height })
+                exit = slideOutVertically(targetOffsetY = { height -> height }),
             ) {
                 BottomMenu(
                     modifier = Modifier,
@@ -118,7 +120,7 @@ fun SetWallpaper(
                     onFabClicked = {
                         viewModel.setWallpaper(
                             wallpaper,
-                            WallpaperManager.FLAG_SYSTEM
+                            WallpaperManager.FLAG_SYSTEM,
                         )
                     },
                     onDownload = {
@@ -134,15 +136,16 @@ fun SetWallpaper(
                     onShare = {
                         scope.launch {
                             val uri = viewModel.saveWallpaper(wallpaper)
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_STREAM, uri)
-                                type = "image/jpg"
-                            }
+                            val sendIntent: Intent =
+                                Intent().apply {
+                                    action = Intent.ACTION_SEND
+                                    putExtra(Intent.EXTRA_STREAM, uri)
+                                    type = "image/jpg"
+                                }
                             startActivity(
                                 context,
                                 Intent.createChooser(sendIntent, "Share wallpaper"),
-                                null
+                                null,
                             )
                         }
                     },
@@ -150,18 +153,19 @@ fun SetWallpaper(
                         Log.d(TAG, "onCreate: SetWallpaperUseCases")
                         viewModel.setWallpaper(
                             wallpaper,
-                            WallpaperManager.FLAG_LOCK
+                            WallpaperManager.FLAG_LOCK,
                         )
                     },
-                    isProgressVisible = isProgressVisible
+                    isProgressVisible = isProgressVisible,
                 )
             }
         }
         BackButton(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(start = 16.dp, top = 16.dp),
-            navController = navController
+            modifier =
+                Modifier
+                    .align(Alignment.TopStart)
+                    .padding(start = 16.dp, top = 16.dp),
+            navController = navController,
         )
     }
 }

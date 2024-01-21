@@ -16,19 +16,20 @@ fun BottomNavBar(
     modifier: Modifier = Modifier,
     currentScreen: Screen,
     screens: List<Screen>,
-    onClick: (Screen) -> Unit
+    onClick: (Screen) -> Unit,
 ) {
     NavigationBar(
-        modifier = Modifier
-            .fillMaxWidth()
-            .then(modifier)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .then(modifier),
     ) {
         screens.forEach { screen ->
             NavigationBarItem(
                 icon = {
                     Icon(
                         painter = painterResource(id = screen.icon),
-                        contentDescription = stringResource(screen.title)
+                        contentDescription = stringResource(screen.title),
                     )
                 },
                 label = { Text(stringResource(screen.title)) },
@@ -38,7 +39,7 @@ fun BottomNavBar(
                         onClick(screen)
                     }
                 },
-                alwaysShowLabel = false
+                alwaysShowLabel = false,
             )
         }
     }

@@ -5,5 +5,5 @@ import com.google.gson.annotations.SerializedName
 data class TopicSubmissionsX(
     val animals: Animals,
     @SerializedName("textures-patterns")
-    val texturesPatterns: TexturesPatterns
+    val texturesPatterns: TexturesPatterns,
 )

@@ -16,5 +16,5 @@ data class CollectionDto(
     val title: String,
     val total_photos: Int,
     val updated_at: String,
-    val user: UserXX
+    val user: UserXX,
 )

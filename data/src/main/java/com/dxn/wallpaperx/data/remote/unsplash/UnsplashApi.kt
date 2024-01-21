@@ -8,7 +8,6 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UnsplashApi {
-
     @GET("/search/photos")
     suspend fun getImages(
         @Query("query") query: String,

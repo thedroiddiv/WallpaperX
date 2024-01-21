@@ -5,7 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavouriteDao {
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(favourite: FavouriteEntity)
 

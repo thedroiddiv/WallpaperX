@@ -21,9 +21,8 @@ fun WallpaperAppBar(
     navigateUp: () -> Unit,
     toSettings: () -> Unit,
     toSearch: () -> Unit,
-    scrollBehavior: TopAppBarScrollBehavior? = null
+    scrollBehavior: TopAppBarScrollBehavior? = null,
 ) {
-
     when (destination) {
         Screen.Wallpapers, Screen.Collections, Screen.Favourites -> {
             LargeTopAppBar(
@@ -32,17 +31,17 @@ fun WallpaperAppBar(
                     IconButton(onClick = toSettings) {
                         Icon(
                             painter = painterResource(id = Screen.Settings.icon),
-                            contentDescription = stringResource(id = Screen.Settings.title)
+                            contentDescription = stringResource(id = Screen.Settings.title),
                         )
                     }
                     IconButton(onClick = toSearch) {
                         Icon(
                             painter = painterResource(id = Screen.Search.icon),
-                            contentDescription = stringResource(id = Screen.Search.title)
+                            contentDescription = stringResource(id = Screen.Search.title),
                         )
                     }
                 },
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
             )
         }
 
@@ -56,11 +55,11 @@ fun WallpaperAppBar(
                     IconButton(onClick = navigateUp) {
                         Icon(
                             imageVector = Icons.Rounded.ArrowBack,
-                            contentDescription = stringResource(id = R.string.back)
+                            contentDescription = stringResource(id = R.string.back),
                         )
                     }
                 },
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
             )
         }
     }

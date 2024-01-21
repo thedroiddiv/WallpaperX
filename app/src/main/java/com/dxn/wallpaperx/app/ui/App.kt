@@ -33,12 +33,12 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App() {
-
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val screen = remember(navBackStackEntry) {
-        Screen.entries.firstOrNull { it.route == navBackStackEntry?.destination?.route }
-    }
+    val screen =
+        remember(navBackStackEntry) {
+            Screen.entries.firstOrNull { it.route == navBackStackEntry?.destination?.route }
+        }
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val scrollState = rememberScrollState()
     val homeScreenVM: HomeScreenVM = koinViewModel()
@@ -54,7 +54,7 @@ fun App() {
                     navigateUp = { navController.navigateUp() },
                     toSettings = { navController.navigate(Screen.Settings.route) },
                     toSearch = { navController.navigate(Screen.Search.route) },
-                    scrollBehavior = scrollBehavior
+                    scrollBehavior = scrollBehavior,
                 )
             }
         },
@@ -73,28 +73,28 @@ fun App() {
                             launchSingleTop = true
                             restoreState = true
                         }
-                    }
+                    },
                 )
             }
-        }
+        },
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
         ) {
             NavHost(navController = navController, startDestination = "home_screens") {
                 navigation(
                     startDestination = Screen.Wallpapers.route,
-                    route = "home_screens"
+                    route = "home_screens",
                 ) {
                     composable(Screen.Wallpapers.route) {
-
                         WallpapersScreen(
                             uiState = homeUiState,
                             wallpapers = wallpapers,
                             onFavClick = {},
-                            onWallpaperClick = {}
+                            onWallpaperClick = {},
                         )
                     }
                     composable(Screen.Collections.route) {
@@ -115,7 +115,7 @@ fun App() {
                 }
 
                 composable(
-                    route = Screen.Search.route
+                    route = Screen.Search.route,
                 ) {
                     LazyColumn(Modifier.fillMaxWidth()) {
                         items(50) {
@@ -135,7 +135,7 @@ fun App() {
                 }
 
                 composable(
-                    route = Screen.Gallery.route
+                    route = Screen.Gallery.route,
                 ) {
                     LazyColumn(Modifier.fillMaxWidth()) {
                         items(50) {
@@ -145,7 +145,7 @@ fun App() {
                 }
 
                 composable(
-                    route = Screen.Settings.route
+                    route = Screen.Settings.route,
                 ) {
                     LazyColumn(Modifier.fillMaxWidth()) {
                         items(50) {

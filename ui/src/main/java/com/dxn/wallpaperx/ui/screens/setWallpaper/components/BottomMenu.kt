@@ -24,45 +24,46 @@ fun BottomMenu(
     subtitle: String,
     isLiked: Boolean,
     onFabClicked: () -> Unit,
-
     onDownload: () -> Unit,
     onLock: () -> Unit,
     onShare: () -> Unit,
     onFavourite: () -> Unit,
-
-    isProgressVisible: Boolean = false
+    isProgressVisible: Boolean = false,
 ) {
     Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
         backgroundColor = MaterialTheme.colors.primary,
-        shape = RectangleShape
+        shape = RectangleShape,
     ) {
         Column(Modifier.padding(16.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Row {
                     Box(Modifier.size(52.dp)) {
                         Image(
-                            modifier = Modifier
-                                .clip(CircleShape)
-                                .size(40.dp)
-                                .align(Alignment.Center),
+                            modifier =
+                                Modifier
+                                    .clip(CircleShape)
+                                    .size(40.dp)
+                                    .align(Alignment.Center),
                             painter = rememberImagePainter(data = userImageUrl),
                             contentDescription = "user",
-                            contentScale = ContentScale.Crop
+                            contentScale = ContentScale.Crop,
                         )
                         if (isProgressVisible) {
                             CircularProgressIndicator(
-                                modifier = Modifier
-                                    .size(52.dp)
-                                    .align(Alignment.Center),
+                                modifier =
+                                    Modifier
+                                        .size(52.dp)
+                                        .align(Alignment.Center),
                                 color = MaterialTheme.colors.onPrimary,
-                                strokeWidth = 2.dp
+                                strokeWidth = 2.dp,
                             )
                         }
                     }
@@ -76,41 +77,41 @@ fun BottomMenu(
                 FloatingActionButton(
                     onClick = onFabClicked,
                     backgroundColor = MaterialTheme.colors.onPrimary,
-                    contentColor = MaterialTheme.colors.primary
+                    contentColor = MaterialTheme.colors.primary,
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.Wallpaper,
-                        contentDescription = "set"
+                        contentDescription = "set",
                     )
                 }
             }
             Spacer(modifier = Modifier.height(16.dp))
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceEvenly,
             ) {
                 IconButton(onClick = onDownload) {
                     Icon(
                         imageVector = Icons.Rounded.Download,
-                        contentDescription = "download"
+                        contentDescription = "download",
                     )
                 }
                 IconButton(onClick = onFavourite) {
                     Icon(
                         imageVector = if (isLiked) (Icons.Rounded.Favorite) else Icons.Rounded.FavoriteBorder,
-                        contentDescription = "favourite"
+                        contentDescription = "favourite",
                     )
                 }
                 IconButton(onClick = onShare) {
                     Icon(
                         imageVector = Icons.Rounded.Share,
-                        contentDescription = "share"
+                        contentDescription = "share",
                     )
                 }
                 IconButton(onClick = onLock) {
                     Icon(
                         imageVector = Icons.Rounded.LockOpen,
-                        contentDescription = "set"
+                        contentDescription = "set",
                     )
                 }
             }

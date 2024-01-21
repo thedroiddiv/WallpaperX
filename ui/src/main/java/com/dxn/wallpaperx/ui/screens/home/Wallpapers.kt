@@ -21,7 +21,7 @@ fun Wallpapers(
     wallpapers: LazyPagingItems<Wallpaper>,
     favourites: List<Wallpaper>,
     listState: LazyGridState,
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         WallpaperList(
@@ -30,7 +30,7 @@ fun Wallpapers(
             addFavourite = { viewModel.addFavourite(it) },
             removeFavourite = { viewModel.removeFavourite(it) },
             state = listState,
-            navController = navController
+            navController = navController,
         )
     }
 }

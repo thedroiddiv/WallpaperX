@@ -16,22 +16,23 @@ import com.dxn.wallpaperx.data.model.Wallpaper
 fun FavoritesScreen(
     uiState: HomeUiState,
     onFavClick: (Wallpaper) -> Unit,
-    onWallpaperClick: (Wallpaper) -> Unit
+    onWallpaperClick: (Wallpaper) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
     ) {
         items(uiState.favourites) { wallpaper ->
             WallpaperCard(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1f),
                 previewUrl = wallpaper.previewUrl,
                 isFav = true,
                 onFavClick = { onFavClick(wallpaper) },
-                onClick = { onWallpaperClick(wallpaper) }
+                onClick = { onWallpaperClick(wallpaper) },
             )
         }
     }

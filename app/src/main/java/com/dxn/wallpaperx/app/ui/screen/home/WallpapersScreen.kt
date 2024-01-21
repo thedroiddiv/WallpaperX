@@ -1,5 +1,6 @@
 package com.dxn.wallpaperx.app.ui.screen.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,26 +16,30 @@ import com.dxn.wallpaperx.data.model.Wallpaper
 @Composable
 fun WallpapersScreen(
     uiState: HomeUiState,
-    wallpapers: LazyPagingItems<Wallpaper>, // TODO: Can we do plain List?
+    wallpapers: LazyPagingItems<Wallpaper>,
+    // TODO: Can we do plain List?
     onFavClick: (Wallpaper) -> Unit,
-    onWallpaperClick: (Wallpaper) -> Unit
+    onWallpaperClick: (Wallpaper) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         items(wallpapers.itemCount) { idx ->
             wallpapers[idx]?.let { wallpaper ->
                 val isFavourite = uiState.favourites.any { it.id == wallpaper.id }
                 WallpaperCard(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .aspectRatio(1f),
-                    previewUrl = wallpaper.previewUrl,
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(1f),
+                    previewUrl = wallpaper.smallUrl,
                     isFav = isFavourite,
                     onFavClick = { onFavClick(wallpaper) },
-                    onClick = { onWallpaperClick(wallpaper) }
+                    onClick = { onWallpaperClick(wallpaper) },
                 )
             }
         }

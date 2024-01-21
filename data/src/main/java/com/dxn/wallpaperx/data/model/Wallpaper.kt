@@ -2,6 +2,10 @@ package com.dxn.wallpaperx.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+
+/**
+ * Image Size: [previewUrl] < [smallUrl] < [wallpaperUrl]
+ */
 data class Wallpaper(
     val id: String,
     val previewUrl: String,
@@ -16,10 +20,13 @@ data class Wallpaper(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
-        parcel.readString()!!
+        parcel.readString()!!,
     )
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(
+        parcel: Parcel,
+        flags: Int,
+    ) {
         parcel.writeString(id)
         parcel.writeString(previewUrl)
         parcel.writeString(smallUrl)

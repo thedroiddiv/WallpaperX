@@ -13,5 +13,5 @@ data class User(
     val total_likes: Int,
     val total_photos: Int,
     val twitter_username: String,
-    val username: String
+    val username: String,
 )

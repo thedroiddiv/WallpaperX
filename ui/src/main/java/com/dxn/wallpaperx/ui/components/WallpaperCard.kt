@@ -34,12 +34,13 @@ fun WallpaperCard(
 ) {
     Surface(modifier = modifier, elevation = elevation, shape = shape) {
         Box(Modifier.fillMaxSize()) {
-            val loader = rememberImagePainter(
-                data = wallpaper.previewUrl,
-                builder = {
-                    transformations(BlurTransformation(LocalContext.current))
-                }
-            )
+            val loader =
+                rememberImagePainter(
+                    data = wallpaper.previewUrl,
+                    builder = {
+                        transformations(BlurTransformation(LocalContext.current))
+                    },
+                )
             val painter = rememberImagePainter(wallpaper.smallUrl)
 
             if (painter.state.javaClass == ImagePainter.State.Loading::class.java) {
@@ -47,27 +48,29 @@ fun WallpaperCard(
                     modifier = Modifier.matchParentSize(),
                     painter = loader,
                     contentDescription = "wallpaper",
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
             }
             Image(
                 modifier = Modifier.matchParentSize(),
                 painter = painter,
                 contentDescription = "wallpaper",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
             Box(
-                modifier = Modifier
-                    .matchParentSize()
-                    .clickable {
-                        onClick()
-                    }
+                modifier =
+                    Modifier
+                        .matchParentSize()
+                        .clickable {
+                            onClick()
+                        },
             ) {
                 FavouriteButton(
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(12.dp),
-                    isFavourite = isFavourite
+                    modifier =
+                        Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(12.dp),
+                    isFavourite = isFavourite,
                 ) {
                     onLikedClicked()
                 }

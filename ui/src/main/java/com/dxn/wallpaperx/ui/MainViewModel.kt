@@ -19,69 +19,74 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel
-@Inject
-constructor(
-    private val wallpaperUseCase: WallpaperUseCase
-) : ViewModel() {
+    @Inject
+    constructor(
+        private val wallpaperUseCase: WallpaperUseCase,
+    ) : ViewModel() {
+        private var favJob: Job? = null
+        private var wallJob: Job? = null
+        private var collJob: Job? = null
+        var wallpapers = flowOf<PagingData<Wallpaper>>()
+        var collections = flowOf<PagingData<Collection>>()
+        val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())
 
-    private var favJob: Job? = null
-    private var wallJob: Job? = null
-    private var collJob: Job? = null
-    var wallpapers = flowOf<PagingData<Wallpaper>>()
-    var collections = flowOf<PagingData<Collection>>()
-    val favourites: MutableState<List<Wallpaper>> = mutableStateOf(listOf())
+        init {
+            loadWallpapers()
+            loadFavourites()
+            loadCollections()
+        }
 
-    init {
-        loadWallpapers()
-        loadFavourites()
-        loadCollections()
-    }
+        private fun loadCollections() {
+            collJob?.cancel()
+            collJob =
+                viewModelScope.launch {
+                    kotlin.runCatching {
+                        collections = wallpaperUseCase.getCollections()
+                        Log.d(TAG, "loadCollections: $collections")
+                    }.getOrElse {
+                        Log.e(TAG, "loadFavourites: ${it.message}")
+                    }
+                }
+        }
 
-    private fun loadCollections() {
-        collJob?.cancel()
-        collJob = viewModelScope.launch {
+        private fun loadWallpapers() {
+            wallJob?.cancel()
+            wallJob =
+                viewModelScope.launch {
+                    kotlin.runCatching {
+                        wallpapers = wallpaperUseCase.getWallpapers("wallpaper")
+                    }.getOrElse {
+                        Log.e(TAG, "loadFavourites: ${it.message}")
+                    }
+                }
+        }
+
+        private fun loadFavourites() =
             kotlin.runCatching {
-                collections = wallpaperUseCase.getCollections()
-                Log.d(TAG, "loadCollections: $collections")
+                favJob?.cancel()
+                favJob =
+                    wallpaperUseCase.getFavourites()
+                        .onEach { favourites.value = it }
+                        .launchIn(viewModelScope)
             }.getOrElse {
                 Log.e(TAG, "loadFavourites: ${it.message}")
             }
-        }
-    }
 
-    private fun loadWallpapers() {
-        wallJob?.cancel()
-        wallJob = viewModelScope.launch {
+        fun addFavourite(wallpaper: Wallpaper) =
             kotlin.runCatching {
-                wallpapers = wallpaperUseCase.getWallpapers("wallpaper")
+                viewModelScope.launch { wallpaperUseCase.addFavourite(wallpaper) }
             }.getOrElse {
                 Log.e(TAG, "loadFavourites: ${it.message}")
             }
+
+        fun removeFavourite(id: String) =
+            kotlin.runCatching {
+                viewModelScope.launch { wallpaperUseCase.removeFavourite(id) }
+            }.getOrElse {
+                Log.e(TAG, "loadFavourites: ${it.message}")
+            }
+
+        companion object {
+            const val TAG = "MainActivityViewModel"
         }
     }
-
-    private fun loadFavourites() = kotlin.runCatching {
-        favJob?.cancel()
-        favJob = wallpaperUseCase.getFavourites()
-            .onEach { favourites.value = it }
-            .launchIn(viewModelScope)
-    }.getOrElse {
-        Log.e(TAG, "loadFavourites: ${it.message}")
-    }
-
-    fun addFavourite(wallpaper: Wallpaper) = kotlin.runCatching {
-        viewModelScope.launch { wallpaperUseCase.addFavourite(wallpaper) }
-    }.getOrElse {
-        Log.e(TAG, "loadFavourites: ${it.message}")
-    }
-
-    fun removeFavourite(id: String) = kotlin.runCatching {
-        viewModelScope.launch { wallpaperUseCase.removeFavourite(id) }
-    }.getOrElse {
-        Log.e(TAG, "loadFavourites: ${it.message}")
-    }
-
-    companion object {
-        const val TAG = "MainActivityViewModel"
-    }
-}

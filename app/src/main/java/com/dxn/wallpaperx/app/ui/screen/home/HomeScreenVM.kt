@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.flowOf
 class HomeScreenVM(
     private val wallpaperRepository: WallpaperRepository,
 ) : ViewModel() {
-
     private val _uiState = MutableStateFlow(HomeUiState(listOf(), listOf()))
     val uiState = _uiState.asStateFlow()
 
@@ -31,10 +30,11 @@ class HomeScreenVM(
 
     private fun loadWallpapers() {
         runCatching {
-            wallpapers = Pager(
-                config = PagingConfig(pageSize = 20),
-                pagingSourceFactory = { wallpaperRepository.wallpaperSource("wallpaper", false) }
-            ).flow.cachedIn(viewModelScope)
+            wallpapers =
+                Pager(
+                    config = PagingConfig(pageSize = 20),
+                    pagingSourceFactory = { wallpaperRepository.wallpaperSource("wallpaper", false) },
+                ).flow.cachedIn(viewModelScope)
         }.getOrElse {
             Log.e(TAG, "loadWallpapers: ${it.message}")
         }

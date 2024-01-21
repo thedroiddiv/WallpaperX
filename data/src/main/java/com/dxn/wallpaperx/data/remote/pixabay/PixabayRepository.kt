@@ -7,21 +7,23 @@ import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.data.remote.pixabay.models.Hit
 
 class PixabayRepository(private val api: PixabayApi) : RemoteRepository {
-
     private val apiKey: String = BuildConfig.PIXABAY_API_KEY
 
-    override suspend fun getWallpapers(page: Int, query: String): List<Wallpaper> {
+    override suspend fun getWallpapers(
+        page: Int,
+        query: String,
+    ): List<Wallpaper> {
         return api.searchImage(
             apiKey = apiKey,
             query = query,
-            page = page
+            page = page,
         ).hits.map(::hitToWallpaper)
     }
 
     override suspend fun getWallpaper(id: String): Wallpaper {
         return api.searchImage(
             apiKey = apiKey,
-            id = id
+            id = id,
         ).hits.map(::hitToWallpaper).first()
     }
 
@@ -31,11 +33,11 @@ class PixabayRepository(private val api: PixabayApi) : RemoteRepository {
 
     override suspend fun getWallpapersByCollection(
         collectionId: String,
-        page: Int
+        page: Int,
     ): List<Wallpaper> {
         return api.searchImage(
             apiKey = apiKey,
-            category = collectionId
+            category = collectionId,
         ).hits.map(::hitToWallpaper)
     }
 }
@@ -47,6 +49,6 @@ fun hitToWallpaper(imageDto: Hit): Wallpaper {
         smallUrl = imageDto.webformatURL,
         wallpaperUrl = imageDto.largeImageURL,
         user = imageDto.user,
-        userImageURL = imageDto.userImageURL
+        userImageURL = imageDto.userImageURL,
     )
 }

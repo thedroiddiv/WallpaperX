@@ -11,7 +11,6 @@ allprojects {
     // Optionally configure plugin
     configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
         debug.set(true)
-        disabledRules.set(listOf("no-wildcard-imports"))
     }
 }
 

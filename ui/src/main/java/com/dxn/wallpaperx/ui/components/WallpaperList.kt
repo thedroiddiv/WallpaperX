@@ -40,8 +40,9 @@ fun WallpaperList(
     navController: NavHostController,
 ) {
     SwipeRefresh(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier =
+            Modifier
+                .fillMaxSize(),
         state = rememberSwipeRefreshState(isRefreshing = (wallpapers.loadState.refresh is LoadState.Loading)),
         indicator = { swipeState, trigger ->
             SwipeRefreshIndicator(
@@ -54,16 +55,16 @@ fun WallpaperList(
         },
         onRefresh = {
             wallpapers.refresh()
-        }
+        },
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            modifier = Modifier
-                .padding(horizontal = 8.dp)
-                .fillMaxSize(),
-            state = state
+            modifier =
+                Modifier
+                    .padding(horizontal = 8.dp)
+                    .fillMaxSize(),
+            state = state,
         ) {
-
             items(
                 count = wallpapers.itemCount,
 //                span = {
@@ -73,11 +74,12 @@ fun WallpaperList(
                 wallpapers[index]?.let { wallpaper ->
                     val isFavourite = favourites.any { it.id == wallpaper.id }
                     WallpaperCard(
-                        modifier = Modifier
-                            .padding(top = if (index == 0 || index == 1) 8.dp else 0.dp)
-                            .padding(8.dp)
-                            .fillMaxWidth()
-                            .height(246.dp),
+                        modifier =
+                            Modifier
+                                .padding(top = if (index == 0 || index == 1) 8.dp else 0.dp)
+                                .padding(8.dp)
+                                .fillMaxWidth()
+                                .height(246.dp),
                         wallpaper = wallpaper,
                         onClick = {
                             val data = Uri.encode(Gson().toJson(wallpaper))
@@ -85,20 +87,25 @@ fun WallpaperList(
                         },
                         isFavourite = isFavourite,
                         onLikedClicked = {
-                            if (isFavourite) removeFavourite(wallpaper.id) else addFavourite(
-                                wallpaper
-                            )
-                        }
+                            if (isFavourite) {
+                                removeFavourite(wallpaper.id)
+                            } else {
+                                addFavourite(
+                                    wallpaper,
+                                )
+                            }
+                        },
                     )
                 }
             }
             wallpapers.apply {
-                val error = when {
-                    loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
-                    loadState.append is LoadState.Error -> loadState.append as LoadState.Error
-                    loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
-                    else -> null
-                }
+                val error =
+                    when {
+                        loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                        loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                        loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                        else -> null
+                    }
                 error?.let {
                     item {
                         Text(text = "No items found \n Error : " + it.error.message.toString())
