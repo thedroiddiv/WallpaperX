@@ -5,7 +5,7 @@ import com.dxn.wallpaperx.data.model.Wallpaper
 
 data class HomeUiState(
     // Can be optimised by {id: wallpaper,...}
-    val favourites: List<Wallpaper>,
+    val favourites: List<Wallpaper> = listOf(),
     // val wallpapers: PagingData<Wallpaper>, // Can we use plain list? Maybe wallpapers.itemSnapshotList.items?
-    val collections: List<Collection>,
+    val collections: List<Collection> = listOf(),
 )

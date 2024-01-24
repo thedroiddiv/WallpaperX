@@ -1,3 +1,9 @@
 package com.dxn.wallpaperx.app.ui.screen.search
 
-class SearchUiState
+import com.dxn.wallpaperx.data.model.Wallpaper
+
+data class SearchUiState(
+    val isActive: Boolean = false,
+    val query: String = "",
+    val favourites: List<Wallpaper> = listOf(),
+)

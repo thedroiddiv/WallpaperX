@@ -17,17 +17,24 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.dxn.wallpaperx.app.ui.components.BottomNavBar
 import com.dxn.wallpaperx.app.ui.components.WallpaperAppBar
 import com.dxn.wallpaperx.app.ui.nav.Screen
 import com.dxn.wallpaperx.app.ui.screen.home.HomeScreenVM
 import com.dxn.wallpaperx.app.ui.screen.home.WallpapersScreen
+import com.dxn.wallpaperx.app.ui.screen.search.SearchScreen
+import com.dxn.wallpaperx.app.ui.screen.search.SearchScreenVM
+import com.dxn.wallpaperx.app.ui.screen.setWallpaper.SetWallpaperScreen
+import com.dxn.wallpaperx.app.ui.screen.setWallpaper.SetWallpaperScreenVM
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,7 +101,7 @@ fun App() {
                             uiState = homeUiState,
                             wallpapers = wallpapers,
                             onFavClick = {},
-                            onWallpaperClick = {},
+                            onWallpaperClick = { navController.navigate("${Screen.SetWallpaper.route}/${it.id}") },
                         )
                     }
                     composable(Screen.Collections.route) {
@@ -117,21 +124,28 @@ fun App() {
                 composable(
                     route = Screen.Search.route,
                 ) {
-                    LazyColumn(Modifier.fillMaxWidth()) {
-                        items(50) {
-                            Text(text = "Item $it")
-                        }
-                    }
+                    val searchScreenVM: SearchScreenVM = koinViewModel()
+                    val uiState by searchScreenVM.uiState.collectAsState()
+                    val searchResults = searchScreenVM.searchResults.collectAsLazyPagingItems()
+                    SearchScreen(
+                        uiState = uiState,
+                        onQueryChange = searchScreenVM::onQueryChange,
+                        onSearchActiveChange = searchScreenVM::onSearchActiveChange,
+                        onSearch = searchScreenVM::searchWallpapers,
+                        searchResults = searchResults,
+                        onFavClick = {},
+                        onWallpaperClick = {},
+                        navigateUp = navController::navigateUp,
+                    )
                 }
 
                 composable(
-                    route = Screen.SetWallpaper.route,
+                    route = "${Screen.SetWallpaper.route}/{wallpaperId}",
+                    arguments = listOf(navArgument("wallpaperId") { type = NavType.StringType }),
                 ) {
-                    LazyColumn(Modifier.fillMaxWidth()) {
-                        items(50) {
-                            Text(text = "Item $it")
-                        }
-                    }
+                    val viewModel: SetWallpaperScreenVM = koinViewModel()
+                    val uiState by viewModel.uiState.collectAsState()
+                    SetWallpaperScreen(uiState = uiState)
                 }
 
                 composable(
