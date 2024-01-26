@@ -15,4 +15,4 @@ allprojects {
 }
 
 apply { from(rootProject.file("install-git-hooks.gradle")) }
-tasks.getByPath(":ui:preBuild").dependsOn(":installGitHook")
+tasks.getByPath(":app:preBuild").dependsOn(":installGitHook")
