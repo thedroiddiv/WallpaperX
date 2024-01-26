@@ -10,12 +10,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SetWallpaperScreenVM(
-    private val savedStateHandle: SavedStateHandle,
+    savedStateHandle: SavedStateHandle,
     private val wallpaperRepository: WallpaperRepository,
+    private val wallpaperManager: WallpaperManager,
 ) : ViewModel() {
     private val wallpaperId: String? = savedStateHandle["wallpaperId"]
 
-    private val _uiState = MutableStateFlow<SetWallpaperUiState>(SetWallpaperUiState.INITIAL)
+    private val _uiState = MutableStateFlow(SetWallpaperUiState.INITIAL)
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -29,5 +30,35 @@ class SetWallpaperScreenVM(
                 _uiState.update { it.copy(wallpaper = wallpaper) }
             }
         }
+    }
+
+    fun setWallpaper(flag: Int) {
+        _uiState.update { it.copy(loading = true) }
+        uiState.value.wallpaper?.let { wallpaper ->
+            viewModelScope.launch {
+                wallpaperManager.setWallpaper(wallpaper, flag)
+                _uiState.update { it.copy(loading = true) }
+            }
+        }
+    }
+
+    fun download() {
+        TODO("Not yet implemented")
+    }
+
+    fun setLockScreenWallpaper() {
+        TODO("Not yet implemented")
+    }
+
+    fun setHomeScreenWallpaper() {
+        TODO("Not yet implemented")
+    }
+
+    fun addToFavourites() {
+        TODO("Not yet implemented")
+    }
+
+    fun share() {
+        TODO("Not yet implemented")
     }
 }

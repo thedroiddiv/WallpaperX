@@ -145,7 +145,15 @@ fun App() {
                 ) {
                     val viewModel: SetWallpaperScreenVM = koinViewModel()
                     val uiState by viewModel.uiState.collectAsState()
-                    SetWallpaperScreen(uiState = uiState)
+                    SetWallpaperScreen(
+                        uiState = uiState,
+                        onDownloadClicked = viewModel::download,
+                        onLockClicked = viewModel::setLockScreenWallpaper,
+                        onHomeClicked = viewModel::setHomeScreenWallpaper,
+                        onFavouriteClicked = viewModel::addToFavourites,
+                        onShareClicked = viewModel::share,
+                        navigateUp = navController::navigateUp,
+                    )
                 }
 
                 composable(
