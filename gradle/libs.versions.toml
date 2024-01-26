@@ -55,8 +55,6 @@ compose-material-icons-extended = { module = "androidx.compose.material:material
 compose-material = { module = "androidx.compose.material:material", version.ref = "androidx-material" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 
-
-
 # Coil
 compose-coil = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
 
