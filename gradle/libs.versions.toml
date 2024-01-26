@@ -1,7 +1,7 @@
 [versions]
 accompanistVersion = "0.24.13-rc"
 activity-compose = "1.6.0"
-agp = "8.2.1"
+agp = "8.2.2"
 androidx-material = "1.2.1"
 appcompat = "1.5.1"
 coilComposeVersion = "1.4.0"
@@ -54,6 +54,8 @@ compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview"
 compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "material-icons-extended" }
 compose-material = { module = "androidx.compose.material:material", version.ref = "androidx-material" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+
+
 
 # Coil
 compose-coil = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
