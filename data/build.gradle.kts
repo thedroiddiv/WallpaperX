@@ -57,9 +57,10 @@ dependencies {
     implementation(libs.retrofit.converter.gson)
 
     // OkHttp
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.11.0"))
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    val okhttpBom = platform(libs.okhttp3.bom)
+    implementation(okhttpBom)
+    implementation(libs.okhttp3)
+    implementation(libs.okhttp3.logging.interceptor)
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -69,8 +70,8 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    kapt(libs.hilt.compiler)
 
-    val koinVersion = "3.5.3"
-    implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
+    // FIXME: Is this the right way to use koin in data module?
+    implementation(libs.koin.compose)
 }

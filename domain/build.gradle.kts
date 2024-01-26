@@ -43,7 +43,7 @@ dependencies {
 
     // Hilt
     implementation(libs.hilt.android)
-    kapt("com.google.dagger:hilt-compiler:2.48")
+    kapt(libs.hilt.compiler)
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
@@ -52,6 +52,6 @@ dependencies {
     // Paging 3
     implementation(libs.androidx.paging.compose)
 
-    val koinVersion = "3.5.3"
-    implementation("io.insert-koin:koin-androidx-compose:$koinVersion")
+    // FIXME: Is this the right way to use koin in data module?
+    implementation(libs.koin.compose)
 }
