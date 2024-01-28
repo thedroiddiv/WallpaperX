@@ -4,7 +4,6 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("com.android.library")
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
 }
@@ -71,10 +70,6 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     // Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     // FIXME: Is this the right way to use koin in data module?
     implementation(libs.koin.compose)
