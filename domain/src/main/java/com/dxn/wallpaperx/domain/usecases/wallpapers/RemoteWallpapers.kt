@@ -7,10 +7,8 @@ import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
 import com.dxn.wallpaperx.domain.source.WallpaperSource
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 class GetWallpaper
-    @Inject
     constructor(
         private val repository: WallpaperRepository,
     ) {
@@ -20,7 +18,6 @@ class GetWallpaper
     }
 
 class GetWallpapers
-    @Inject
     constructor(
         private val repository: WallpaperRepository,
     ) {
@@ -32,7 +29,6 @@ class GetWallpapers
     }
 
 class GetWallpapersByCollection
-    @Inject
     constructor(
         private val repository: WallpaperRepository,
     ) {

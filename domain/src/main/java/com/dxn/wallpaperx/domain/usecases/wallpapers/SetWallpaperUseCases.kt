@@ -10,10 +10,8 @@ import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.domain.usecases.downloads.getBitmap
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class SetWallpaperUseCases
-    @Inject
     constructor(private val context: Application) {
         private val wpm: WallpaperManager =
             context.getSystemService(Context.WALLPAPER_SERVICE) as WallpaperManager

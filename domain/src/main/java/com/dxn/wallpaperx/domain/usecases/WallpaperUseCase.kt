@@ -9,10 +9,8 @@ import com.dxn.wallpaperx.domain.usecases.wallpapers.GetWallpaper
 import com.dxn.wallpaperx.domain.usecases.wallpapers.GetWallpapers
 import com.dxn.wallpaperx.domain.usecases.wallpapers.GetWallpapersByCollection
 import com.dxn.wallpaperx.domain.usecases.wallpapers.SetWallpaperUseCases
-import javax.inject.Inject
 
 data class WallpaperUseCase
-    @Inject
     constructor(
         val getWallpapers: GetWallpapers,
         val getWallpaper: GetWallpaper,

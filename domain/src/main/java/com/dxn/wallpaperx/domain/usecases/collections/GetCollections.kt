@@ -7,10 +7,8 @@ import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
 import com.dxn.wallpaperx.domain.source.CollectionSource
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 class GetCollections
-    @Inject
     constructor(private val repository: WallpaperRepository) {
         operator fun invoke(): Flow<PagingData<Collection>> {
             return Pager(PagingConfig(pageSize = 20)) {

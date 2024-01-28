@@ -11,16 +11,13 @@ import coil.request.ImageRequest
 import coil.request.SuccessResult
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class DownloadWallpaper
-    @Inject
     constructor(
         private val repository: WallpaperRepository,
-        @ApplicationContext private val context: Context,
+        private val context: Context,
     ) {
         suspend operator fun invoke(wallpaper: Wallpaper): Result<Uri?> {
             return try {
