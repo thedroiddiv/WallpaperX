@@ -3,9 +3,10 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 /**
@@ -47,6 +48,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
     }
 }
 
@@ -64,7 +68,7 @@ dependencies {
 
     // Room
     implementation(libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
     // Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
 

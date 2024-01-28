@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.dxn.wallpaperx.data.local.favourites.FavouriteDao
 import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
 
-@Database(entities = [FavouriteEntity::class], version = 1, exportSchema = false)
+@Database(entities = [FavouriteEntity::class], version = 1, exportSchema = true)
 abstract class LocalDatabase : RoomDatabase() {
     abstract fun getNoteDao(): FavouriteDao
 
