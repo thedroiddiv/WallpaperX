@@ -72,6 +72,8 @@ dependencies {
     ksp(libs.androidx.room.compiler)
     // Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
+    // Paging support for room
+    implementation(libs.androidx.room.paging)
 
     // FIXME: Is this the right way to use koin in data module?
     implementation(libs.koin.compose)

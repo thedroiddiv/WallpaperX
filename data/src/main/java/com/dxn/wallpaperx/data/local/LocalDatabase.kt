@@ -6,8 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.dxn.wallpaperx.data.local.dao.FavouriteDao
 import com.dxn.wallpaperx.data.local.entities.FavouriteEntity
+import com.dxn.wallpaperx.data.local.entities.RemoteKeyEntity
+import com.dxn.wallpaperx.data.local.entities.WallpaperEntity
 
-@Database(entities = [FavouriteEntity::class], version = 1, exportSchema = true)
+@Database(
+    entities = [FavouriteEntity::class, WallpaperEntity::class, RemoteKeyEntity::class],
+    version = 2,
+    exportSchema = true,
+)
 abstract class LocalDatabase : RoomDatabase() {
     abstract fun getNoteDao(): FavouriteDao
 
