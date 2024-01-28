@@ -7,6 +7,7 @@ import com.dxn.wallpaperx.data.remote.unsplash.UnsplashApi
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -15,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 val dataModule =
     module {
         single<FavouriteDao> { LocalDatabase.getNoteDatabase(androidContext()).getNoteDao() }
+        single<LocalDatabase> { LocalDatabase.getNoteDatabase(androidApplication()) }
 
         single<UnsplashApi> {
             Retrofit.Builder().baseUrl("https://api.unsplash.com/")

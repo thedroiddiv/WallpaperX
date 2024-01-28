@@ -1,12 +1,23 @@
 package com.dxn.wallpaperx.data.remote.pixabay
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import com.dxn.wallpaperx.data.BuildConfig
+import com.dxn.wallpaperx.data.local.LocalDatabase
+import com.dxn.wallpaperx.data.local.entities.WallpaperEntity
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.data.remote.RemoteRepository
+import com.dxn.wallpaperx.data.remote.RemoteWallpaperMediator
 import com.dxn.wallpaperx.data.remote.pixabay.models.Hit
 
-class PixabayRepository(private val api: PixabayApi) : RemoteRepository {
+const val PAGE_SIZE = 20
+
+class PixabayRepository(
+    private val api: PixabayApi,
+    private val localDatabase: LocalDatabase,
+) : RemoteRepository {
     private val apiKey: String = BuildConfig.PIXABAY_API_KEY
 
     override suspend fun getWallpapers(
@@ -18,6 +29,23 @@ class PixabayRepository(private val api: PixabayApi) : RemoteRepository {
             query = query,
             page = page,
         ).hits.map(::hitToWallpaper)
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    override fun getWallpapers(query: String): Pager<Int, WallpaperEntity> {
+        val mediator = RemoteWallpaperMediator(api, localDatabase, query)
+        return Pager(
+            config =
+                PagingConfig(
+                    pageSize = PAGE_SIZE,
+                    prefetchDistance = 10,
+                    initialLoadSize = PAGE_SIZE,
+                ),
+            remoteMediator = mediator,
+            pagingSourceFactory = {
+                localDatabase.wallpaperDao.getAll()
+            },
+        )
     }
 
     override suspend fun getWallpaper(id: String): Wallpaper {

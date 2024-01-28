@@ -1,5 +1,7 @@
 package com.dxn.wallpaperx.data.remote.unsplash
 
+import androidx.paging.Pager
+import com.dxn.wallpaperx.data.local.entities.WallpaperEntity
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.data.remote.RemoteRepository
@@ -15,6 +17,10 @@ class UnsplashRepository(private val unsplashApi: UnsplashApi) : RemoteRepositor
             query = query,
             page = page,
         ).results.map { imageDtoToWallpaper(it) }
+    }
+
+    override fun getWallpapers(query: String): Pager<Int, WallpaperEntity> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getWallpaper(id: String): Wallpaper {

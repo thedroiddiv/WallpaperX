@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val wallpaperModule =
     module {
-        single<RemoteRepository> { PixabayRepository(get()) }
+        single<RemoteRepository> { PixabayRepository(get(), get()) }
         single<LocalRepository> { LocalRepository(androidApplication(), get()) }
         single<WallpaperRepository> { WallpaperRepositoryImpl(get(), get()) }
     }

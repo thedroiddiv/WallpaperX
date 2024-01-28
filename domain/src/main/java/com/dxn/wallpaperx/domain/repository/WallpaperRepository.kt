@@ -2,6 +2,8 @@ package com.dxn.wallpaperx.domain.repository
 
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.paging.Pager
+import com.dxn.wallpaperx.data.local.entities.WallpaperEntity
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.domain.source.WallpaperSource
@@ -12,6 +14,8 @@ interface WallpaperRepository {
         query: String,
         isCollection: Boolean,
     ): WallpaperSource
+
+    fun getWallpapers(query: String): Pager<Int, WallpaperEntity>
 
     suspend fun getWallpapers(
         page: Int,

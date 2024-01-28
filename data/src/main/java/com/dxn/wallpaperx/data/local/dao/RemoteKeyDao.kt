@@ -11,11 +11,11 @@ interface RemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(remoteKey: List<RemoteKeyEntity>)
 
-    @Query("Select * From remote_key Where id = :id")
-    suspend fun getRemoteKeyByMovieID(id: Int): RemoteKeyEntity?
+    @Query("Select * From remote_key Where wallpaperId = :id")
+    suspend fun getRemoteKeyByWallpaperId(id: String): RemoteKeyEntity?
 
     @Query("Delete From remote_key")
-    suspend fun clearRemoteKeys()
+    suspend fun clear()
 
     @Query("Select createdAt From remote_key Order By createdAt DESC LIMIT 1")
     suspend fun getCreationTime(): Long?
