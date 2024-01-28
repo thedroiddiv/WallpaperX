@@ -1,55 +1,37 @@
 [versions]
-accompanistVersion = "0.32.0"
 activity-compose = "1.8.2"
 agp = "8.2.2"
-androidx-material = "1.6.0"
 appcompat = "1.6.1"
 coilComposeVersion = "2.5.0"
 core-ktx = "1.12.0"
 compose-bom = "2023.10.01"
 gsonVersion = "2.10.1"
-hilt = "2.48"
-hiltNavigationComposeVersion = "1.1.0"
 koinVersion = "3.5.3"
 kotlin = "1.9.20"
 kotlinxCoroutinesCoreVersion = "1.7.3"
 ktlint = "12.1.0"
 ksp-plugin="1.9.20-1.0.14"
-material-icons-extended = "1.6.0"
 navigation-compose = "2.7.6"
 okhttp = "4.11.0"
 pagingComposeVersion = "3.2.1"
 retrofitVersion = "2.9.0"
 roomVersion = "2.6.1"
-ui-tooling-preview = "1.6.0"
-ui = "1.6.0"
 lifecycle-viewmodel-compose = "2.7.0"
 lifecycle-runtime-ktx = "2.7.0"
-material3 = "1.1.2"
 material = "1.11.0"
-uiToolingVersion = "1.6.0"
 
 [libraries]
-# Acconmpanist
-accompanist-insets = { module = "com.google.accompanist:accompanist-insets", version.ref = "accompanistVersion" }
-accompanist-pager-indicators = { module = "com.google.accompanist:accompanist-pager-indicators", version.ref = "accompanistVersion" }
-accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistVersion" }
-accompanist-swiperefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version.ref = "accompanistVersion" }
-accompanist-systemuicontroller = { module = "com.google.accompanist:accompanist-systemuicontroller", version.ref = "accompanistVersion" }
-accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanistVersion" }
 
 # AndroidX
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
-androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationComposeVersion" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingComposeVersion" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingComposeVersion" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
-androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime-ktx" }
 
 # Compose
@@ -70,10 +52,6 @@ koin-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = 
 # GSON
 gson = { module = "com.google.code.gson:gson", version.ref = "gsonVersion" }
 
-# Dagger Hilt
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
-
 # KotlinX
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesCoreVersion" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCoreVersion" }
@@ -93,6 +71,5 @@ retrofit-converter-gson = { module = "com.squareup.retrofit2:converter-gson", ve
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp-plugin" }

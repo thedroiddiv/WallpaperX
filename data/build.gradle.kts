@@ -28,7 +28,6 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = 23
-        targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -50,6 +49,9 @@ android {
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 

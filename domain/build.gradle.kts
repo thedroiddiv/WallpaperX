@@ -8,7 +8,6 @@ android {
     compileSdk = 34
     defaultConfig {
         minSdk = 23
-        targetSdk = 34
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -39,10 +38,6 @@ dependencies {
 
     // Coil
     implementation(libs.compose.coil)
-
-    // Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.core)
