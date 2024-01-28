@@ -11,7 +11,10 @@ import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class HomeScreenVM(
     private val wallpaperRepository: WallpaperRepository,
@@ -49,9 +52,17 @@ class HomeScreenVM(
     }
 
     private fun loadFavourites() {
+        viewModelScope.launch {
+            wallpaperRepository.getFavourites().collect { favourites ->
+                _uiState.update { it.copy(favourites = favourites) }
+            }
+        }
     }
 
     fun addToFavourites(wallpaper: Wallpaper) {
+        viewModelScope.launch {
+            wallpaperRepository.addFavourite(wallpaper)
+        }
     }
 
     companion object {

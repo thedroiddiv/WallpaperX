@@ -100,7 +100,7 @@ fun App() {
                         WallpapersScreen(
                             uiState = homeUiState,
                             wallpapers = wallpapers,
-                            onFavClick = {},
+                            onFavClick = homeScreenVM::addToFavourites,
                             onWallpaperClick = { navController.navigate("${Screen.SetWallpaper.route}/${it.id}") },
                         )
                     }
