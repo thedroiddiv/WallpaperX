@@ -7,8 +7,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import com.dxn.wallpaperx.data.local.favourites.FavouriteDao
-import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
+import com.dxn.wallpaperx.data.local.dao.FavouriteDao
+import com.dxn.wallpaperx.data.local.entities.FavouriteEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

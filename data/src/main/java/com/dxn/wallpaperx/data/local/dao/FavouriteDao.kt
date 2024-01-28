@@ -1,6 +1,7 @@
-package com.dxn.wallpaperx.data.local.favourites
+package com.dxn.wallpaperx.data.local.dao
 
 import androidx.room.*
+import com.dxn.wallpaperx.data.local.entities.FavouriteEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -1,4 +1,4 @@
-package com.dxn.wallpaperx.data.local.favourites
+package com.dxn.wallpaperx.data.local.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

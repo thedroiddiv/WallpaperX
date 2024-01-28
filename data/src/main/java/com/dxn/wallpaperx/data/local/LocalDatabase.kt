@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.dxn.wallpaperx.data.local.favourites.FavouriteDao
-import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
+import com.dxn.wallpaperx.data.local.dao.FavouriteDao
+import com.dxn.wallpaperx.data.local.entities.FavouriteEntity
 
 @Database(entities = [FavouriteEntity::class], version = 1, exportSchema = true)
 abstract class LocalDatabase : RoomDatabase() {

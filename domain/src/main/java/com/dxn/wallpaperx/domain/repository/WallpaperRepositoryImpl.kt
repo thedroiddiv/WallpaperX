@@ -3,7 +3,7 @@ package com.dxn.wallpaperx.domain.repository
 import android.graphics.Bitmap
 import android.net.Uri
 import com.dxn.wallpaperx.data.local.LocalRepository
-import com.dxn.wallpaperx.data.local.favourites.FavouriteEntity
+import com.dxn.wallpaperx.data.local.entities.FavouriteEntity
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.data.remote.RemoteRepository

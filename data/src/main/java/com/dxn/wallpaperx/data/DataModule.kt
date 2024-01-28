@@ -1,7 +1,7 @@
 package com.dxn.wallpaperx.data
 
 import com.dxn.wallpaperx.data.local.LocalDatabase
-import com.dxn.wallpaperx.data.local.favourites.FavouriteDao
+import com.dxn.wallpaperx.data.local.dao.FavouriteDao
 import com.dxn.wallpaperx.data.remote.pixabay.PixabayApi
 import com.dxn.wallpaperx.data.remote.unsplash.UnsplashApi
 import com.google.gson.GsonBuilder
