@@ -1,6 +1,7 @@
 package com.dxn.wallpaperx.ui.screens.wallpaperList
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -17,13 +18,18 @@ import javax.inject.Inject
 class ColWallpapersViewModel
 @Inject
 constructor(
-    private val wallpaperUseCase: WallpaperUseCase
+    private val wallpaperUseCase: WallpaperUseCase,
+    savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private var wallJob: Job? = null
     var wallpapers = flowOf<PagingData<Wallpaper>>()
 
-    fun loadWallpapers(collectionId: String) {
+    init {
+        loadWallpapers(savedStateHandle.get<String>("collectionId")!!)
+    }
+
+    private fun loadWallpapers(collectionId: String) {
         wallJob?.cancel()
         wallJob = viewModelScope.launch {
             kotlin.runCatching {

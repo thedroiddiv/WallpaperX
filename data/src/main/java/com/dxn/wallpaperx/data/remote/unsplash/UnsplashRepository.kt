@@ -48,6 +48,6 @@ fun collectionDtoToCollection(collectionDto: CollectionDto): Collection {
         title = collectionDto.title,
         totalPhotos = collectionDto.total_photos,
         coverPhoto = collectionDto.cover_photo.urls.regular,
-        tags = collectionDto.tags.map { it.title }
+        tags = listOf()
     )
 }

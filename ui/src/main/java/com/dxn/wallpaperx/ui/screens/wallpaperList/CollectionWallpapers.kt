@@ -1,7 +1,12 @@
 package com.dxn.wallpaperx.ui.screens.wallpaperList
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -9,7 +14,6 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -25,7 +29,6 @@ import com.dxn.wallpaperx.ui.components.WallpaperList
 @ExperimentalFoundationApi
 @Composable
 fun CollectionWallpapers(
-    collectionId: String,
     collectionName: String,
     favourites: List<Wallpaper>,
     addFavourite: (Wallpaper) -> Unit,
@@ -33,9 +36,6 @@ fun CollectionWallpapers(
     navController: NavHostController,
     viewModel: ColWallpapersViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(key1 = true) {
-        viewModel.loadWallpapers(collectionId)
-    }
     val wallpapers = viewModel.wallpapers.collectAsLazyPagingItems()
     Column {
         Row(

@@ -226,7 +226,6 @@ fun App() {
                 backStack.arguments?.getString("collectionId")?.let { id ->
                     val title = backStack.arguments?.getString("title")
                     CollectionWallpapers(
-                        collectionId = id,
                         collectionName = title ?: "",
                         favourites = favourites,
                         addFavourite = { mainViewModel.addFavourite(it) },

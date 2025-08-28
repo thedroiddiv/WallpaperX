@@ -12,7 +12,6 @@ data class CollectionDto(
     val `private`: Boolean,
     val published_at: String,
     val share_key: String,
-    val tags: List<Tag>,
     val title: String,
     val total_photos: Int,
     val updated_at: String,
