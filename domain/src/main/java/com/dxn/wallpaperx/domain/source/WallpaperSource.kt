@@ -23,10 +23,11 @@ constructor(
             val wallpapers =
                 if (isCollection) repository.getWallpapersByCollection(query, nextPage) else
                     repository.getWallpapers(nextPage, query)
+            val nextKey = if (wallpapers.isEmpty()) null else nextPage + 1
             LoadResult.Page(
                 data = wallpapers,
                 prevKey = if (nextPage == 1) null else nextPage - 1,
-                nextKey = nextPage.plus(1)
+                nextKey = nextKey
             )
         }.getOrElse {
             Log.e(TAG, "load: ${it.message}")

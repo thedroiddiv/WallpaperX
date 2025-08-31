@@ -79,3 +79,5 @@ lint/tmp/
 
 # Android Profiling
 *.hprof
+
+ui/release/

@@ -4,6 +4,8 @@ import android.app.Application
 import com.dxn.wallpaperx.data.local.LocalRepository
 import com.dxn.wallpaperx.data.local.favourites.FavouriteDao
 import com.dxn.wallpaperx.data.remote.RemoteRepository
+import com.dxn.wallpaperx.data.remote.pixabay.PixabayApi
+import com.dxn.wallpaperx.data.remote.pixabay.PixabayRepository
 import com.dxn.wallpaperx.data.remote.unsplash.UnsplashApi
 import com.dxn.wallpaperx.data.remote.unsplash.UnsplashRepository
 import com.dxn.wallpaperx.domain.repository.WallpaperRepository
@@ -26,6 +28,14 @@ object WallpaperModule {
         unsplashApi: UnsplashApi
     ): RemoteRepository =
         UnsplashRepository(unsplashApi)
+
+    @Provides
+    @Singleton
+    @Named("pixabay")
+    fun providePixabayRepository(
+        pixabayApi: PixabayApi
+    ): RemoteRepository =
+        PixabayRepository(pixabayApi)
 
     @Provides
     @Singleton
