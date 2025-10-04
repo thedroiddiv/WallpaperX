@@ -6,11 +6,10 @@ plugins {
 }
 
 android {
-    compileSdk 32
-
+    compileSdkVersion = 36
     defaultConfig {
-        minSdk 23
-        targetSdk 36
+        minSdk = 23
+        targetSdk = 36
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -23,11 +22,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '17'
     }
     namespace 'com.dxn.wallpaperx.domain'
 }
@@ -37,17 +36,17 @@ dependencies {
     implementation project(path: ':data')
 
     // Coil
-    implementation "io.coil-kt:coil-compose:1.4.0"
+    implementation "io.coil-kt:coil-compose:2.7.0"
 
     // hilt
-    implementation "com.google.dagger:hilt-android:2.56.2"
-    ksp "com.google.dagger:hilt-compiler:2.56.2"
+    implementation "com.google.dagger:hilt-android:2.57.2"
+    ksp "com.google.dagger:hilt-compiler:2.57.2"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2'
 
     // Paging 3
-    def paging_compose_version = "1.0.0-alpha14"
+    def paging_compose_version = "3.3.6"
     implementation "androidx.paging:paging-compose:$paging_compose_version"
 }

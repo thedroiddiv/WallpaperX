@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.items
 import com.dxn.wallpaperx.data.model.Collection
 import com.dxn.wallpaperx.ui.components.CategoryCard
 import com.dxn.wallpaperx.ui.navigation.RootScreen
@@ -46,7 +45,8 @@ fun Collections(
         }
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize(), state = listState) {
-            items(collections) { collection ->
+            items(collections.itemCount) { idx ->
+                val collection = collections[idx]
                 collection?.let {
                     CategoryCard(
                         modifier = Modifier

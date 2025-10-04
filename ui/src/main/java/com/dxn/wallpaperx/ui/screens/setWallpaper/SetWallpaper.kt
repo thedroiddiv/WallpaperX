@@ -26,9 +26,9 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.AsyncImagePainter
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import coil.transform.BlurTransformation
 import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.ui.components.BackButton
 import com.dxn.wallpaperx.ui.screens.setWallpaper.components.BottomMenu
@@ -57,15 +57,12 @@ fun SetWallpaper(
 
     val loader = rememberImagePainter(
         data = wallpaper.previewUrl,
-        builder = {
-            transformations(BlurTransformation(LocalContext.current))
-        }
+        builder = {}
     )
     val painter = rememberImagePainter(data = wallpaper.wallpaperUrl)
-    val isLoading = (painter.state.javaClass == ImagePainter.State.Loading::class.java)
 
     Box(modifier = Modifier.fillMaxSize()) {
-        if (isLoading) {
+        if (painter.state is AsyncImagePainter.State.Loading) {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = loader,
@@ -90,72 +87,71 @@ fun SetWallpaper(
                     color = Color.White
                 )
             }
-        } else {
-            Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .pointerInput(key1 = Unit) {
-                        detectTapGestures {
-                            bottomMenuVisibility = !bottomMenuVisibility
+        }
+        Image(
+            modifier = Modifier
+                .fillMaxSize()
+                .pointerInput(key1 = Unit) {
+                    detectTapGestures {
+                        bottomMenuVisibility = !bottomMenuVisibility
+                    }
+                },
+            painter = painter,
+            contentDescription = "wallpaper",
+            contentScale = ContentScale.Crop
+        )
+        AnimatedVisibility(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            visible = bottomMenuVisibility,
+            enter = slideInVertically(initialOffsetY = { height -> height }),
+            exit = slideOutVertically(targetOffsetY = { height -> height })
+        ) {
+            BottomMenu(
+                modifier = Modifier,
+                title = wallpaper.user,
+                subtitle = "unsplash.com",
+                isLiked = isLiked,
+                userImageUrl = wallpaper.userImageURL,
+                onFabClicked = {
+                    viewModel.setWallpaper(
+                        wallpaper,
+                        WallpaperManager.FLAG_SYSTEM
+                    )
+                },
+                onDownload = {
+                    viewModel.downloadWallpaper(wallpaper)
+                },
+                onFavourite = {
+                    if (isLiked) {
+                        removeFavourite(wallpaper.id)
+                    } else {
+                        addFavourite(wallpaper)
+                    }
+                },
+                onShare = {
+                    scope.launch {
+                        val uri = viewModel.saveWallpaper(wallpaper)
+                        val sendIntent: Intent = Intent().apply {
+                            action = Intent.ACTION_SEND
+                            putExtra(Intent.EXTRA_STREAM, uri)
+                            type = "image/jpg"
                         }
-                    },
-                painter = painter,
-                contentDescription = "wallpaper",
-                contentScale = ContentScale.Crop
+                        startActivity(
+                            context,
+                            Intent.createChooser(sendIntent, "Share wallpaper"),
+                            null
+                        )
+                    }
+                },
+                onLock = {
+                    Log.d(TAG, "onCreate: SetWallpaperUseCases")
+                    viewModel.setWallpaper(
+                        wallpaper,
+                        WallpaperManager.FLAG_LOCK
+                    )
+                },
+                isProgressVisible = isProgressVisible
             )
-            AnimatedVisibility(
-                modifier = Modifier.align(Alignment.BottomCenter),
-                visible = bottomMenuVisibility,
-                enter = slideInVertically(initialOffsetY = { height -> height }),
-                exit = slideOutVertically(targetOffsetY = { height -> height })
-            ) {
-                BottomMenu(
-                    modifier = Modifier,
-                    title = wallpaper.user,
-                    subtitle = "unsplash.com",
-                    isLiked = isLiked,
-                    userImageUrl = wallpaper.userImageURL,
-                    onFabClicked = {
-                        viewModel.setWallpaper(
-                            wallpaper,
-                            WallpaperManager.FLAG_SYSTEM
-                        )
-                    },
-                    onDownload = {
-                        viewModel.downloadWallpaper(wallpaper)
-                    },
-                    onFavourite = {
-                        if (isLiked) {
-                            removeFavourite(wallpaper.id)
-                        } else {
-                            addFavourite(wallpaper)
-                        }
-                    },
-                    onShare = {
-                        scope.launch {
-                            val uri = viewModel.saveWallpaper(wallpaper)
-                            val sendIntent: Intent = Intent().apply {
-                                action = Intent.ACTION_SEND
-                                putExtra(Intent.EXTRA_STREAM, uri)
-                                type = "image/jpg"
-                            }
-                            startActivity(
-                                context,
-                                Intent.createChooser(sendIntent, "Share wallpaper"),
-                                null
-                            )
-                        }
-                    },
-                    onLock = {
-                        Log.d(TAG, "onCreate: SetWallpaperUseCases")
-                        viewModel.setWallpaper(
-                            wallpaper,
-                            WallpaperManager.FLAG_LOCK
-                        )
-                    },
-                    isProgressVisible = isProgressVisible
-                )
-            }
         }
         BackButton(
             modifier = Modifier

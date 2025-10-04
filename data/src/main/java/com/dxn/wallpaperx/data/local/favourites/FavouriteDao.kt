@@ -10,7 +10,7 @@ interface FavouriteDao {
     fun insert(favourite: FavouriteEntity)
 
     @Query("DELETE  FROM favourites_table WHERE id = :id")
-    fun delete(id: String): Void
+    fun delete(id: String)
 
     @Query("SELECT * FROM favourites_table")
     fun getAll(): Flow<List<FavouriteEntity>>

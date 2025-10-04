@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import coil.annotation.ExperimentalCoilApi
 import com.dxn.wallpaperx.ui.screens.App
 import com.dxn.wallpaperx.ui.theme.WallpaperXTheme
-import com.google.accompanist.insets.ProvideWindowInsets
 import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,9 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             WallpaperXTheme {
                 Surface(modifier = Modifier.fillMaxSize(), color = Color.Black) {
-                    ProvideWindowInsets {
-                        App()
-                    }
+                    App()
                 }
             }
         }

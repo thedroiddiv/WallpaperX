@@ -16,9 +16,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.AsyncImagePainter
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
-import coil.transform.BlurTransformation
 import com.dxn.wallpaperx.data.model.Wallpaper
 
 @ExperimentalCoilApi
@@ -37,12 +37,11 @@ fun WallpaperCard(
             val loader = rememberImagePainter(
                 data = wallpaper.previewUrl,
                 builder = {
-                    transformations(BlurTransformation(LocalContext.current))
                 }
             )
             val painter = rememberImagePainter(wallpaper.smallUrl)
 
-            if (painter.state.javaClass == ImagePainter.State.Loading::class.java) {
+            if (painter.state is AsyncImagePainter.State.Loading) {
                 Image(
                     modifier = Modifier.matchParentSize(),
                     painter = loader,
