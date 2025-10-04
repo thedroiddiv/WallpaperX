@@ -11,43 +11,44 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class WallpaperRepositoryImpl
-constructor(
-    private val remoteRepository: RemoteRepository,
-    private val localRepository: LocalRepository
-) : WallpaperRepository {
+    constructor(
+        private val remoteRepository: RemoteRepository,
+        private val localRepository: LocalRepository
+    ) : WallpaperRepository {
 
-    companion object {
-        const val TAG = "WallpaperRepositoryImpl"
+        companion object {
+            const val TAG = "WallpaperRepositoryImpl"
+        }
+
+        override suspend fun getWallpapers(page: Int, query: String) =
+            remoteRepository.getWallpapers(page, query)
+
+        override suspend fun getWallpaper(id: String) =
+            remoteRepository.getWallpaper(id)
+
+        override suspend fun getCollections(page: Int): List<Collection> =
+            remoteRepository.getCollections(page)
+
+        override suspend fun getWallpapersByCollection(
+            collectionId: String,
+            page: Int
+        ): List<Wallpaper> = remoteRepository.getWallpapersByCollection(collectionId, page)
+
+        override suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String): Uri? =
+            localRepository.downloadWallpaper(bitmap, displayName)
+
+        override suspend fun addFavourite(wallpaper: Wallpaper): Boolean =
+            localRepository.addToFavourites(
+                wallpaperToFavouriteEntity(wallpaper),
+            )
+
+        override suspend fun removeFavourite(id: String): Boolean =
+            localRepository.removeFavourite(id)
+
+        override fun getFavourites(): Flow<List<Wallpaper>> =
+            localRepository.getFavourites()
+                .map { wallpapers -> wallpapers.map { favEntityToWallpaper(it) } }
     }
-
-    override suspend fun getWallpapers(page: Int, query: String) =
-        remoteRepository.getWallpapers(page, query)
-
-    override suspend fun getWallpaper(id: String) =
-        remoteRepository.getWallpaper(id)
-
-    override suspend fun getCollections(page: Int): List<Collection> =
-        remoteRepository.getCollections(page)
-
-    override suspend fun getWallpapersByCollection(
-        collectionId: String,
-        page: Int
-    ): List<Wallpaper> = remoteRepository.getWallpapersByCollection(collectionId, page)
-
-    override suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String): Uri? =
-        localRepository.downloadWallpaper(bitmap, displayName)
-
-    override suspend fun addFavourite(wallpaper: Wallpaper): Boolean =
-        localRepository.addToFavourites(
-            wallpaperToFavouriteEntity(wallpaper)
-        )
-
-    override suspend fun removeFavourite(id: String): Boolean =
-        localRepository.removeFavourite(id)
-
-    override fun getFavourites(): Flow<List<Wallpaper>> = localRepository.getFavourites()
-        .map { wallpapers -> wallpapers.map { favEntityToWallpaper(it) } }
-}
 
 fun favEntityToWallpaper(favouriteEntity: FavouriteEntity): Wallpaper {
     return Wallpaper(
@@ -56,7 +57,7 @@ fun favEntityToWallpaper(favouriteEntity: FavouriteEntity): Wallpaper {
         favouriteEntity.wallpaperUrl,
         favouriteEntity.smallUrl,
         favouriteEntity.user,
-        favouriteEntity.userImageURL
+        favouriteEntity.userImageURL,
     )
 }
 
@@ -67,6 +68,6 @@ fun wallpaperToFavouriteEntity(wallpaper: Wallpaper): FavouriteEntity {
         wallpaper.wallpaperUrl,
         wallpaper.smallUrl,
         wallpaper.user,
-        wallpaper.userImageURL
+        wallpaper.userImageURL,
     )
 }

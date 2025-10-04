@@ -30,12 +30,13 @@ fun SplashScreen(
     LaunchedEffect(key1 = true) {
         scale.animateTo(
             targetValue = 0.7f,
-            animationSpec = tween(
-                durationMillis = 800,
-                easing = {
-                    OvershootInterpolator(4f).getInterpolation(it)
-                }
-            )
+            animationSpec =
+                tween(
+                    durationMillis = 800,
+                    easing = {
+                        OvershootInterpolator(4f).getInterpolation(it)
+                    },
+                ),
         )
         delay(1000)
         navController.navigate(RootScreen.Home.route) {
@@ -44,15 +45,16 @@ fun SplashScreen(
     }
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(brandColor),
-        contentAlignment = Alignment.Center
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(brandColor),
+        contentAlignment = Alignment.Center,
     ) {
         Image(
             modifier = Modifier.scale(scale.value),
             painter = painterResource(id = R.mipmap.ic_launcher_foreground),
-            contentDescription = "app icon"
+            contentDescription = "app icon",
         )
     }
 }

@@ -1,0 +1,8 @@
+[*.kt]
+ktlint_standard_no-wildcard-imports = disabled
+ktlint_standard_function-naming = disabled
+ktlint_standard_trailing-comma-on-declaration-site = disabled
+ktlint_standard_no-empty-first-line-in-class-body = disabled
+ktlint_standard_function-signature = disabled
+ktlint_standard_function-expression-body = disabled
+ktlint_standard_chain-method-continuation = disabled

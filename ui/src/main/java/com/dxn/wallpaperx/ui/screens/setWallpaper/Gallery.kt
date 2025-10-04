@@ -36,7 +36,6 @@ fun Gallery(
     imageUri: Uri,
     navController: NavHostController
 ) {
-
     val context = LocalContext.current
     val bitmap = remember { mutableStateOf<Bitmap?>(null) }
     val viewModel = hiltViewModel<SetWallpaperViewModel>()
@@ -45,11 +44,13 @@ fun Gallery(
     LaunchedEffect(key1 = true) {
         kotlin.runCatching {
             if (Build.VERSION.SDK_INT < 28) {
-                bitmap.value = MediaStore.Images
-                    .Media.getBitmap(context.contentResolver, imageUri)
+                bitmap.value =
+                    MediaStore.Images
+                        .Media.getBitmap(context.contentResolver, imageUri)
             } else {
-                val source = ImageDecoder
-                    .createSource(context.contentResolver, imageUri)
+                val source =
+                    ImageDecoder
+                        .createSource(context.contentResolver, imageUri)
                 bitmap.value = ImageDecoder.decodeBitmap(source)
             }
         }.getOrElse {
@@ -61,57 +62,63 @@ fun Gallery(
                 modifier = Modifier.fillMaxSize(),
                 bitmap = btm.asImageBitmap(),
                 contentDescription = null,
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
             Box(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .alpha(if (isProgressVisible) 1f else 0f)
-                    .background(Color.Black.copy(0.4f))
-                    .padding(16.dp)
-                    .align(Alignment.Center)
+                modifier =
+                    Modifier
+                        .clip(CircleShape)
+                        .alpha(if (isProgressVisible) 1f else 0f)
+                        .background(Color.Black.copy(0.4f))
+                        .padding(16.dp)
+                        .align(Alignment.Center),
             ) {
                 CircularProgressIndicator(color = Color.White)
             }
             Row(Modifier.align(Alignment.BottomCenter)) {
                 Button(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = MaterialTheme.colors.primary,
-                        contentColor = MaterialTheme.colors.onPrimary
-                    ),
+                    modifier =
+                        Modifier
+                            .padding(16.dp),
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            backgroundColor = MaterialTheme.colors.primary,
+                            contentColor = MaterialTheme.colors.onPrimary,
+                        ),
                     shape = CircleShape,
                     onClick = {
                         viewModel.setWallpaper(btm, WallpaperManager.FLAG_LOCK)
-                    }
+                    },
                 ) {
                     Icon(
                         imageVector = Icons.Rounded.LockOpen,
-                        contentDescription = "set lock screen wallpaper"
+                        contentDescription = "set lock screen wallpaper",
                     )
                 }
 
                 Button(
-                    modifier = Modifier
-                        .padding(16.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        backgroundColor = MaterialTheme.colors.primary,
-                        contentColor = MaterialTheme.colors.onPrimary
-                    ),
+                    modifier =
+                        Modifier
+                            .padding(16.dp),
+                    colors =
+                        ButtonDefaults.buttonColors(
+                            backgroundColor = MaterialTheme.colors.primary,
+                            contentColor = MaterialTheme.colors.onPrimary,
+                        ),
                     shape = CircleShape,
                     onClick = {
                         viewModel.setWallpaper(btm, WallpaperManager.FLAG_SYSTEM)
-                    }
+                    },
                 ) {
                     Text(text = "Set Wallpaper")
                 }
             }
             BackButton(
-                modifier = Modifier
-                    .align(Alignment.TopStart)
-                    .padding(start = 16.dp, top = 16.dp),
-                navController = navController
+                modifier =
+                    Modifier
+                        .align(Alignment.TopStart)
+                        .padding(start = 16.dp, top = 16.dp),
+                navController = navController,
             )
         }
     }

@@ -28,8 +28,9 @@ fun Collections(
     navController: NavHostController
 ) {
     SwipeRefresh(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier =
+            Modifier
+                .fillMaxSize(),
         state = rememberSwipeRefreshState(isRefreshing = (collections.loadState.refresh is LoadState.Loading)),
         indicator = { swipeState, trigger ->
             SwipeRefreshIndicator(
@@ -42,32 +43,33 @@ fun Collections(
         },
         onRefresh = {
             collections.refresh()
-        }
+        },
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize(), state = listState) {
             items(collections.itemCount) { idx ->
                 val collection = collections[idx]
                 collection?.let {
                     CategoryCard(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(180.dp)
-                            .padding(horizontal = 16.dp, vertical = 8.dp),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .height(180.dp)
+                                .padding(horizontal = 16.dp, vertical = 8.dp),
                         title = collection.title,
-                        backgroundImage = collection.coverPhoto
+                        backgroundImage = collection.coverPhoto,
                     ) {
-
                         navController.navigate(RootScreen.CollectionWallpaper.route.plus("/${it.id}/${it.title}"))
                     }
                 }
             }
             collections.apply {
-                val error = when {
-                    loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
-                    loadState.append is LoadState.Error -> loadState.append as LoadState.Error
-                    loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
-                    else -> null
-                }
+                val error =
+                    when {
+                        loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+                        loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+                        loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+                        else -> null
+                    }
                 error?.let {
                     item {
                         Text(text = "No items found \n Error : " + it.error.message.toString())

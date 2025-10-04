@@ -17,34 +17,35 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class DownloadWallpaper
-@Inject
-constructor(
-    private val repository: WallpaperRepository,
-    @ApplicationContext private val context: Context
-) {
-    suspend operator fun invoke(wallpaper: Wallpaper): Result<Uri?> {
-        return try {
-            val bitmap = context.getBitmap(wallpaper.wallpaperUrl)
-            val uri = repository.downloadWallpaper(bitmap, "IMG${wallpaper.id}.jpg")
-            Result.success(uri)
-        } catch (e: Exception) {
-            Log.e(TAG, "invoke: ${e.message}")
-            Result.failure(e)
+    @Inject
+    constructor(
+        private val repository: WallpaperRepository,
+        @ApplicationContext private val context: Context
+    ) {
+        suspend operator fun invoke(wallpaper: Wallpaper): Result<Uri?> {
+            return try {
+                val bitmap = context.getBitmap(wallpaper.wallpaperUrl)
+                val uri = repository.downloadWallpaper(bitmap, "IMG${wallpaper.id}.jpg")
+                Result.success(uri)
+            } catch (e: Exception) {
+                Log.e(TAG, "invoke: ${e.message}")
+                Result.failure(e)
+            }
+        }
+
+        companion object {
+            const val TAG = "DownloadWallpaper"
         }
     }
-
-    companion object {
-        const val TAG = "DownloadWallpaper"
-    }
-}
 
 suspend fun Context.getBitmap(url: String): Bitmap {
     return withContext(Dispatchers.IO) {
         val loader = ImageLoader(this@getBitmap)
-        val request = ImageRequest.Builder(this@getBitmap)
-            .data(url)
-            .allowHardware(false) // Disable hardware bitmaps.
-            .build()
+        val request =
+            ImageRequest.Builder(this@getBitmap)
+                .data(url)
+                .allowHardware(false) // Disable hardware bitmaps.
+                .build()
         val res = loader.execute(request)
         when (res) {
             is SuccessResult -> {

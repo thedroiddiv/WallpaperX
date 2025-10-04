@@ -12,12 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImagePainter
-import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.dxn.wallpaperx.data.model.Wallpaper
 
@@ -34,11 +32,12 @@ fun WallpaperCard(
 ) {
     Surface(modifier = modifier, elevation = elevation, shape = shape) {
         Box(Modifier.fillMaxSize()) {
-            val loader = rememberImagePainter(
-                data = wallpaper.previewUrl,
-                builder = {
-                }
-            )
+            val loader =
+                rememberImagePainter(
+                    data = wallpaper.previewUrl,
+                    builder = {
+                    },
+                )
             val painter = rememberImagePainter(wallpaper.smallUrl)
 
             if (painter.state is AsyncImagePainter.State.Loading) {
@@ -46,27 +45,29 @@ fun WallpaperCard(
                     modifier = Modifier.matchParentSize(),
                     painter = loader,
                     contentDescription = "wallpaper",
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
                 )
             }
             Image(
                 modifier = Modifier.matchParentSize(),
                 painter = painter,
                 contentDescription = "wallpaper",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
             Box(
-                modifier = Modifier
-                    .matchParentSize()
-                    .clickable {
-                        onClick()
-                    }
+                modifier =
+                    Modifier
+                        .matchParentSize()
+                        .clickable {
+                            onClick()
+                        },
             ) {
                 FavouriteButton(
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(12.dp),
-                    isFavourite = isFavourite
+                    modifier =
+                        Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(12.dp),
+                    isFavourite = isFavourite,
                 ) {
                     onLikedClicked()
                 }

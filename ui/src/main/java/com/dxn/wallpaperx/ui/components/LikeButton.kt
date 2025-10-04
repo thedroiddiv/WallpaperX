@@ -17,18 +17,17 @@ fun FavouriteButton(
     isFavourite: Boolean,
     onClick: () -> Unit
 ) {
-
     IconButton(
         modifier = modifier,
         onClick = {
             onClick()
-        }
+        },
     ) {
         Icon(
             imageVector = if (isFavourite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
             contentDescription = "favourite button",
             tint = if (isFavourite) Color.Red else Color.White,
-            modifier = Modifier.size(24.dp)
+            modifier = Modifier.size(24.dp),
         )
     }
 }

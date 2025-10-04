@@ -6,7 +6,9 @@ import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.data.remote.unsplash.models.collection.CollectionDto
 import com.dxn.wallpaperx.data.remote.unsplash.models.image.ImageDto
 
-class UnsplashRepository(private val unsplashApi: UnsplashApi) : RemoteRepository {
+class UnsplashRepository(
+    private val unsplashApi: UnsplashApi
+) : RemoteRepository {
 
     override suspend fun getWallpapers(page: Int, query: String): List<Wallpaper> {
         return unsplashApi.getImages(
@@ -38,7 +40,7 @@ fun imageDtoToWallpaper(imageDto: ImageDto): Wallpaper {
         smallUrl = imageDto.urls.small,
         wallpaperUrl = imageDto.urls.full,
         user = imageDto.user.name,
-        userImageURL = imageDto.user.profile_image.small
+        userImageURL = imageDto.user.profile_image.small,
     )
 }
 
@@ -48,6 +50,6 @@ fun collectionDtoToCollection(collectionDto: CollectionDto): Collection {
         title = collectionDto.title,
         totalPhotos = collectionDto.total_photos,
         coverPhoto = collectionDto.cover_photo.urls.regular,
-        tags = listOf()
+        tags = listOf(),
     )
 }

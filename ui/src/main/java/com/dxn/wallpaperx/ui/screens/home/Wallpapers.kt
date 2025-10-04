@@ -30,7 +30,7 @@ fun Wallpapers(
             addFavourite = { viewModel.addFavourite(it) },
             removeFavourite = { viewModel.removeFavourite(it) },
             state = listState,
-            navController = navController
+            navController = navController,
         )
     }
 }

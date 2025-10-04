@@ -17,72 +17,74 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 
 class LocalRepository
-constructor(
-    private val context: Application,
-    private val favouriteDao: FavouriteDao
-) {
-    suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String): Uri? {
-        return withContext(Dispatchers.IO) {
-            kotlin.runCatching {
-                val imageUri: Uri?
-                var fos: OutputStream?
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    context.contentResolver.let { resolver ->
-                        val contentValues = ContentValues().apply {
-                            put(MediaStore.Images.ImageColumns.DISPLAY_NAME, displayName)
-                            put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/jpeg")
-                            put(
-                                MediaStore.Images.ImageColumns.RELATIVE_PATH,
-                                Environment.DIRECTORY_PICTURES + "/wallpaperx"
-                            )
+    constructor(
+        private val context: Application,
+        private val favouriteDao: FavouriteDao
+    ) {
+        suspend fun downloadWallpaper(bitmap: Bitmap, displayName: String): Uri? {
+            return withContext(Dispatchers.IO) {
+                kotlin.runCatching {
+                    val imageUri: Uri?
+                    var fos: OutputStream?
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        context.contentResolver.let { resolver ->
+                            val contentValues =
+                                ContentValues().apply {
+                                    put(MediaStore.Images.ImageColumns.DISPLAY_NAME, displayName)
+                                    put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/jpeg")
+                                    put(
+                                        MediaStore.Images.ImageColumns.RELATIVE_PATH,
+                                        Environment.DIRECTORY_PICTURES + "/wallpaperx",
+                                    )
+                                }
+                            imageUri =
+                                resolver.insert(
+                                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                    contentValues,
+                                )
+                            fos = imageUri?.let { context.contentResolver.openOutputStream(it) }
                         }
-                        imageUri = resolver.insert(
-                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                            contentValues
-                        )
-                        fos = imageUri?.let { context.contentResolver.openOutputStream(it) }
+                    } else {
+                        val imagesDir =
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/wallpaperx")
+                        val image = File(imagesDir, displayName)
+                        fos = FileOutputStream(image)
+                        imageUri = Uri.fromFile(image)
                     }
-                } else {
-                    val imagesDir =
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/wallpaperx")
-                    val image = File(imagesDir, displayName)
-                    fos = FileOutputStream(image)
-                    imageUri = Uri.fromFile(image)
-                }
-                fos?.use {
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 95, it)
-                    it.close()
-                }
-                imageUri
+                    fos?.use {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 95, it)
+                        it.close()
+                    }
+                    imageUri
+                }.getOrThrow()
+            }
+        }
+
+        suspend fun addToFavourites(id: FavouriteEntity): Boolean {
+            return withContext(Dispatchers.IO) {
+                kotlin.runCatching {
+                    favouriteDao.insert(id)
+                    true
+                }.getOrThrow()
+            }
+        }
+
+        fun getFavourites(): Flow<List<FavouriteEntity>> {
+            return runCatching {
+                favouriteDao.getAll()
             }.getOrThrow()
         }
-    }
 
-    suspend fun addToFavourites(id: FavouriteEntity): Boolean {
-        return withContext(Dispatchers.IO) {
-            kotlin.runCatching {
-                favouriteDao.insert(id)
-                true
-            }.getOrThrow()
+        suspend fun removeFavourite(id: String): Boolean {
+            return withContext(Dispatchers.IO) {
+                kotlin.runCatching {
+                    favouriteDao.delete(id)
+                    true
+                }.getOrThrow()
+            }
+        }
+
+        companion object {
+            const val TAG = "LocalRepository"
         }
     }
-
-    fun getFavourites(): Flow<List<FavouriteEntity>> {
-        return runCatching {
-            favouriteDao.getAll()
-        }.getOrThrow()
-    }
-
-    suspend fun removeFavourite(id: String): Boolean {
-        return withContext(Dispatchers.IO) {
-            kotlin.runCatching {
-                favouriteDao.delete(id)
-                true
-            }.getOrThrow()
-        }
-    }
-
-    companion object {
-        const val TAG = "LocalRepository"
-    }
-}

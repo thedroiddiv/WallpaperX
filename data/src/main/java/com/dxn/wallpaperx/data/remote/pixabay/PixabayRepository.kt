@@ -6,7 +6,9 @@ import com.dxn.wallpaperx.data.model.Wallpaper
 import com.dxn.wallpaperx.data.remote.RemoteRepository
 import com.dxn.wallpaperx.data.remote.pixabay.models.Hit
 
-class PixabayRepository(private val api: PixabayApi) : RemoteRepository {
+class PixabayRepository(
+    private val api: PixabayApi
+) : RemoteRepository {
     private val apiKey: String = BuildConfig.PIXABAY_API_KEY
 
     override suspend fun getWallpapers(

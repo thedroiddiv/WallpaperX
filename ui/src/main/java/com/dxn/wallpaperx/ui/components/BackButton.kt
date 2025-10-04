@@ -18,12 +18,12 @@ fun BackButton(
         modifier = modifier,
         onClick = {
             navController.popBackStack()
-        }
+        },
     ) {
         Icon(
             imageVector = Icons.Rounded.ArrowBack,
             contentDescription = "back button",
-            tint = MaterialTheme.colors.onPrimary
+            tint = MaterialTheme.colors.onPrimary,
         )
     }
 }

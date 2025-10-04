@@ -30,26 +30,29 @@ fun SearchBar(
     val focusManager = LocalFocusManager.current
 
     Row(
-        modifier = modifier
-            .clip(CircleShape)
-            .background(MaterialTheme.colors.onPrimary.copy(0.1f)),
+        modifier =
+            modifier
+                .clip(CircleShape)
+                .background(MaterialTheme.colors.onPrimary.copy(0.1f)),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         BasicTextField(
             value = query,
             onValueChange = { query = it },
             textStyle = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onPrimary),
-            modifier = Modifier
-                .weight(1f)
-                .padding(vertical = 4.dp, horizontal = 16.dp),
+            modifier =
+                Modifier
+                    .weight(1f)
+                    .padding(vertical = 4.dp, horizontal = 16.dp),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
-            keyboardActions = KeyboardActions(onSearch = {
-                onSearch(query)
-                focusManager.clearFocus()
-            }),
+            keyboardActions =
+                KeyboardActions(onSearch = {
+                    onSearch(query)
+                    focusManager.clearFocus()
+                }),
             singleLine = true,
             maxLines = 1,
-            cursorBrush = SolidColor(MaterialTheme.colors.onPrimary)
+            cursorBrush = SolidColor(MaterialTheme.colors.onPrimary),
         )
         IconButton(onClick = {
             query = ""
@@ -58,7 +61,7 @@ fun SearchBar(
             Icon(
                 imageVector = Icons.Rounded.Clear,
                 contentDescription = "cancel",
-                tint = MaterialTheme.colors.onPrimary.copy(0.4f)
+                tint = MaterialTheme.colors.onPrimary.copy(0.4f),
             )
         }
     }

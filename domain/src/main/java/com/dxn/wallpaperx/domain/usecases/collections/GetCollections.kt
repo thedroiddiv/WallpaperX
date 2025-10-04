@@ -10,15 +10,17 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetCollections
-@Inject
-constructor(private val repository: WallpaperRepository) {
-    operator fun invoke(): Flow<PagingData<Collection>> {
-        return Pager(PagingConfig(pageSize = 20)) {
-            CollectionSource(repository)
-        }.flow
-    }
+    @Inject
+    constructor(
+        private val repository: WallpaperRepository
+    ) {
+        operator fun invoke(): Flow<PagingData<Collection>> {
+            return Pager(PagingConfig(pageSize = 20)) {
+                CollectionSource(repository)
+            }.flow
+        }
 
-    companion object {
-        private const val TAG = "GetCollections"
+        companion object {
+            private const val TAG = "GetCollections"
+        }
     }
-}

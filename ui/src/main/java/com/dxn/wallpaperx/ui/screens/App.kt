@@ -74,12 +74,13 @@ fun App() {
     val favouriteListState = rememberLazyGridState()
     val collectionListState = rememberLazyListState()
     val pagerState = rememberPagerState()
-    val screens = listOf(
-        HomeScreen.Wallpapers,
-        HomeScreen.Collections,
-        HomeScreen.Favourites,
-        HomeScreen.Setting
-    )
+    val screens =
+        listOf(
+            HomeScreen.Wallpapers,
+            HomeScreen.Collections,
+            HomeScreen.Favourites,
+            HomeScreen.Setting,
+        )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -100,13 +101,14 @@ fun App() {
                         .fillMaxWidth()
                         .height(56.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        modifier = Modifier
-                            .padding(start = 16.dp, top = 16.dp, bottom = 8.dp),
+                        modifier =
+                            Modifier
+                                .padding(start = 16.dp, top = 16.dp, bottom = 8.dp),
                         painter = painterResource(id = screens[pagerState.currentPage].resId),
-                        contentDescription = "collections"
+                        contentDescription = "collections",
                     )
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
@@ -117,7 +119,7 @@ fun App() {
                     }) {
                         Icon(
                             imageVector = Icons.Rounded.Search,
-                            contentDescription = "Search"
+                            contentDescription = "Search",
                         )
                     }
                 }
@@ -130,12 +132,12 @@ fun App() {
                         launcher.launch("image/*")
                     },
                     backgroundColor = MaterialTheme.colors.onPrimary,
-                    contentColor = MaterialTheme.colors.primary
+                    contentColor = MaterialTheme.colors.primary,
                 ) {
                     Icon(imageVector = Icons.Rounded.Add, contentDescription = "add photo")
                 }
             }
-        }
+        },
     ) {
         AnimatedNavHost(navController = navController, startDestination = RootScreen.Home.route) {
             composable(RootScreen.Splash.route) {
@@ -150,14 +152,14 @@ fun App() {
                                 wallpapers = wallpapers,
                                 favourites = favourites,
                                 listState = wallpaperListState,
-                                navController = navController
+                                navController = navController,
                             )
                         }
                         HomeScreen.Collections -> {
                             Collections(
                                 collections = collections,
                                 listState = collectionListState,
-                                navController = navController
+                                navController = navController,
                             )
                         }
                         HomeScreen.Favourites -> {
@@ -165,7 +167,7 @@ fun App() {
                                 viewModel = mainViewModel,
                                 favourites = favourites,
                                 listState = favouriteListState,
-                                navController = navController
+                                navController = navController,
                             )
                         }
                         HomeScreen.Setting -> {
@@ -177,20 +179,20 @@ fun App() {
             composable(
                 route = RootScreen.Search.route,
                 enterTransition = { slideInHorizontally(initialOffsetX = { 1000 }) },
-                exitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) }
+                exitTransition = { slideOutHorizontally(targetOffsetX = { 1000 }) },
             ) {
                 Search(
                     navController = navController,
                     favourites = favourites,
                     addFavourite = { mainViewModel.addFavourite(it) },
-                    removeFavourite = { mainViewModel.removeFavourite(it) }
+                    removeFavourite = { mainViewModel.removeFavourite(it) },
                 )
             }
             composable(
                 route = RootScreen.Gallery.route.plus("/{imageUri}"),
                 enterTransition = { FavouritesAnimations.enterTransition(this.initialState) },
                 exitTransition = { FavouritesAnimations.exitTransition(this.targetState) },
-                arguments = listOf(navArgument("imageUri") { type = NavType.StringType })
+                arguments = listOf(navArgument("imageUri") { type = NavType.StringType }),
             ) { backStack ->
                 backStack.arguments?.getString("imageUri")?.let { u ->
                     val uri = Uri.parse(u)
@@ -201,7 +203,7 @@ fun App() {
                 route = RootScreen.SetWallpaper.route + "/{wallpaper}",
                 enterTransition = { SetWallpaperAnimations.enterTransition() },
                 exitTransition = { SetWallpaperAnimations.exitTransition() },
-                arguments = listOf(navArgument("wallpaper") { type = NavType.StringType })
+                arguments = listOf(navArgument("wallpaper") { type = NavType.StringType }),
             ) { backStack ->
                 backStack.arguments?.getString("wallpaper")?.let { w ->
                     val wallpaper = Gson().fromJson(w, Wallpaper::class.java)
@@ -210,7 +212,7 @@ fun App() {
                         wallpaper = wallpaper,
                         favourites = favourites,
                         addFavourite = { mainViewModel.addFavourite(it) },
-                        removeFavourite = { mainViewModel.removeFavourite(it) }
+                        removeFavourite = { mainViewModel.removeFavourite(it) },
                     )
                 }
             }
@@ -218,10 +220,11 @@ fun App() {
                 route = RootScreen.CollectionWallpaper.route + "/{collectionId}/{title}",
                 enterTransition = { expandIn() },
                 exitTransition = { shrinkOut() },
-                arguments = listOf(
-                    navArgument("collectionId") { type = NavType.StringType },
-                    navArgument("title") { type = NavType.StringType }
-                )
+                arguments =
+                    listOf(
+                        navArgument("collectionId") { type = NavType.StringType },
+                        navArgument("title") { type = NavType.StringType },
+                    ),
             ) { backStack ->
                 backStack.arguments?.getString("collectionId")?.let { id ->
                     val title = backStack.arguments?.getString("title")
@@ -230,7 +233,7 @@ fun App() {
                         favourites = favourites,
                         addFavourite = { mainViewModel.addFavourite(it) },
                         removeFavourite = { mainViewModel.removeFavourite(it) },
-                        navController = navController
+                        navController = navController,
                     )
                 }
             }

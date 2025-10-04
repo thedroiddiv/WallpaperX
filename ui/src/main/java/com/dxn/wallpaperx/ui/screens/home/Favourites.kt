@@ -29,9 +29,10 @@ fun Favourites(
     navController: NavHostController
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 12.dp)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 12.dp),
     ) {
         if (favourites.isEmpty()) {
             Text(text = "Uhh no! No items were found")
@@ -42,11 +43,12 @@ fun Favourites(
         ) {
             itemsIndexed(favourites) { index, wallpaper ->
                 WallpaperCard(
-                    modifier = Modifier
-                        .padding(top = if (index == 0 || index == 1) 8.dp else 0.dp)
-                        .padding(4.dp)
-                        .fillMaxWidth()
-                        .height(246.dp),
+                    modifier =
+                        Modifier
+                            .padding(top = if (index == 0 || index == 1) 8.dp else 0.dp)
+                            .padding(4.dp)
+                            .fillMaxWidth()
+                            .height(246.dp),
                     wallpaper = wallpaper,
                     isFavourite = true,
                     onLikedClicked = {
@@ -55,7 +57,7 @@ fun Favourites(
                     onClick = {
                         val data = Uri.encode(Gson().toJson(wallpaper))
                         navController.navigate("${RootScreen.SetWallpaper.route}/$data")
-                    }
+                    },
                 )
             }
         }

@@ -14,18 +14,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel
-@Inject
-constructor(
-    private val wallpaperUseCase: WallpaperUseCase
-) : ViewModel() {
+    @Inject
+    constructor(
+        private val wallpaperUseCase: WallpaperUseCase
+    ) : ViewModel() {
 
-    private var searchJob: Job? = null
-    val wallpapers = mutableStateOf(flowOf<PagingData<Wallpaper>>())
+        private var searchJob: Job? = null
+        val wallpapers = mutableStateOf(flowOf<PagingData<Wallpaper>>())
 
-    fun search(query: String) {
-        searchJob?.cancel()
-        searchJob = viewModelScope.launch {
-            wallpapers.value = wallpaperUseCase.getWallpapers(query)
+        fun search(query: String) {
+            searchJob?.cancel()
+            searchJob =
+                viewModelScope.launch {
+                    wallpapers.value = wallpaperUseCase.getWallpapers(query)
+                }
         }
     }
-}

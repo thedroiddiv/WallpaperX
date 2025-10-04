@@ -13,15 +13,17 @@ abstract class LocalDatabase : RoomDatabase() {
     abstract fun getNoteDao(): FavouriteDao
 
     companion object {
-        private var INSTANCE: LocalDatabase? = null
+        private var instance: LocalDatabase? = null
+
         fun getNoteDatabase(context: Context): LocalDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    LocalDatabase::class.java,
-                    "local_database"
-                ).build()
-                INSTANCE = instance
+            return instance ?: synchronized(this) {
+                val instance =
+                    Room.databaseBuilder(
+                        context.applicationContext,
+                        LocalDatabase::class.java,
+                        "local_database",
+                    ).build()
+                Companion.instance = instance
                 return instance
             }
         }

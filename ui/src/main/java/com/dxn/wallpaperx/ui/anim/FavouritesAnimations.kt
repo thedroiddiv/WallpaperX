@@ -5,7 +5,7 @@ import androidx.navigation.NavBackStackEntry
 import com.dxn.wallpaperx.ui.navigation.HomeScreen
 
 object FavouritesAnimations {
-    @ExperimentalAnimationApi
+    // @ExperimentalAnimationApi
     fun enterTransition(initial: NavBackStackEntry): EnterTransition {
         return when (initial.destination.route) {
             HomeScreen.Wallpapers.route, HomeScreen.Collections.route -> {
@@ -20,7 +20,7 @@ object FavouritesAnimations {
         }
     }
 
-    @ExperimentalAnimationApi
+    // @ExperimentalAnimationApi
     fun exitTransition(target: NavBackStackEntry): ExitTransition {
         return when (target.destination.route) {
             HomeScreen.Wallpapers.route, HomeScreen.Collections.route -> {
