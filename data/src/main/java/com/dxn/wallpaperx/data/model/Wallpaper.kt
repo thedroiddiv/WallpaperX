@@ -9,9 +9,11 @@ data class Wallpaper(
     val smallUrl: String,
     val wallpaperUrl: String,
     val user: String,
+    val userDescription:String,
     val userImageURL: String,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
@@ -26,6 +28,7 @@ data class Wallpaper(
         parcel.writeString(smallUrl)
         parcel.writeString(wallpaperUrl)
         parcel.writeString(user)
+        parcel.writeString(userDescription)
         parcel.writeString(userImageURL)
     }
 

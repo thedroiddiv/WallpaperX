@@ -110,7 +110,7 @@ fun SetWallpaper(
             BottomMenu(
                 modifier = Modifier,
                 title = wallpaper.user,
-                subtitle = "unsplash.com",
+                subtitle = wallpaper.userDescription,
                 isLiked = isLiked,
                 userImageUrl = wallpaper.userImageURL,
                 onFabClicked = {

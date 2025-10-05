@@ -57,6 +57,7 @@ fun favEntityToWallpaper(favouriteEntity: FavouriteEntity): Wallpaper {
         favouriteEntity.wallpaperUrl,
         favouriteEntity.smallUrl,
         favouriteEntity.user,
+        userDescription = "",
         favouriteEntity.userImageURL,
     )
 }

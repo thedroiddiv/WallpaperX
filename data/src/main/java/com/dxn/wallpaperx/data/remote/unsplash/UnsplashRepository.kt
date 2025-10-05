@@ -40,6 +40,7 @@ fun imageDtoToWallpaper(imageDto: ImageDto): Wallpaper {
         smallUrl = imageDto.urls.small,
         wallpaperUrl = imageDto.urls.full,
         user = imageDto.user.name,
+        userDescription = imageDto.user.portfolio_url,
         userImageURL = imageDto.user.profile_image.small,
     )
 }

@@ -52,5 +52,6 @@ fun hitToWallpaper(imageDto: Hit): Wallpaper {
         wallpaperUrl = imageDto.largeImageURL,
         user = imageDto.user,
         userImageURL = imageDto.userImageURL,
+        userDescription = imageDto.userURL
     )
 }
