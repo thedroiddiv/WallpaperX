@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.devtools.ksp'
     id 'com.google.dagger.hilt.android'
+    alias libs.plugins.kotlinx.serialization
 }
 
 android {
@@ -58,4 +59,10 @@ dependencies {
     // hilt
     implementation "com.google.dagger:hilt-android:2.57.2"
     ksp "com.google.dagger:hilt-compiler:2.57.2"
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.client.contentnegotiation)
+    implementation(libs.ktor.kotlinx.serialization.json)
 }

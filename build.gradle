@@ -6,6 +6,7 @@ plugins {
     id "org.jlleitschuh.gradle.ktlint" version "13.1.0"
     id 'com.google.devtools.ksp' version '2.2.20-2.0.3' apply false
     id 'org.jetbrains.kotlin.plugin.compose' version "2.2.20"
+    alias libs.plugins.kotlinx.serialization apply false
 }
 
 subprojects {
