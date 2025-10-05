@@ -1,29 +1,35 @@
 package com.dxn.wallpaperx.data.remote.pixabay.models
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class Hit(
-    val comments: Int,
-    val downloads: Int,
-    val fullHDURL: String,
-    val id: Int,
-    val imageHeight: Int,
-    val imageSize: Int,
-    val imageURL: String,
-    val imageWidth: Int,
-    val largeImageURL: String,
-    val likes: Int,
+    val id: Long,
     val pageURL: String,
-    val previewHeight: Int,
+    val type: String,
+    val tags: String,
     val previewURL: String,
     val previewWidth: Int,
-    val tags: String,
-    val type: String,
-    val user: String,
-    val userImageURL: String,
-    @SerializedName("user_id") val userId: Int,
-    val views: Int,
-    val webformatHeight: Int,
+    val previewHeight: Int,
     val webformatURL: String,
     val webformatWidth: Int,
+    val webformatHeight: Int,
+    val largeImageURL: String,
+    val imageWidth: Int,
+    val imageHeight: Int,
+    val imageSize: Long,
+    val views: Int,
+    val downloads: Int,
+    val collections: Int,
+    val likes: Int,
+    val comments: Int,
+    @SerialName("user_id") val userId: Long,
+    val user: String,
+    val userImageURL: String,
+    val noAiTraining: Boolean,
+    val isAiGenerated: Boolean,
+    val isGRated: Boolean,
+    val isLowQuality: Boolean,
+    val userURL: String
 )

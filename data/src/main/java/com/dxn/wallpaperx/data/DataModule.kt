@@ -3,12 +3,18 @@ package com.dxn.wallpaperx.data
 import android.app.Application
 import com.dxn.wallpaperx.data.local.LocalDatabase
 import com.dxn.wallpaperx.data.remote.pixabay.PixabayApi
+import com.dxn.wallpaperx.data.remote.pixabay.PixabayKtorApi
 import com.dxn.wallpaperx.data.remote.unsplash.UnsplashApi
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.ktor.client.HttpClient
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.http.ContentType.Application.Json
+import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -63,26 +69,19 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun providePixabayApi(
-        loggingInterceptor: HttpLoggingInterceptor
-    ): PixabayApi {
-        return Retrofit.Builder().baseUrl("https://pixabay.com/")
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .client(
-                OkHttpClient.Builder()
-                    .addInterceptor { chain ->
-                        val req = chain.request()
-                        val newUrl =
-                            req.url.newBuilder()
-                                .addQueryParameter("key", BuildConfig.PIXABAY_API_KEY)
-                                .build()
-                        val newReq = req.newBuilder().url(newUrl).build()
-                        chain.proceed(newReq)
-                    }
-                    .addInterceptor(loggingInterceptor)
-                    .build(),
-            )
-            .build()
-            .create(PixabayApi::class.java)
+    fun providePixabayApi(): PixabayApi {
+        val client =
+            HttpClient {
+                install(ContentNegotiation) {
+                    json(
+                        Json {
+                            ignoreUnknownKeys = true
+                            isLenient = true
+                            prettyPrint = true
+                        },
+                    )
+                }
+            }
+        return PixabayKtorApi(client)
     }
 }

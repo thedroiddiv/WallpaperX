@@ -47,7 +47,7 @@ object WallpaperModule {
     @Provides
     @Singleton
     fun provideWallpaperRepository(
-        @Named("unsplash") remoteRepository: RemoteRepository,
+        @Named("pixabay") remoteRepository: RemoteRepository,
         localRepository: LocalRepository
     ): WallpaperRepository =
         WallpaperRepositoryImpl(remoteRepository, localRepository)
