@@ -1,0 +1,99 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.compose")
+}
+
+android {
+    compileSdk = 36
+    namespace = "com.dxn.wallpaperx.ui"
+
+    defaultConfig {
+        applicationId = "com.dxn.wallpaperx.ui"
+        minSdk = 23
+        targetSdk = 36
+        versionCode = 3
+        versionName = "1.0.2"
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+    buildFeatures {
+        compose = true
+    }
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    namespace = "com.dxn.wallpaperx.ui"
+}
+
+dependencies {
+
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
+    // core dependencies
+    implementation("androidx.core:core-ktx:1.17.0")
+    implementation("androidx.appcompat:appcompat:1.7.1")
+    implementation("androidx.activity:activity-compose:1.11.0")
+    implementation("com.google.android.material:material:1.13.0")
+    implementation("androidx.compose.material3:material3:1.4.0")
+
+    // lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.4")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.9.4")
+
+    // compose
+    implementation("androidx.compose.ui:ui:1.9.2")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.9.2")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.9.2")
+    implementation("androidx.compose.material:material:1.9.2")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
+    // Paging 3
+    val paging_compose_version = "3.3.5"
+    implementation("androidx.paging:paging-compose:$paging_compose_version")
+
+    // navigation
+    implementation("androidx.navigation:navigation-compose:2.9.5")
+
+    val accompanist_version = "0.36.0"
+    implementation("com.google.accompanist:accompanist-navigation-animation:$accompanist_version")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanist_version")
+    implementation("com.google.accompanist:accompanist-swiperefresh:$accompanist_version")
+    implementation("com.google.accompanist:accompanist-pager:$accompanist_version")
+    implementation("com.google.accompanist:accompanist-pager-indicators:$accompanist_version")
+
+    // Coil
+    implementation("io.coil-kt:coil-compose:2.7.0")
+
+    // Gson
+    implementation("com.google.code.gson:gson:2.13.2")
+
+    //Dagger - Hilt
+    implementation("com.google.dagger:hilt-android:2.57.2")
+    ksp("com.google.dagger:hilt-compiler:2.57.2")
+    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
+
+}
