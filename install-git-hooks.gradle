@@ -1,0 +1,11 @@
+/**
+ *  TODO: Move this task to build.gradle.kts
+ *  Kotlin doesn't allow integers to start with '0' but to give the 'pre-commit' file
+ *  executable permission we need to give file-mode 0777
+ *  For permissions 0777 != 777; see https://unix.stackexchange.com/a/103414
+ */
+task installPreCommit(type: Copy) {
+    from new File(rootProject.rootDir, 'pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    fileMode 0777
+}

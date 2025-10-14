@@ -81,3 +81,5 @@ lint/tmp/
 *.hprof
 
 ui/release/
+
+.kotlin
