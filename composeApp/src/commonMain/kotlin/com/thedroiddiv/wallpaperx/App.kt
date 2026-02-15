@@ -15,9 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.jetbrains.compose.resources.painterResource
-
-import wallpaperx.composeapp.generated.resources.Res
-import wallpaperx.composeapp.generated.resources.compose_multiplatform
+import com.thedroiddiv.wallpaperx.compose_multiplatform
 
 @Composable
 @Preview
