@@ -21,3 +21,4 @@ rootProject.name = "WallpaperX"
 include(":ui")
 include(":data")
 include(":domain")
+include(":composeApp")

@@ -7,14 +7,14 @@ plugins {
     alias(libs.plugins.ktlint) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.composeCompiler) apply false
+
+    alias(libs.plugins.composeHotReload) apply false
+    alias(libs.plugins.composeMultiplatform) apply false
+    alias(libs.plugins.kotlinMultiplatform) apply false
 }
 
 subprojects {
     apply(plugin = "org.jlleitschuh.gradle.ktlint") // Version should be inherited from parent
-}
-
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
 }
 
 apply {
