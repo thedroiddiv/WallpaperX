@@ -1,3 +1,24 @@
+## ⚠️ Migration Warning
+
+> [!WARNING]
+> **This project is currently undergoing a Kotlin Multiplatform (KMP) migration.**
+> The `master` branch reflects the stable Android-only version. Active migration work is happening on the `kmp-migration` branch. Expect breaking changes and instability until the migration is complete.
+
+### KMP Migration Checkpoints
+
+The migration follows a deliberate order — AGP 9 upgrade first, then KMP+CMP setup — to handle AGP 9 breaking changes cleanly before introducing multiplatform structure.
+
+- [x] **Upgrade to AGP 9** — Update Android Gradle Plugin to version 9, resolving breaking changes introduced in this version before introducing KMP
+- [x] **Set up KMP + Compose Multiplatform (CMP) project structure** — Add `composeApp`, `iosApp` and shared modules; configure multiplatform targets
+- [ ] **Migrate `:data` module to KMP** — Move data sources, repositories, and models to shared Kotlin code
+- [ ] **Migrate `:domain` module to KMP** — Move use cases and domain logic to shared Kotlin code
+- [ ] **Migrate `:ui` module to CMP** — Port Jetpack Compose UI to Compose Multiplatform
+- [ ] **iOS app integration** — Wire up the shared KMP modules to the iOS app
+- [ ] **Verify Android app parity** — Ensure the Android app (`androidApp`) works correctly with the new shared modules
+- [ ] **Clean up legacy Android-only code** — Remove redundant platform-specific code replaced by shared implementations
+
+---
+
 
 <p align="center">
 <img src="https://github.com/divyansh-dxn/WallpaperX/blob/master/assets/icons/ic_launcher_round/android/res/mipmap-xxxhdpi/ic_launcher_round.png?raw=true"/>
@@ -9,6 +30,9 @@
 </p>
 
 <h1 align="center">WallpaperX</h1>
+
+
+
 WallpaperX is a simple android application built using <a href="https://developer.android.com/jetpack/compose">Jetpack compose - Android’s modern toolkit for building native UI</a>. It uses pixabay and unsplash api to fetch wallpapers. 
 <br><br>
 WallpaperX brings cool and fresh wallpapers just to you from unsplash.com. Set wallpapers for your home and lock screen, download and share.
