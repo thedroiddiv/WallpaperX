@@ -1,4 +1,4 @@
-package com.thedroiddiv.wallpaperx
+package com.thedroiddiv.wallpaperx.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -14,6 +14,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.thedroiddiv.wallpaperx.Greeting
+import com.thedroiddiv.wallpaperx.Res
 import org.jetbrains.compose.resources.painterResource
 import com.thedroiddiv.wallpaperx.compose_multiplatform
 
