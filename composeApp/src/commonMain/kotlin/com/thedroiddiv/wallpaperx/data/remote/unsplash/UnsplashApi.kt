@@ -1,5 +1,9 @@
 package com.thedroiddiv.wallpaperx.data.remote.unsplash
 
+import com.thedroiddiv.wallpaperx.data.model.Wallpaper
+import com.thedroiddiv.wallpaperx.data.model.WallpaperCollection
+import com.thedroiddiv.wallpaperx.data.remote.WallpaperApi
+import com.thedroiddiv.wallpaperx.data.remote.buildHttpClient
 import com.thedroiddiv.wallpaperx.data.remote.unsplash.dto.UnsplashCollectionDto
 import com.thedroiddiv.wallpaperx.data.remote.unsplash.dto.UnsplashImageDto
 import com.thedroiddiv.wallpaperx.data.remote.unsplash.dto.UnsplashSearchResponse
@@ -8,22 +12,42 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 
-internal class UnsplashApi(private val client: HttpClient) {
+class UnsplashApi(apiKey: String) : WallpaperApi {
 
-    /** Mirrors UnsplashApi.getImages() — search photos by query. */
-    suspend fun searchImages(
+    private val client: HttpClient = buildHttpClient(
+        baseUrl = BASE_URL,
+        authParamName = AUTH_PARAM,
+        authParamValue = apiKey,
+    )
+
+    override suspend fun getWallpapers(page: Int, query: String): List<Wallpaper> =
+        fetchImages(query = query, page = page).results.map(::toWallpaper)
+
+    override suspend fun getWallpaper(id: String): Wallpaper =
+        toWallpaper(fetchImage(id))
+
+    override suspend fun getCollections(page: Int): List<WallpaperCollection> =
+        fetchCollections(page = page).map(::toCollection)
+
+    override suspend fun getWallpapersByCollection(
+        collectionId: String,
+        page: Int,
+    ): List<Wallpaper> = fetchCollectionPhotos(collectionId = collectionId, page = page).map(::toWallpaper)
+
+    // ── HTTP ─────────────────────────────────────────────────────────────────────
+
+    private suspend fun fetchImages(
         query: String,
         page: Int = 1,
         perPage: Int = 20,
-    ): UnsplashSearchResponse = client.get("/search/photos") {
+    ) = client.get("/search/photos") {
         parameter("query", query)
         parameter("page", page)
         parameter("orientation", "portrait")
         parameter("per_page", perPage)
-    }.body()
+    }.body<UnsplashSearchResponse>()
 
-    /** Mirrors UnsplashApi.getCollection() — paginated list of collections. */
-    suspend fun getCollections(
+    private suspend fun fetchCollections(
         page: Int = 1,
         perPage: Int = 20,
     ): List<UnsplashCollectionDto> = client.get("/collections") {
@@ -31,8 +55,7 @@ internal class UnsplashApi(private val client: HttpClient) {
         parameter("per_page", perPage)
     }.body()
 
-    /** Mirrors UnsplashApi.getPhotosByCollection() — photos inside a collection. */
-    suspend fun getPhotosByCollection(
+    private suspend fun fetchCollectionPhotos(
         collectionId: String,
         page: Int = 1,
         perPage: Int = 20,
@@ -41,10 +64,30 @@ internal class UnsplashApi(private val client: HttpClient) {
         parameter("per_page", perPage)
     }.body()
 
-    /**
-     * Mirrors UnsplashApi.getImage() — single photo by ID.
-     * Note: the original had a missing @Path param; fixed here.
-     */
-    suspend fun getImage(id: String): UnsplashImageDto =
+    private suspend fun fetchImage(id: String): UnsplashImageDto =
         client.get("/photos/$id").body()
+
+    // ── Mappers ──────────────────────────────────────────────────────────────────
+
+    private fun toWallpaper(dto: UnsplashImageDto) = Wallpaper(
+        id = dto.id,
+        previewUrl = dto.urls.thumb,
+        smallUrl = dto.urls.small,
+        wallpaperUrl = dto.urls.full,
+        user = dto.user.name,
+        userImageUrl = dto.user.profileImage.small,
+    )
+
+    private fun toCollection(dto: UnsplashCollectionDto) = WallpaperCollection(
+        id = dto.id,
+        title = dto.title,
+        totalPhotos = dto.totalPhotos,
+        coverPhoto = dto.coverPhoto.urls.regular,
+        tags = emptyList(),
+    )
+
+    companion object {
+        private const val BASE_URL = "https://api.unsplash.com/"
+        private const val AUTH_PARAM = "client_id"
+    }
 }
