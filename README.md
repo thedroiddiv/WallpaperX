@@ -11,6 +11,12 @@ The migration follows a deliberate order — AGP 9 upgrade first, then KMP+CMP s
 - [x] **Upgrade to AGP 9** — Update Android Gradle Plugin to version 9, resolving breaking changes introduced in this version before introducing KMP
 - [x] **Set up KMP + Compose Multiplatform (CMP) project structure** — Add `composeApp`, `iosApp` and shared modules; configure multiplatform targets
 - [ ] **Migrate `:data` module to KMP** — Move data sources, repositories, and models to shared Kotlin code
+  - [x] Add KMP-compatible dependencies — Ktor, kotlinx-serialization, Coil3, Napier, Room multiplatform, KSP
+  - [x] Set up `roomMain` intermediate source set — Android/iOS/JVM depend on it; JS/WasmJS excluded (custom DB abstraction pending)
+  - [x] Migrate domain models — `Wallpaper`, `WallpaperCollection` as plain KMP data classes
+  - [x] Migrate remote layer — `WallpaperApi` interface, `PixabayApi` + `UnsplashApi` Ktor implementations with kotlinx-serialization DTOs
+  - [ ] Migrate local/database layer — Room multiplatform database, DAO, and favourites entity
+  - [ ] JS/WasmJS DB abstraction — custom in-memory or IndexedDB-backed implementation for unsupported targets
 - [ ] **Migrate `:domain` module to KMP** — Move use cases and domain logic to shared Kotlin code
 - [ ] **Migrate `:ui` module to CMP** — Port Jetpack Compose UI to Compose Multiplatform
 - [ ] **iOS app integration** — Wire up the shared KMP modules to the iOS app
