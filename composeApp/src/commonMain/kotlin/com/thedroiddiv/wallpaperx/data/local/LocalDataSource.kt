@@ -4,7 +4,7 @@ import com.thedroiddiv.wallpaperx.data.model.Wallpaper
 import kotlinx.coroutines.flow.Flow
 
 /**
- * Platform-agnostic interface for local favourites storage.
+ * Platform-agnostic interface for local favourites' storage.
  *
  * Room-backed implementations live in roomMain (Android/iOS/JVM).
  * JS and WasmJS will provide a separate implementation once the
