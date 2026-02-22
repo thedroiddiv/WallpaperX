@@ -15,7 +15,7 @@ The migration follows a deliberate order — AGP 9 upgrade first, then KMP+CMP s
   - [x] Set up `roomMain` intermediate source set — Android/iOS/JVM depend on it; JS/WasmJS excluded (custom DB abstraction pending)
   - [x] Migrate domain models — `Wallpaper`, `WallpaperCollection` as plain KMP data classes
   - [x] Migrate remote layer — `WallpaperApi` interface, `PixabayApi` + `UnsplashApi` Ktor implementations with kotlinx-serialization DTOs
-  - [ ] Migrate local/database layer — Room multiplatform database, DAO, and favourites entity
+  - [x] Migrate local/database layer — `FavouriteEntity`, `FavouriteDao`, `WallpaperDatabase` in `roomMain`; `LocalDataSource` interface in `commonMain`; `RoomLocalDataSource` + platform database builders in `androidMain`/`iosMain`/`jvmMain`
   - [ ] JS/WasmJS DB abstraction — custom in-memory or IndexedDB-backed implementation for unsupported targets
 - [ ] **Migrate `:domain` module to KMP** — Move use cases and domain logic to shared Kotlin code
 - [ ] **Migrate `:ui` module to CMP** — Port Jetpack Compose UI to Compose Multiplatform
