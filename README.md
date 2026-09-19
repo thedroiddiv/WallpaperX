@@ -1,43 +1,46 @@
+This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop (JVM).
 
-<p align="center">
-<img src="https://github.com/divyansh-dxn/WallpaperX/blob/master/assets/icons/ic_launcher_round/android/res/mipmap-xxxhdpi/ic_launcher_round.png?raw=true"/>
+* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
+  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
 
-</p>
+* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
+  It contains several subfolders:
+  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
+  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
+    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
+    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
+    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
+    folder is the appropriate location.
 
-<p align="center">
-<a href="https://play.google.com/store/apps/details?id=com.dxn.wallpaperx.ui" target="_blank"><img src="https://user-images.githubusercontent.com/69595691/203753454-6dd20127-9dee-4c17-a28d-15236b477db5.png" width="200"/></a>
-</p>
+### Running the apps
 
-<h1 align="center">WallpaperX</h1>
-WallpaperX is a simple android application built using <a href="https://developer.android.com/jetpack/compose">Jetpack compose - Android’s modern toolkit for building native UI</a>. It uses pixabay and unsplash api to fetch wallpapers. 
-<br><br>
-WallpaperX brings cool and fresh wallpapers just to you from unsplash.com. Set wallpapers for your home and lock screen, download and share.
-<br><br>
-The project uses multiple modules saparated on basis DATA-DOMAIN-UI, three layered architecutre.
-<br><br>
+Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
 
-![Frame 7](https://user-images.githubusercontent.com/69595691/183310290-77a10919-f9a0-4a76-8cac-23b018f4d67b.png)
+- Android app: `./gradlew :androidApp:assembleDebug`
+- Desktop app:
+  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
+  - Standard run: `./gradlew :desktopApp:run`
+- Web app:
+  - Wasm target (faster, modern browsers): `./gradlew :webApp:wasmJsBrowserDevelopmentRun`
+  - JS target (slower, supports older browsers): `./gradlew :webApp:jsBrowserDevelopmentRun`
+- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
 
-### Technologies used
-- Jetpack compose
-- Dagger-Hilt
-- Kotlin-flow
-- Animated navigation from accompanist library
+### Running tests
 
-### Previews
-<div>
-<img src = "https://raw.githubusercontent.com/divyanshdxn/WallpaperX/master/assets/samples/preview_all.jpeg"/>
-</div>
+Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
 
-### MAD Overview
-<div>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/assets/mad/summary.png" width="720"/>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/assets/mad/jetpack.png" width="720"/>
-<img src="https://raw.githubusercontent.com/divyansh-dxn/WallpaperX/master/assets/mad/kotlin.png" width="720"/>
-</div>
+- Android tests: `./gradlew :shared:testAndroidHostTest`
+- Desktop tests: `./gradlew :shared:jvmTest`
+- Web tests:
+  - Wasm target: `./gradlew :shared:wasmJsTest`
+  - JS target: `./gradlew :shared:jsTest`
+- iOS tests: `./gradlew :shared:iosSimulatorArm64Test`
 
-![logo](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
-![logo](	https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white)
+---
 
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
+[Compose Multiplatform](https://kotlinlang.org/compose-multiplatform/),
+[Kotlin/Wasm](https://kotl.in/wasm/)…
 
-
+We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web).
+If you face any issues, please report them on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
